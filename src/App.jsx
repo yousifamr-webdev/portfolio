@@ -1,33 +1,28 @@
-import { useState } from "react";
-import Home from "./components/Home/Home";
-import About from "./components/About/About";
-import Contact from "./components/Contact/Contact";
-import Portfolio from "./components/Portfolio/Portfolio";
-import MainLayout from "./components/MainLayout/MainLayout"
-import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-
-const Routes = createBrowserRouter([
-  {
-    path: "",
-    element: <MainLayout />, 
-    children: [
-      { index: true, element: <Home /> },
-      { path: "about", element: <About /> },
-      { path: "portfolio", element: <Portfolio /> },
-      { path: "contact", element: <Contact /> },
-    ],
-  },
-]);
+import { AnimatePresence, LayoutGroup } from 'framer-motion'
+import { usePersona } from './context/PersonaContext'
+import IntroOverlay from './components/intro/IntroOverlay'
+import Navbar from './components/navigation/Navbar'
+import Footer from './components/Footer/Footer'
+import PortfolioHome from './pages/PortfolioHome'
 
 function App() {
+  const { isIntroComplete } = usePersona()
+
   return (
-    <>
-      <RouterProvider router={Routes}></RouterProvider>
-      
-    </>
-  );
+    <LayoutGroup>
+      <AnimatePresence>
+        {isIntroComplete ? (
+          <div key="portfolio">
+            <Navbar />
+            <PortfolioHome />
+            <Footer />
+          </div>
+        ) : (
+          <IntroOverlay key="intro" />
+        )}
+      </AnimatePresence>
+    </LayoutGroup>
+  )
 }
 
-export default App;
+export default App
