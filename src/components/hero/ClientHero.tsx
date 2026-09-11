@@ -6,10 +6,8 @@ import {
   Layers3,
   Sparkles,
 } from "lucide-react";
+import type { MouseEvent } from "react";
 import { portfolioData } from "../../data/portfolioData";
-
-
-
 
 const springTransition = {
   type: "spring" as const,
@@ -17,13 +15,64 @@ const springTransition = {
   damping: 22,
 };
 
-
-
 export default function ClientHero() {
   const { showcase, identity } = portfolioData;
 
+  const featuredProjectId =
+    (showcase.featuredProject as { id?: string }).id ??
+    portfolioData.projects.find(
+      (p) =>
+        p.title.toLowerCase() === showcase.featuredProject.name.toLowerCase(),
+    )?.id ??
+    portfolioData.projects[0]?.id ??
+    "featured";
+
+  // Mobile-safe smooth scroll with navbar clearance
+  const handleScrollTo = (
+    e: MouseEvent<HTMLAnchorElement>,
+    targetId: string,
+  ) => {
+    e.preventDefault();
+    const target = document.getElementById(targetId);
+    if (target) {
+      const navbarHeight = 76;
+      const targetTop =
+        target.getBoundingClientRect().top + window.scrollY - navbarHeight;
+      window.scrollTo({
+        top: targetTop,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const handleNavigateToFeaturedProject = (e: MouseEvent) => {
+    e.preventDefault();
+    const targetElement = document.getElementById(
+      `project-${featuredProjectId}`,
+    );
+    if (targetElement) {
+      window.dispatchEvent(
+        new CustomEvent("focus-project", {
+          detail: { projectId: featuredProjectId },
+        }),
+      );
+    } else {
+      const fallbackSection = document.getElementById("projects");
+      if (fallbackSection) {
+        const navbarHeight = 76;
+        window.scrollTo({
+          top:
+            fallbackSection.getBoundingClientRect().top +
+            window.scrollY -
+            navbarHeight,
+          behavior: "smooth",
+        });
+      }
+    }
+  };
+
   return (
-    <main className="relative mx-auto max-w-7xl px-4 pb-20 pt-8 sm:px-6 sm:pb-24 sm:pt-16 md:px-10 md:pt-24 lg:pt-10">
+    <main className="relative mx-auto max-w-7xl px-4 pb-20 pt-3 sm:px-6 sm:pb-24 sm:pt-6 md:px-10 md:pt-8 lg:pt-8">
       {/* Ambient background glow */}
       <div className="pointer-events-none absolute left-1/4 top-1/4 -translate-x-1/2 -translate-y-1/2">
         <div className="h-[320px] w-[320px] rounded-full bg-accent/10 blur-[130px] sm:h-[480px] sm:w-[480px]" />
@@ -39,7 +88,6 @@ export default function ClientHero() {
         >
           {/* Eyebrow */}
           <div className="inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-surface-elevated/60 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-accent backdrop-blur-sm">
-            <Sparkles size={13} />
             <span>Digital Product Partner</span>
           </div>
 
@@ -57,21 +105,22 @@ export default function ClientHero() {
           {/* Action Buttons */}
           <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
             <a
-              className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3.5 text-sm font-semibold text-accent-contrast shadow-[0_0_24px_rgba(217,184,255,0.3)] transition-all hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              href={`mailto:${identity.email}?subject=Project%20Inquiry`}
-            >
-              Start a Project
-            </a>
-
-            <a
-              className="group inline-flex items-center justify-center gap-2 rounded-xl border border-border/80 bg-surface/70 px-6 py-3.5 text-sm font-semibold text-text-base backdrop-blur-sm transition-colors hover:border-accent hover:bg-surface-elevated hover:text-accent"
               href="#projects"
+              onClick={(e) => handleScrollTo(e, "projects")}
+              className="group inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3.5 text-sm font-semibold text-accent-contrast shadow-[0_0_24px_rgba(217,184,255,0.3)] transition-all hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
             >
-              <span>View Case Studies</span>
+              <span>View My Work</span>
               <ArrowDown
                 size={15}
-                className="transition-transform group-hover:translate-y-0.5"
+                className="transition-transform group-hover:translate-y-0.5 ms-1"
               />
+            </a>
+            <a
+              href="#contact"
+              onClick={(e) => handleScrollTo(e, "contact")}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border/80 bg-surface/70 px-6 py-3.5 text-sm font-semibold text-text-base backdrop-blur-sm transition-colors hover:border-accent hover:bg-surface-elevated hover:text-accent cursor-pointer"
+            >
+              Let&apos;s Talk
             </a>
           </div>
 
@@ -96,40 +145,41 @@ export default function ClientHero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ ...springTransition, delay: 0.12 }}
         >
-          {/* Layered Glass Frame */}
           <div className="relative overflow-hidden rounded-[2.25rem] border border-border/80 bg-surface/60 p-4 shadow-2xl backdrop-blur-xl sm:p-5">
-            {/* Portrait & Project Overlap Container */}
             <div className="relative aspect-[4/4.2] w-full overflow-hidden rounded-2xl border border-border/60 bg-canvas sm:aspect-[4/4.5]">
               <img
                 src="/portrait.webp"
                 alt="Yousif Amr"
-                className="h-full w-full object-cover object-top  contrast-105 transition-all duration-700 hover:grayscale-0"
+                className="h-full w-full object-cover object-top contrast-105 transition-all duration-700 hover:grayscale-0"
               />
               <div className="pointer-events-none absolute inset-0 dark:bg-gradient-to-t dark:from-canvas dark:via-canvas/20 dark:to-transparent dark:to-50%" />
 
               {/* Floating Featured Case Study Badge */}
-              <div className="absolute inset-x-3 bottom-3 rounded-xl dark:border dark:border-border/80 bg-surface/80 p-3.5 shadow-lg backdrop-blur-md sm:inset-x-4 sm:bottom-4 sm:p-4">
+              <div
+                onClick={handleNavigateToFeaturedProject}
+                className="group/badge absolute inset-x-3 bottom-3 cursor-pointer rounded-xl border border-border/80  p-3.5 shadow-lg backdrop-blur-lg transition-all duration-200 hover:border-accent hover:bg-surface-elevated bg-surface-elevated sm:inset-x-4 sm:bottom-4 sm:p-4"
+              >
                 <div className="flex items-center justify-between text-[11px] text-text-muted">
-                  <span className="flex items-center gap-1.5 font-medium text-[blue]">
+                  <span className="flex items-center gap-1.5 font-medium text-accent">
                     <Layers3 size={13} />
                     <span>Featured Delivery</span>
                   </span>
-                  <span className="font-mono text-[10px]">01 / 04</span>
                 </div>
 
                 <div className="mt-2 flex items-center justify-between gap-3">
                   <div>
-                    <h2 className="text-sm font-bold dark:text-text-base text-[white]  sm:text-base">
+                    <h2 className="text-sm font-bold text-text-base sm:text-base">
                       {showcase.featuredProject.name}
                     </h2>
-                    <p className="line-clamp-1 text-xs dark:text-text-muted text-[gray]">
+                    <p className="line-clamp-1 text-xs text-text-muted">
                       {showcase.featuredProject.description}
                     </p>
                   </div>
 
                   <a
-                    href="#projects"
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border bg-surface-elevated text-text-base transition-colors hover:border-accent hover:text-accent"
+                    href={`#project-${featuredProjectId}`}
+                    onClick={handleNavigateToFeaturedProject}
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border bg-surface-elevated text-text-base transition-colors group-hover/badge:border-accent group-hover/badge:text-accent cursor-pointer"
                     aria-label="View featured project"
                   >
                     <ArrowUpRight size={15} />

@@ -5,13 +5,12 @@ import { portfolioData } from "../../data/portfolioData";
 export default function ExperienceTimeline() {
   return (
     <section
-      className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20 md:px-10 md:py-24"
+      className="relative mx-auto max-w-7xl px-4 pb-16 pt-4 sm:px-6 sm:pb-20 sm:pt-6 md:px-10 md:pb-24 md:pt-8"
       id="experience"
     >
       {/* Header */}
       <div className="flex flex-col items-start">
         <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent backdrop-blur-sm sm:px-3.5 sm:py-1.5 sm:text-xs sm:tracking-[0.24em]">
-          <BriefcaseBusiness className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
           <span>Track Record</span>
         </div>
 

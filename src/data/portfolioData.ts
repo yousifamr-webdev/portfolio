@@ -8,6 +8,7 @@ export interface Project {
   stack: string[];
   image: string;
   imageLabel: string;
+  gallery?: string[];
   liveUrl: string;
   githubUrl: string;
   technicalScore: number;
@@ -33,6 +34,7 @@ export interface PortfolioData {
   identity: {
     name: string;
     email: string;
+    phone: string;
     github: string;
     linkedin: string;
     facebook: string;
@@ -62,13 +64,14 @@ export const portfolioData: PortfolioData = {
   identity: {
     name: "Yousif Amr",
     email: "yousifamr811@gmail.com",
+    phone: "+20 109 400 5690",
     github: "https://github.com/yousifamr-webdev",
     linkedin: "https://www.linkedin.com/in/yousif-amr/",
     facebook: "https://web.facebook.com/yousif.amr.fb",
     instagram: "https://www.instagram.com/yousifamr_/",
   },
   recruiter: {
-    title: "Full-Stack / Backend Software Engineer",
+    title: "Full-Stack Software Engineer",
     stack: [
       "NestJS",
       "Node.js",

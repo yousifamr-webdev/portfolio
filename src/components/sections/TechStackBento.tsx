@@ -8,6 +8,7 @@ import {
   Terminal,
 } from "lucide-react";
 import { portfolioData } from "../../data/portfolioData";
+import { WatermarkLogo } from "../ui/WatermarkLogo";
 
 const iconMap: Record<string, typeof Code2> = {
   Frontend: Code2,
@@ -27,7 +28,7 @@ const bentoSpanClasses = [
 export default function TechStackBento() {
   return (
     <section
-      className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 md:px-10 md:py-24"
+      className="relative mx-auto max-w-7xl overflow-hidden px-4 pb-16 pt-4 sm:px-6 sm:pb-20 sm:pt-6 md:px-10 md:pb-24 md:pt-8"
       id="skills"
     >
       {/* Ambient background glow */}
@@ -36,9 +37,8 @@ export default function TechStackBento() {
       </div>
 
       {/* Header */}
-      <div className="flex flex-col items-start">
+      <div className="relative z-10 flex flex-col items-start">
         <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent backdrop-blur-sm sm:px-3.5 sm:py-1.5 sm:text-xs sm:tracking-[0.24em]">
-          <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
           <span>Toolkit &amp; Architecture</span>
         </div>
 
@@ -53,7 +53,7 @@ export default function TechStackBento() {
       </div>
 
       {/* Bento Grid */}
-      <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-12 sm:gap-5 md:grid-cols-2 lg:grid-cols-12">
+      <div className="relative z-10 mt-10 grid grid-cols-1 gap-4 sm:mt-12 sm:gap-5 md:grid-cols-2 lg:grid-cols-12">
         {portfolioData.skillCategories.map((category, index) => {
           const Icon = iconMap[category.name] || Layers;
           const spanClass = bentoSpanClasses[index % bentoSpanClasses.length];

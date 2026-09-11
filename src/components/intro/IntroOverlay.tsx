@@ -10,18 +10,24 @@ const springTransition = {
   damping: 24,
 };
 
-// Module-level session memory: survives component unmounting when switching modes
-let hasCompletedInitialIntro = false;
+const THEATRICAL_INTRO_KEY = "has_seen_theatrical_intro";
+
+function checkHasSeenIntro(): boolean {
+  if (typeof window === "undefined") return false;
+  return sessionStorage.getItem(THEATRICAL_INTRO_KEY) === "true";
+}
 
 export default function IntroOverlay() {
   const { persona, selectPersona } = usePersona();
 
-  // If this session already ran the intro or has an active persona, it's a navbar switch
-  const isReopening = hasCompletedInitialIntro || Boolean(persona);
+  // Instantly true if the intro ran once or if an active persona already exists
+  const [isReopening] = useState(() => checkHasSeenIntro() || Boolean(persona));
   const [isRevealed, setIsRevealed] = useState(isReopening);
 
   useEffect(() => {
-    // Only run the 1.5s theatrical hold on the very first page load
+    // Lock the flag immediately into session storage on first mount
+    sessionStorage.setItem(THEATRICAL_INTRO_KEY, "true");
+
     if (!isReopening) {
       const timer = window.setTimeout(() => setIsRevealed(true), 1500);
       return () => window.clearTimeout(timer);
@@ -29,12 +35,12 @@ export default function IntroOverlay() {
   }, [isReopening]);
 
   const handleSelect = (nextPersona: "client" | "recruiter" | "curious") => {
-    hasCompletedInitialIntro = true;
+    sessionStorage.setItem(THEATRICAL_INTRO_KEY, "true");
     selectPersona(nextPersona);
   };
 
   const handleSkip = () => {
-    hasCompletedInitialIntro = true;
+    sessionStorage.setItem(THEATRICAL_INTRO_KEY, "true");
     selectPersona("recruiter");
   };
 
@@ -54,12 +60,12 @@ export default function IntroOverlay() {
       <button
         type="button"
         onClick={handleSkip}
-        className="absolute right-6 top-6 sm:right-8 sm:top-8 z-10 text-xs font-semibold uppercase tracking-[0.25em] text-text-muted transition-colors hover:text-text-base"
+        className="absolute right-6 top-6 sm:right-8 sm:top-8 z-10 text-xs font-semibold uppercase tracking-[0.25em] text-text-muted transition-colors hover:text-text-base cursor-pointer"
       >
         Skip →
       </button>
 
-      {/* Main Container: On reopening, both columns mount on frame 0 so the logo never centers */}
+      {/* Main Container */}
       <motion.div
         layout
         transition={springTransition}
@@ -74,7 +80,6 @@ export default function IntroOverlay() {
           <motion.div
             layout
             layoutId="brand-monogram"
-            // If reopening, initial={false} glides smoothly from the navbar's exact screen position
             initial={isReopening ? false : { scale: 3.8, opacity: 0 }}
             animate={{
               scale: isReopening ? 1 : isRevealed ? 1 : 1.38,
@@ -121,11 +126,11 @@ export default function IntroOverlay() {
                 }}
                 className="mt-2 flex flex-col items-center text-center select-none"
               >
-                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium tracking-[0.42em] text-text-base uppercase pl-[0.42em]">
-                  YOUSIF&nbsp;AMR
+                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium tracking-[0.42em] [word-spacing:-0.22em] text-text-base uppercase pl-[0.42em] whitespace-nowrap">
+                  YOUSIF AMR
                 </h2>
                 <p className="mt-1.5 sm:mt-2 text-xs md:text-sm font-semibold uppercase tracking-[0.38em] text-text-muted pl-[0.38em]">
-                  Web Developer
+                  Web Development
                 </p>
               </motion.div>
             )}
@@ -145,7 +150,7 @@ export default function IntroOverlay() {
           />
         )}
 
-        {/* Right Column: Question + Pills */}
+        {/* Right Column: Question + Mode Buttons */}
         <AnimatePresence>
           {isRevealed && (
             <motion.div
@@ -174,7 +179,7 @@ export default function IntroOverlay() {
                   whileHover={{ scale: 1.03, borderColor: "var(--accent)" }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => handleSelect("client")}
-                  className="group flex w-full items-center justify-center gap-1.5 sm:gap-2.5 rounded-full border border-border/80 bg-surface/70 py-3 sm:py-3.5 px-2 sm:px-4 text-xs sm:text-sm md:text-base font-semibold text-text-base backdrop-blur-md shadow-sm transition-all hover:border-accent hover:bg-surface-elevated hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent whitespace-nowrap"
+                  className="group flex w-full items-center justify-center gap-1.5 sm:gap-2.5 rounded-full border border-border/80 bg-surface/70 py-3 sm:py-3.5 px-2 sm:px-4 text-xs sm:text-sm md:text-base font-semibold text-text-base backdrop-blur-md shadow-sm transition-all hover:border-accent hover:bg-surface-elevated hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent whitespace-nowrap cursor-pointer"
                 >
                   <BriefcaseBusiness className="h-4 w-4 sm:h-[18px] sm:w-[18px] shrink-0 text-text-muted transition-colors group-hover:text-accent" />
                   <span>Potential client</span>
@@ -186,7 +191,7 @@ export default function IntroOverlay() {
                   whileHover={{ scale: 1.03, borderColor: "var(--accent)" }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => handleSelect("recruiter")}
-                  className="group flex w-full items-center justify-center gap-1.5 sm:gap-2.5 rounded-full border border-border/80 bg-surface/70 py-3 sm:py-3.5 px-2 sm:px-4 text-xs sm:text-sm md:text-base font-semibold text-text-base backdrop-blur-md shadow-sm transition-all hover:border-accent hover:bg-surface-elevated hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent whitespace-nowrap"
+                  className="group flex w-full items-center justify-center gap-1.5 sm:gap-2.5 rounded-full border border-border/80 bg-surface/70 py-3 sm:py-3.5 px-2 sm:px-4 text-xs sm:text-sm md:text-base font-semibold text-text-base backdrop-blur-md shadow-sm transition-all hover:border-accent hover:bg-surface-elevated hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent whitespace-nowrap cursor-pointer"
                 >
                   <Terminal className="h-4 w-4 sm:h-[18px] sm:w-[18px] shrink-0 text-text-muted transition-colors group-hover:text-accent" />
                   <span>Recruiter</span>
@@ -199,7 +204,7 @@ export default function IntroOverlay() {
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.96 }}
                     onClick={() => handleSelect("curious")}
-                    className="flex w-[calc(50%-5px)] sm:w-[calc(50%-7px)] items-center justify-center gap-1.5 sm:gap-2.5 rounded-full border border-accent bg-accent py-3 sm:py-3.5 px-2 sm:px-4 text-xs sm:text-sm md:text-base font-bold text-accent-contrast shadow-[0_0_30px_rgba(217,184,255,0.35)] transition-all hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent whitespace-nowrap"
+                    className="flex w-[calc(50%-5px)] sm:w-[calc(50%-7px)] items-center justify-center gap-1.5 sm:gap-2.5 rounded-full border border-accent bg-accent py-3 sm:py-3.5 px-2 sm:px-4 text-xs sm:text-sm md:text-base font-bold text-accent-contrast shadow-[0_0_30px_rgba(217,184,255,0.35)] transition-all hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent whitespace-nowrap cursor-pointer"
                   >
                     <Compass className="h-4 w-4 sm:h-[18px] sm:w-[18px] shrink-0" />
                     <span>Just curious</span>

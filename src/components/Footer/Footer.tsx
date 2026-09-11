@@ -5,6 +5,7 @@ import { portfolioData } from "../../data/portfolioData";
 import { getNavigationLinks } from "../navigation/Navbar";
 import { PersonalLogo } from "../ui/Logo";
 import { FacebookIcon, GitHubIcon, InstagramIcon, LinkedInIcon } from "../ui/SocialIcons";
+import { WatermarkLogo } from "../ui/WatermarkLogo";
 
 
 
@@ -22,7 +23,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-border bg-surface/60 backdrop-blur-md">
+    <footer className="relative border-t border-border bg-surface/60 backdrop-blur-md overflow-hidden">
       {/* Top Main Grid */}
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:px-10 lg:grid-cols-[1.4fr_0.8fr_1fr_1fr]">
         {/* Brand Column */}
@@ -35,8 +36,8 @@ export default function Footer() {
               <PersonalLogo tight className="h-9 w-9 text-accent" />
             </span>
             <div className="flex flex-col select-none">
-              <span className="text-sm font-semibold text-center tracking-[0.32em] text-text-base uppercase pl-[0.32em]">
-                YOUSIF&nbsp;AMR
+              <span className="text-sm font-semibold text-center tracking-[0.32em] [word-spacing:-0.22em] text-text-base uppercase pl-[0.32em] whitespace-nowrap">
+                YOUSIF AMR
               </span>
               <p className="text-[8px] font-semibold text-center uppercase tracking-[0.32em] text-text-muted pl-[0.38em]">
                 Web Development
@@ -45,8 +46,8 @@ export default function Footer() {
           </a>
 
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-text-muted">
-            Building resilient full-stack systems, clean database schemas, and
-            modern interactive user interfaces.
+            Building functional production ready web systems, clean database
+            schemas, and modern interactive user interfaces.
           </p>
         </div>
 
