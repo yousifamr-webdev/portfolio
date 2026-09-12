@@ -13,6 +13,9 @@
   --accent-hover: #1C2D88;
   --accent-contrast: #FFFFFF;
   --border-color: #E2E8F0;
+  --grid-line: rgba(15, 23, 42, 0.032);
+  --grid-major-line: rgba(15, 23, 42, 0.055);
+  --ambient-glow: rgba(38, 59, 170, 0.04);
 }
 
 .dark {
@@ -26,6 +29,9 @@
   --accent-hover: #E8D4FF;
   --accent-contrast: #171717;
   --border-color: #262626;
+  --grid-line: rgba(255, 255, 255, 0.02);
+  --grid-major-line: rgba(255, 255, 255, 0.038);
+  --ambient-glow: rgba(217, 184, 255, 0.035);
 }
 
 html {
@@ -112,4 +118,26 @@ body {
 
 .menu-toggle.active svg path:nth-child(3) {
   --offset: 58px;
+}
+
+
+/* Technical Drafting Grid Layer */
+.bg-architectural-grid {
+  background-image: 
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* Subtle corner registration marks (+) for technical precision */
+.cad-crosshair {
+  position: relative;
+}
+.cad-crosshair::before,
+.cad-crosshair::after {
+  content: '';
+  position: absolute;
+  background-color: var(--border-color);
+  pointer-events: none;
+  opacity: 0.7;
 }

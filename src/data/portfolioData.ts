@@ -1,4 +1,4 @@
-export type ProjectCategory = "Full-Stack" | "Frontend";
+export type ProjectCategory = "Full-Stack" | "Frontend" | "Backend" | "Databases" | "Dev Tools/Cloud";
 
 export interface Project {
   id: string;
@@ -9,7 +9,7 @@ export interface Project {
   image: string;
   imageLabel: string;
   gallery?: string[];
-  liveUrl: string;
+  liveUrl?: string;
   githubUrl: string;
   technicalScore: number;
   visualScore: number;
@@ -108,60 +108,77 @@ export const portfolioData: PortfolioData = {
   },
   projects: [
     {
-      id: "freshcart-ecommerce",
-      title: "FreshCart E-Commerce",
+      id: "ecommerce-nestjs",
+      title: "E-Commerce Platform",
       category: "Full-Stack",
       impact:
-        "Architected an end-to-end commerce engine with 68 RESTful endpoints, JWT role-based auth, and 11 Mongoose relational data schemas.",
-      stack: ["Next.js", "NestJS", "TypeScript", "MongoDB", "Mongoose", "Zod"],
-      image: "/projects/place_holder.webp",
-      imageLabel: "FreshCart storefront and checkout preview",
-      liveUrl: "https://e-commerce-green-ten-54.vercel.app/",
+        "A full-stack storefront pairing a NestJS commerce API (58 REST endpoints, JWT auth, S3 image uploads, 10 Mongoose schemas spanning products, carts, orders, and coupons) with a Next.js 15 frontend handling checkout, wishlists, and order history.",
+      stack: [
+        "Next.js",
+        "NestJS",
+        "TypeScript",
+        "MongoDB",
+        "Mongoose",
+        "Zod",
+        "NextAuth",
+        "AWS S3",
+      ],
+      image: "/projects/e-commerce/landing-page.webp",
+      imageLabel: "E-Commerce storefront and checkout preview",
+      gallery: [
+        "/projects/e-commerce/landing-page.webp",
+        "/projects/e-commerce/products-page.webp",
+        "/projects/e-commerce/orders-page.webp",
+      ],
+      liveUrl: "https://e-commerce-green-ten-54.vercel.app",
       githubUrl: "https://github.com/yousifamr-webdev/E-Commerce-NestJS-",
-      technicalScore: 10,
-      visualScore: 9,
+      technicalScore: 9,
+      visualScore: 4,
     },
     {
       id: "social-app",
-      title: "Real-Time Social Platform",
+      title: "Social App",
       category: "Full-Stack",
       impact:
-        "Constructed a live social application utilizing Socket.io for instantaneous messaging, feed streams, and MVC backend separation.",
-      stack: ["React", "Node.js", "Express.js", "Socket.io", "MongoDB"],
-      image: "/projects/place_holder.webp",
-      imageLabel: "SocialApp real-time interaction feed preview",
-      liveUrl: "https://social-app-sable-xi.vercel.app/login",
+        "A full-stack social network with 29 REST endpoints plus a GraphQL layer for post reactions, real-time chat over Socket.io, Firebase push notifications, and S3-backed media uploads, paired with a React 19 frontend built on TanStack Query.",
+      stack: [
+        "React",
+        "Vite",
+        "TypeScript",
+        "Express",
+        "MongoDB",
+        "Socket.io",
+        "GraphQL",
+        "TanStack Query",
+        "Redis",
+      ],
+      image: "/projects/social-app/framework.webp",
+      imageLabel: "Social App feed and post details preview",
+      liveUrl: "https://social-app-sable-xi.vercel.app",
       githubUrl: "https://github.com/yousifamr-webdev/Social_App_BE",
       technicalScore: 9,
-      visualScore: 8,
+      visualScore: 4,
     },
     {
-      id: "game-hub",
-      title: "GameHub Discovery Engine",
-      category: "Full-Stack",
+      id: "sara7a-app",
+      title: "Sara7a App",
+      category: "Backend",
       impact:
-        "Designed an interactive game discovery platform featuring debounced querying, multi-genre filtering, and dynamic responsive grid layouts.",
-      stack: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-      image: "/projects/place_holder.webp",
-      imageLabel: "GameHub catalog and filter grid preview",
-      liveUrl: "https://github.com/yousifamr-webdev/game-hub",
-      githubUrl: "https://github.com/yousifamr-webdev/game-hub",
-      technicalScore: 8,
-      visualScore: 9,
-    },
-    {
-      id: "weather-analytics",
-      title: "Location-Aware Weather Dashboard",
-      category: "Frontend",
-      impact:
-        "Consumes third-party RESTful APIs and the Geolocation API with comprehensive try-catch error recovery for network failures.",
-      stack: ["JavaScript (ES6+)", "Web APIs", "HTML5", "CSS3"],
-      image: "/projects/place_holder.webp",
-      imageLabel: "Weather analytics dashboard preview",
-      liveUrl: "https://yousifamr-webdev.github.io/Weather-App/",
-      githubUrl: "https://github.com/yousifamr-webdev/Weather-App",
-      technicalScore: 7,
-      visualScore: 8,
+        "An anonymous messaging API (Sarahah-style) with 24 RESTful endpoints, Google OAuth + two-step OTP verification, JWT access/refresh tokens, and Redis-backed session/rate control.",
+      stack: [
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "Mongoose",
+        "Redis",
+        "JWT",
+        "Joi",
+      ],
+      image: "/projects/sara7a-app/framework.webp",
+      imageLabel: "Sara7a App auth and messaging flow preview",
+      githubUrl: "https://github.com/yousifamr-webdev/Sara7a-App",
+      technicalScore: 9,
+      visualScore: 4,
     },
   ],
   experience: [
