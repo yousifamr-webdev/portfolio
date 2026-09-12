@@ -5,7 +5,7 @@ import { portfolioData } from "../../data/portfolioData";
 import { getNavigationLinks } from "../navigation/Navbar";
 import { PersonalLogo } from "../ui/Logo";
 import { FacebookIcon, GitHubIcon, InstagramIcon, LinkedInIcon } from "../ui/SocialIcons";
-import { WatermarkLogo } from "../ui/WatermarkLogo";
+import { WatermarkMonogram } from "../ui/WatermarkMonogram";
 
 
 
@@ -26,6 +26,10 @@ export default function Footer() {
     <footer className="relative border-t border-border bg-surface/60 backdrop-blur-md overflow-hidden">
       {/* Top Main Grid */}
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:px-10 lg:grid-cols-[1.4fr_0.8fr_1fr_1fr]">
+         <WatermarkMonogram
+                  variant="ghost"
+                  className="sm:w-[250%] lg:w-[50%] min-w-[1000px] top-[5%] -right-[120%] sm:-top-[40%] sm:-right-[120%] lg:-top-[75%] lg:-right-[10%]"
+                />
         {/* Brand Column */}
         <div className="flex flex-col">
           <a

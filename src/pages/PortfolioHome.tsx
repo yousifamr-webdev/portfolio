@@ -7,6 +7,7 @@ import ExperienceTimeline from "../components/sections/ExperienceTimeline";
 import TechStackBento from "../components/sections/TechStackBento";
 import ContactSection from "../components/sections/ContactSection";
 import { WatermarkMonogram } from "../components/ui/WatermarkMonogram";
+import { DepthSeparator } from "../components/ui/DepthSeparator";
 
 export default function PortfolioHome() {
   const { view } = usePersona();
@@ -30,34 +31,13 @@ export default function PortfolioHome() {
         </div>
       </div>
 
-      {/* Section Transition Datum Line */}
-      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-10">
-        <div className="flex items-center justify-between border-t border-border/40 py-2">
-          <span className="font-mono text-[9px] tracking-widest uppercase text-text-muted/40">
-            SYS // 01 · SELECTED_WORKS
-          </span>
-          <span className="font-mono text-[9px] tracking-widest uppercase text-text-muted/40">
-            +
-          </span>
-        </div>
-      </div>
+      <DepthSeparator variant="lift" />
 
       {/* 2. PROJECTS */}
       <div className="relative z-10 w-full">
         <ProjectsSection />
       </div>
-
-      {/* Section Transition Datum Line */}
-      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-10">
-        <div className="flex items-center justify-between border-t border-border/40 py-2">
-          <span className="font-mono text-[9px] tracking-widest uppercase text-text-muted/40">
-            SYS // 02 · TRACK_RECORD
-          </span>
-          <span className="font-mono text-[9px] tracking-widest uppercase text-text-muted/40">
-            +
-          </span>
-        </div>
-      </div>
+      <DepthSeparator variant="sink" />
 
       {/* 3. EXPERIENCE: Left edge watermark */}
       <div className="relative z-10 w-full overflow-hidden">
@@ -67,36 +47,12 @@ export default function PortfolioHome() {
         />
         <ExperienceTimeline />
       </div>
-
-      {/* Section Transition Datum Line */}
-      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-10">
-        <div className="flex items-center justify-between border-t border-border/40 py-2">
-          <span className="font-mono text-[9px] tracking-widest uppercase text-text-muted/40">
-            SYS // 03 · SPECIFICATIONS
-          </span>
-          <span className="font-mono text-[9px] tracking-widest uppercase text-text-muted/40">
-            +
-          </span>
-        </div>
-      </div>
-
+      <DepthSeparator variant="lift" />
       {/* 4. TECH STACK */}
       <div className="relative z-10 w-full">
         <TechStackBento />
       </div>
-
-      {/* Section Transition Datum Line */}
-      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-10">
-        <div className="flex items-center justify-between border-t border-border/40 py-2">
-          <span className="font-mono text-[9px] tracking-widest uppercase text-text-muted/40">
-            SYS // 04 · DISPATCH
-          </span>
-          <span className="font-mono text-[9px] tracking-widest uppercase text-text-muted/40">
-            +
-          </span>
-        </div>
-      </div>
-
+      <DepthSeparator variant="sink" />
       {/* 5. CONTACT */}
       <div className="relative z-10 w-full">
         <ContactSection />
