@@ -45,7 +45,6 @@ body {
   margin: 0;
   background-color: var(--bg-canvas);
   color: var(--text-primary);
-  transition: background-color 300ms ease, color 300ms ease;
 }
 
 * {

@@ -44,7 +44,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   return (
     <ThemeContext.Provider value={value}>
-      <div className="min-h-screen transition-colors duration-300">{children}</div>
+      <div className="min-h-screen">{children}</div>
     </ThemeContext.Provider>
   )
 }

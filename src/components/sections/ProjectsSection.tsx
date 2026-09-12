@@ -134,7 +134,6 @@ export default function ProjectsSection() {
       </div>
       {/* Projects Grid */}
       <motion.div
-        layout
         className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-12"
       >
         {projects.map((project, index) => {
@@ -155,7 +154,6 @@ export default function ProjectsSection() {
             <motion.article
               id={`project-${project.id}`}
               key={project.id}
-              layout
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}

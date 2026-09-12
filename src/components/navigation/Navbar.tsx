@@ -9,7 +9,7 @@ import {
   Terminal,
   X,
 } from "lucide-react";
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { usePersona } from "../../context/PersonaContext";
 import { useTheme } from "../../context/ThemeContext";
 import { PersonalLogo } from "../ui/Logo";
@@ -55,7 +55,7 @@ export default function Navbar() {
   const scrolledState = useRef(false);
 
   const isRecruiter = persona === "recruiter";
-  const links = getNavigationLinks(isRecruiter);
+  const links = useMemo(() => getNavigationLinks(isRecruiter), [isRecruiter]);
 
   useEffect(() => {
     const handleScroll = () => {

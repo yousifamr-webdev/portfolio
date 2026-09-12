@@ -17,14 +17,14 @@ export default function PortfolioHome() {
       {/* Drafting Grid Backdrop */}
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 transform-gpu bg-architectural-grid [contain:paint] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_60%,transparent_100%)] [transform:translate3d(0,0,0)]"
+        className="pointer-events-none fixed inset-0 z-0 transform-gpu bg-architectural-grid [contain:paint] max-sm:[mask-image:none] md:[mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_60%,transparent_100%)] [transform:translate3d(0,0,0)]"
       />
 
       {/* 1. HERO: Top-right quadrant crop */}
       <div className="relative z-10 w-full overflow-hidden">
         <WatermarkMonogram
           variant="ghost"
-          className="sm:w-[150%] lg:w-[100%] min-w-[500px] top-[5%] -right-[50%] sm:top-[5%] sm:-right-[20%] lg:-top-[5%] lg:right-[20%]"
+          className="sm:w-[150%] lg:w-[100%] min-w-[500px] max-sm:min-w-0 max-sm:w-[280px] top-[5%] -right-[50%] sm:top-[5%] sm:-right-[20%] lg:-top-[5%] lg:right-[20%]"
         />
         <div id="top">
           {view === "VIEW_TECHNICAL" ? <RecruiterHero /> : <ClientHero />}
@@ -43,7 +43,7 @@ export default function PortfolioHome() {
       <div className="relative z-10 w-full overflow-hidden">
         <WatermarkMonogram
           variant="ghost"
-          className="sm:w-[150%] lg:w-[100%] min-w-[560px] top-[35%] -left-[15%] sm:top-[5%] sm:-left-[20%] lg:-top-[5%] lg:left-[20%]"
+          className="sm:w-[150%] lg:w-[100%] min-w-[560px] max-sm:min-w-0 max-sm:w-[280px] top-[35%] -left-[15%] sm:top-[5%] sm:-left-[20%] lg:-top-[5%] lg:left-[20%]"
         />
         <ExperienceTimeline />
       </div>

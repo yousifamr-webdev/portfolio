@@ -19,7 +19,7 @@ export const WatermarkMonogram: FC<WatermarkMonogramProps> = ({
         viewBox="360 385 385 315"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={`h-full w-full transform-gpu will-change-transform ${
+        className={`h-full w-full ${
           variant === "outline"
             ? "stroke-current fill-none stroke-[2.2px] opacity-[0.022] dark:opacity-[0.028]"
             : "fill-current opacity-[0.03] dark:opacity-[0.015] dark:fill-accent"
