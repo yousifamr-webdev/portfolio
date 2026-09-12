@@ -43,7 +43,7 @@ export default function Footer() {
     <footer className="relative border-t border-border bg-surface/60 backdrop-blur-md overflow-hidden">
       <WatermarkMonogram
         variant="ghost"
-        className="pointer-events-none z-0 sm:w-[250%] lg:w-[50%] min-w-[1000px] max-sm:min-w-0 max-sm:w-[280px] top-[5%] -right-[120%] sm:-top-[40%] sm:-right-[120%] lg:-top-[75%] lg:-right-[10%]"
+        className="pointer-events-none z-0 sm:w-[250%] lg:w-[50%] min-w-[1000px] top-[5%] -right-[120%] sm:-top-[40%] sm:-right-[120%] lg:-top-[75%] lg:-right-[10%]"
       />
       {/* Top Main Grid */}
       <div className="relative z-10 mx-auto grid max-w-7xl gap-12 px-6 py-16 md:px-10 lg:grid-cols-[1.4fr_0.8fr_1fr_1fr]">
