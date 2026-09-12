@@ -178,37 +178,41 @@ export default function ProjectsSection() {
               }`}
             >
               {/* Media Container: On Flagship, spans 7 columns */}
-              <div className={isFlagship ? "lg:col-span-7" : ""}>
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => setActiveGalleryProject(project)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setActiveGalleryProject(project);
-                    }
-                  }}
-                  className="group/img relative aspect-[16/10] w-full cursor-pointer overflow-hidden rounded-xl border border-border/70 bg-canvas/50 sm:rounded-2xl"
-                >
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    loading="lazy"
-                    decoding="async"
-                    className="aspect-[16/10] h-full w-full object-cover transition-transform duration-500 ease-out group-hover/img:scale-105"
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 transition-opacity group-hover/img:opacity-80" />
+              {project.image ? (
+                <div className={isFlagship ? "lg:col-span-7" : ""}>
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => setActiveGalleryProject(project)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setActiveGalleryProject(project);
+                      }
+                    }}
+                    className="group/img relative aspect-[16/10] w-full cursor-pointer overflow-hidden rounded-xl border border-border/70 bg-canvas/50 sm:rounded-2xl"
+                  >
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="aspect-[16/10] h-full w-full object-cover transition-transform duration-500 ease-out group-hover/img:scale-105"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 transition-opacity group-hover/img:opacity-80" />
 
-                  <div className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-lg border border-accent/15 shadow-lg backdrop-blur-lg transition-all duration-100 hover:border-accent hover:bg-surface-elevated bg-surface-elevated px-2.5 py-1 text-[11px] font-medium text-accent">
-                    <Images size={13} className="text-accent" />
-                    <span>
-                      {galleryImages.length}{" "}
-                      {galleryImages.length === 1 ? "Image" : "Images"}
-                    </span>
+                    <div className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-lg border border-accent/15 shadow-lg backdrop-blur-lg transition-all duration-100 hover:border-accent hover:bg-surface-elevated bg-surface-elevated px-2.5 py-1 text-[11px] font-medium text-accent">
+                      <Images size={13} className="text-accent" />
+                      <span>
+                        {galleryImages.length}{" "}
+                        {galleryImages.length === 1 ? "Image" : "Images"}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                ""
+              )}
 
               {/* Details Container: On Flagship, spans 5 columns with enhanced hierarchy */}
               <div

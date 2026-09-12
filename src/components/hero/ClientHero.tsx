@@ -98,7 +98,7 @@ export default function ClientHero() {
 
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-text-muted sm:mt-6 sm:text-base sm:leading-8">
             Full-stack engineer delivering production-grade web systems,
-            resilient APIs, and responsive digital interfaces tailored to
+            clean functional APIs, and responsive digital interfaces tailored to
             business momentum.
           </p>
 

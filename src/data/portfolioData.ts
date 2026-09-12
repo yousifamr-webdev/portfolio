@@ -112,7 +112,7 @@ export const portfolioData: PortfolioData = {
       title: "E-Commerce Platform",
       category: "Full-Stack",
       impact:
-        "A full-stack storefront pairing a NestJS commerce API (58 REST endpoints, JWT auth, S3 image uploads, 10 Mongoose schemas spanning products, carts, orders, and coupons) with a Next.js 15 frontend handling checkout, wishlists, and order history.",
+        "A full-stack storefront pairing a NestJS commerce API (68 REST endpoints, JWT auth, S3 image uploads, 11 Mongoose schemas spanning products, carts, orders, and coupons) with a Next.js 15 frontend handling checkout, wishlists, and order history.",
       stack: [
         "Next.js",
         "NestJS",
@@ -152,7 +152,7 @@ export const portfolioData: PortfolioData = {
         "TanStack Query",
         "Redis",
       ],
-      image: "/projects/social-app/framework.webp",
+      image: "",
       imageLabel: "Social App feed and post details preview",
       liveUrl: "https://social-app-sable-xi.vercel.app",
       githubUrl: "https://github.com/yousifamr-webdev/Social_App_BE",
@@ -174,7 +174,7 @@ export const portfolioData: PortfolioData = {
         "JWT",
         "Joi",
       ],
-      image: "/projects/sara7a-app/framework.webp",
+      image: "",
       imageLabel: "Sara7a App auth and messaging flow preview",
       githubUrl: "https://github.com/yousifamr-webdev/Sara7a-App",
       technicalScore: 9,

@@ -44,7 +44,7 @@ const flagshipBenchmarks = [
   {
     project: "Social Platform",
     githubUrl: "https://github.com/yousifamr-webdev/Social_App_BE",
-    metric: "Sub-50ms",
+    metric: "Low-Latency",
     title: "Real-Time WebSocket Pipeline",
     description:
       "Bidirectional Socket.io rooms with MVC state separation, instant messaging streams, and live interaction events.",

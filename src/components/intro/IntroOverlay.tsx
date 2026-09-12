@@ -129,7 +129,7 @@ export default function IntroOverlay() {
                 <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium tracking-[0.42em] [word-spacing:-0.22em] text-text-base uppercase pl-[0.42em] whitespace-nowrap">
                   YOUSIF AMR
                 </h2>
-                <p className="mt-1.5 sm:mt-2 text-xs md:text-sm font-semibold uppercase tracking-[0.38em] text-text-muted pl-[0.38em]">
+                <p className="mt-0.5 sm:mt-2 text-[0.6rem] md:text-sm font-semibold uppercase tracking-[0.38em] text-text-muted pl-[0.38em]">
                   Web Development
                 </p>
               </motion.div>
