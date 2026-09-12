@@ -1,5 +1,5 @@
 import { ArrowUp, ArrowUpRight, Check, Code2, Copy, Mail } from "lucide-react";
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import { usePersona } from "../../context/PersonaContext";
 import { portfolioData } from "../../data/portfolioData";
 import { getNavigationLinks } from "../navigation/Navbar";
@@ -15,6 +15,23 @@ export default function Footer() {
   const links = getNavigationLinks(persona === "recruiter");
   const email = portfolioData.identity.email.replace("mailto:", "");
 
+  const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+
+    if (href === "#top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    const target = document.querySelector(href);
+    if (target) {
+      window.scrollTo({
+        top: target.getBoundingClientRect().top + window.scrollY - 76,
+        behavior: "smooth",
+      });
+    }
+  };
+
   const copyEmail = () => {
     void navigator.clipboard.writeText(email).then(() => {
       setIsCopied(true);
@@ -24,17 +41,18 @@ export default function Footer() {
 
   return (
     <footer className="relative border-t border-border bg-surface/60 backdrop-blur-md overflow-hidden">
+      <WatermarkMonogram
+        variant="ghost"
+        className="pointer-events-none z-0 sm:w-[250%] lg:w-[50%] min-w-[1000px] top-[5%] -right-[120%] sm:-top-[40%] sm:-right-[120%] lg:-top-[75%] lg:-right-[10%]"
+      />
       {/* Top Main Grid */}
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:px-10 lg:grid-cols-[1.4fr_0.8fr_1fr_1fr]">
-         <WatermarkMonogram
-                  variant="ghost"
-                  className="sm:w-[250%] lg:w-[50%] min-w-[1000px] top-[5%] -right-[120%] sm:-top-[40%] sm:-right-[120%] lg:-top-[75%] lg:-right-[10%]"
-                />
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-12 px-6 py-16 md:px-10 lg:grid-cols-[1.4fr_0.8fr_1fr_1fr]">
         {/* Brand Column */}
         <div className="flex flex-col">
           <a
             className="group flex items-center gap-3.5 text-text-base transition-opacity hover:opacity-90"
             href="#top"
+            onClick={(e) => handleNavClick(e, "#top")}
           >
             <span className="shrink-0 text-accent">
               <PersonalLogo tight className="h-9 w-9 text-accent" />
@@ -66,6 +84,7 @@ export default function Footer() {
                 key={link.href}
                 className="w-fit text-sm text-text-muted transition-colors hover:text-accent hover:translate-x-1 duration-200"
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
               >
                 {link.label}
               </a>
@@ -178,7 +197,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Legal Bar */}
-      <div className="border-t border-border/80 bg-surface/80">
+      <div className="relative z-10 border-t border-border/80 bg-surface/80">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-5 text-xs text-text-muted sm:flex-row md:px-10">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-center sm:text-left">
             <span>

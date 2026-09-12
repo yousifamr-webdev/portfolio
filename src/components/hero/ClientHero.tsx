@@ -75,7 +75,7 @@ export default function ClientHero() {
     <main className="relative mx-auto max-w-7xl px-4 pb-20 pt-3 sm:px-6 sm:pb-24 sm:pt-6 md:px-10 md:pt-8 lg:pt-8">
       {/* Ambient background glow */}
       <div className="pointer-events-none absolute left-1/4 top-1/4 -translate-x-1/2 -translate-y-1/2">
-        <div className="h-[320px] w-[320px] rounded-full bg-accent/10 blur-[130px] sm:h-[480px] sm:w-[480px]" />
+        <div className="h-[320px] w-[320px] rounded-full bg-accent/10 blur-2xl sm:h-[480px] sm:w-[480px] sm:blur-[130px]" />
       </div>
 
       <section className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
@@ -145,12 +145,13 @@ export default function ClientHero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ ...springTransition, delay: 0.12 }}
         >
-          <div className="relative overflow-hidden rounded-[2.25rem] border border-border/80 bg-surface/60 p-4 shadow-2xl backdrop-blur-xl sm:p-5">
+          <div className="relative overflow-hidden rounded-[2.25rem] border border-border/80 bg-surface/60 p-4 shadow-2xl backdrop-blur-md sm:p-5 sm:backdrop-blur-xl">
             <div className="relative aspect-[4/4.2] w-full overflow-hidden rounded-2xl border border-border/60 bg-canvas sm:aspect-[4/4.5]">
               <img
                 src="/portrait.webp"
                 alt="Yousif Amr"
-                className="h-full w-full object-cover object-top contrast-105 transition-all duration-700 hover:grayscale-0"
+                decoding="async"
+                className="aspect-[4/4.2] h-full w-full object-cover object-top contrast-105 transition-all duration-700 hover:grayscale-0"
               />
               <div className="pointer-events-none absolute inset-0 dark:bg-gradient-to-t dark:from-canvas dark:via-canvas/20 dark:to-transparent dark:to-50%" />
 

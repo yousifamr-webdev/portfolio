@@ -92,7 +92,7 @@ export function ProjectGalleryModal({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
-        className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-canvas/90 p-4 backdrop-blur-2xl sm:p-6 md:p-8 cursor-default"
+        className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-canvas/90 p-4 backdrop-blur-md sm:p-6 sm:backdrop-blur-xl md:p-8 cursor-default"
       >
         {/* Top Header Bar */}
         <div
@@ -145,13 +145,15 @@ export function ProjectGalleryModal({
                 key={currentIndex}
                 src={images[currentIndex]}
                 alt={`${projectTitle} screenshot ${currentIndex + 1}`}
+                loading="lazy"
+                decoding="async"
                 custom={direction}
                 variants={slideVariants}
                 initial="enter"
                 animate="center"
                 exit="exit"
                 onClick={(e) => e.stopPropagation()}
-                className="pointer-events-auto max-h-full max-w-full rounded-2xl border border-border/80 object-contain shadow-2xl cursor-default"
+                className="pointer-events-auto aspect-[16/10] max-h-full max-w-full rounded-2xl border border-border/80 object-contain shadow-2xl cursor-default"
               />
             </AnimatePresence>
           </div>
@@ -195,7 +197,9 @@ export function ProjectGalleryModal({
                   <img
                     src={img}
                     alt="thumbnail"
-                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    className="aspect-[16/10] h-full w-full object-cover"
                   />
                 </button>
               );

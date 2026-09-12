@@ -8,7 +8,6 @@ import {
   Terminal,
 } from "lucide-react";
 import { portfolioData } from "../../data/portfolioData";
-import { WatermarkLogo } from "../ui/WatermarkLogo";
 
 const iconMap: Record<string, typeof Code2> = {
   Frontend: Code2,
@@ -33,7 +32,7 @@ export default function TechStackBento() {
     >
       {/* Ambient background glow */}
       <div className="pointer-events-none absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2">
-        <div className="h-[260px] w-[300px] rounded-full bg-accent/5 blur-[100px] sm:h-[380px] sm:w-[600px] sm:blur-[130px]" />
+        <div className="h-[260px] w-[300px] rounded-full bg-accent/5 blur-2xl sm:h-[380px] sm:w-[600px] sm:blur-[130px]" />
       </div>
 
       {/* Header */}

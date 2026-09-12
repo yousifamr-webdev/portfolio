@@ -28,63 +28,9 @@ export const HamburgerButton: FC<HamburgerButtonProps> = ({
       } ${className}`}
       {...props}
     >
-      <style>{`
-        .animated-hamburger-btn {
-          -webkit-tap-highlight-color: transparent;
-        }
-        .animated-hamburger-svg {
-          width: 64px;
-          height: 48px;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          stroke: currentColor;
-          stroke-width: 3px;
-          stroke-linecap: round;
-          stroke-linejoin: round;
-          fill: none;
-          pointer-events: none;
-        }
-        .animated-hamburger-svg path {
-          transition: 
-            stroke-dasharray 0.85s ease, 
-            stroke-dashoffset 0.85s ease;
-          stroke-dasharray: 26px 100px;
-          stroke-dashoffset: 126px;
-          transform: translateZ(0);
-        }
-        .animated-hamburger-svg path:nth-child(2) {
-          transition: 
-            stroke-dasharray 0.7s ease-in, 
-            stroke-dashoffset 0.7s ease-in;
-          stroke-dashoffset: 100px;
-          stroke-dasharray: 26px 74px;
-        }
-        .animated-hamburger-svg path:nth-child(3) {
-          stroke-dashoffset: 133px;
-          stroke-dasharray: 26px 107px;
-        }
-        .animated-hamburger-btn.active .animated-hamburger-svg path {
-          stroke-dashoffset: 57px;
-        }
-        .animated-hamburger-btn.active .animated-hamburger-svg path:nth-child(1),
-        .animated-hamburger-btn.active .animated-hamburger-svg path:nth-child(3) {
-          transition-delay: 0.15s;
-          transition-timing-function: cubic-bezier(0.2, 0.4, 0.2, 1.1);
-        }
-        .animated-hamburger-btn.active .animated-hamburger-svg path:nth-child(2) {
-          transition-duration: 0.4s;
-          stroke-dashoffset: 2px;
-          stroke-dasharray: 1px 74px;
-        }
-        .animated-hamburger-btn.active .animated-hamburger-svg path:nth-child(3) {
-          stroke-dashoffset: 58px;
-        }
-      `}</style>
-
       <svg
         viewBox="0 0 64 48"
-        className="animated-hamburger-svg"
+        className="animated-hamburger-svg text-accent"
         style={{
           transform: `translate(-50%, -50%) scale(${scale})`,
         }}

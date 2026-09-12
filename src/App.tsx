@@ -1,11 +1,12 @@
 import { AnimatePresence, LayoutGroup } from 'framer-motion'
+import type { ReactElement } from 'react'
 import { usePersona } from './context/PersonaContext'
 import IntroOverlay from './components/intro/IntroOverlay'
 import Navbar from './components/navigation/Navbar'
-import Footer from './components/Footer/Footer'
+import Footer from './components/footer/Footer'
 import PortfolioHome from './pages/PortfolioHome'
 
-function App() {
+function App(): ReactElement {
   const { isIntroComplete } = usePersona()
 
   return (

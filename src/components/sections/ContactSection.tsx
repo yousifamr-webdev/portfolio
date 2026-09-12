@@ -108,10 +108,10 @@ export default function ContactSection() {
     >
       {/* Background ambient lighting */}
       <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="h-[300px] w-[300px] rounded-full bg-accent/5 blur-[100px] sm:h-[420px] sm:w-[650px] sm:blur-[140px]" />
+        <div className="h-[300px] w-[300px] rounded-full bg-accent/5 blur-2xl sm:h-[420px] sm:w-[650px] sm:blur-[140px]" />
       </div>
 
-      <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-surface/70 p-5 backdrop-blur-xl sm:rounded-3xl sm:p-8 md:p-12 lg:rounded-[2.5rem] lg:p-16">
+      <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-surface/70 p-5 backdrop-blur-md sm:rounded-3xl sm:p-8 sm:backdrop-blur-xl md:p-12 lg:rounded-[2.5rem] lg:p-16">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
           {/* Left Column: Direct Channels & Verified Logistics */}
           <div className="flex flex-col justify-between">

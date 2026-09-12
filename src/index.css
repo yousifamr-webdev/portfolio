@@ -52,74 +52,65 @@ body {
   border-color: var(--border-color);
 }
 
-
-/* ==========================================================================
-   Refined Hamburger Toggle (Calibrated to size 18px / 2px stroke)
-   ========================================================================== */
-.menu-toggle {
-  --menu-color: currentColor;
+.animated-hamburger-btn {
   -webkit-tap-highlight-color: transparent;
-  outline: none;
 }
 
-.menu-toggle svg {
+.animated-hamburger-svg {
   width: 64px;
   height: 48px;
   position: absolute;
   top: 50%;
   left: 50%;
-  /* Scales the 26px path down to an exact 18px visual footprint */
-  transform: translate(-50%, -50%) scale(0.68);
-  stroke: var(--menu-color);
-  stroke-width: 3px; /* Scales down to ~2px visual thickness */
+  stroke: currentColor;
+  stroke-width: 3px;
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
-  display: block;
   pointer-events: none;
 }
 
-.menu-toggle svg path {
-  transition: 
-    stroke-dasharray var(--duration, 0.85s) var(--easing, ease) var(--delay, 0s),
-    stroke-dashoffset var(--duration, 0.85s) var(--easing, ease) var(--delay, 0s);
-  stroke-dasharray: var(--array-1, 26px) var(--array-2, 100px);
-  stroke-dashoffset: var(--offset, 126px);
+.animated-hamburger-svg path {
+  transition:
+    stroke-dasharray 0.85s ease,
+    stroke-dashoffset 0.85s ease;
+  stroke-dasharray: 26px 100px;
+  stroke-dashoffset: 126px;
   transform: translateZ(0);
 }
 
-.menu-toggle svg path:nth-child(2) {
-  --duration: 0.7s;
-  --easing: ease-in;
-  --offset: 100px;
-  --array-2: 74px;
+.animated-hamburger-svg path:nth-child(2) {
+  transition:
+    stroke-dasharray 0.7s ease-in,
+    stroke-dashoffset 0.7s ease-in;
+  stroke-dashoffset: 100px;
+  stroke-dasharray: 26px 74px;
 }
 
-.menu-toggle svg path:nth-child(3) {
-  --offset: 133px;
-  --array-2: 107px;
+.animated-hamburger-svg path:nth-child(3) {
+  stroke-dashoffset: 133px;
+  stroke-dasharray: 26px 107px;
 }
 
-.menu-toggle.active svg path {
-  --offset: 57px;
+.animated-hamburger-btn.active .animated-hamburger-svg path {
+  stroke-dashoffset: 57px;
 }
 
-.menu-toggle.active svg path:nth-child(1),
-.menu-toggle.active svg path:nth-child(3) {
-  --delay: 0.15s;
-  --easing: cubic-bezier(0.2, 0.4, 0.2, 1.1);
+.animated-hamburger-btn.active .animated-hamburger-svg path:nth-child(1),
+.animated-hamburger-btn.active .animated-hamburger-svg path:nth-child(3) {
+  transition-delay: 0.15s;
+  transition-timing-function: cubic-bezier(0.2, 0.4, 0.2, 1.1);
 }
 
-.menu-toggle.active svg path:nth-child(2) {
-  --duration: 0.4s;
-  --offset: 2px;
-  --array-1: 1px;
+.animated-hamburger-btn.active .animated-hamburger-svg path:nth-child(2) {
+  transition-duration: 0.4s;
+  stroke-dashoffset: 2px;
+  stroke-dasharray: 1px 74px;
 }
 
-.menu-toggle.active svg path:nth-child(3) {
-  --offset: 58px;
+.animated-hamburger-btn.active .animated-hamburger-svg path:nth-child(3) {
+  stroke-dashoffset: 58px;
 }
-
 
 /* Technical Drafting Grid Layer */
 .bg-architectural-grid {

@@ -17,7 +17,7 @@ export default function PortfolioHome() {
       {/* Drafting Grid Backdrop */}
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 bg-architectural-grid [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_60%,transparent_100%)]"
+        className="pointer-events-none fixed inset-0 z-0 transform-gpu bg-architectural-grid [contain:paint] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_60%,transparent_100%)] [transform:translate3d(0,0,0)]"
       />
 
       {/* 1. HERO: Top-right quadrant crop */}

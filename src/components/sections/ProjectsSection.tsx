@@ -197,7 +197,8 @@ export default function ProjectsSection() {
                     src={project.image}
                     alt={project.title}
                     loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover/img:scale-105"
+                    decoding="async"
+                    className="aspect-[16/10] h-full w-full object-cover transition-transform duration-500 ease-out group-hover/img:scale-105"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 transition-opacity group-hover/img:opacity-80" />
 

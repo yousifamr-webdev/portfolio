@@ -9,7 +9,7 @@ import {
   Terminal,
   X,
 } from "lucide-react";
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { usePersona } from "../../context/PersonaContext";
 import { useTheme } from "../../context/ThemeContext";
 import { PersonalLogo } from "../ui/Logo";
@@ -51,19 +51,38 @@ export default function Navbar() {
   const [activeHref, setActiveHref] = useState("#top");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const scrollFrame = useRef<number | null>(null);
+  const scrolledState = useRef(false);
 
   const isRecruiter = persona === "recruiter";
   const links = getNavigationLinks(isRecruiter);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-      if (window.scrollY < 80) {
-        setActiveHref("#top");
-      }
+      if (scrollFrame.current !== null) return;
+
+      scrollFrame.current = window.requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const nextIsScrolled = scrollY > 20;
+
+        if (scrolledState.current !== nextIsScrolled) {
+          scrolledState.current = nextIsScrolled;
+          setIsScrolled(nextIsScrolled);
+        }
+        if (scrollY < 80) {
+          setActiveHref("#top");
+        }
+
+        scrollFrame.current = null;
+      });
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollFrame.current !== null) {
+        window.cancelAnimationFrame(scrollFrame.current);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -136,7 +155,7 @@ export default function Navbar() {
       <div
         className={`w-full transition-all duration-300 ${
           isScrolled || isMenuOpen
-            ? "border-b border-border/80 bg-canvas/80 shadow-[0_4px_24px_rgba(0,0,0,0.2)] backdrop-blur-xl"
+            ? "border-b border-border/80 bg-canvas/80 shadow-[0_4px_24px_rgba(0,0,0,0.2)] backdrop-blur-md sm:backdrop-blur-xl"
             : ""
         }`}
       >
@@ -248,7 +267,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="absolute left-0 top-full w-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-b border-border/80 bg-canvas/80 px-6 py-5 shadow-lg backdrop-blur-2xl lg:hidden"
+            className="absolute left-0 top-full w-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-b border-border/80 bg-canvas/80 px-6 py-5 shadow-lg backdrop-blur-md sm:backdrop-blur-xl lg:hidden"
           >
             <div className="flex flex-col gap-2 touch-manipulation">
               {links.map((link, idx) => {

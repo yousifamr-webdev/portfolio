@@ -108,7 +108,7 @@ export default function RecruiterHero() {
         aria-hidden="true"
         className="pointer-events-none absolute right-[18%] top-[22%] -translate-y-1/2"
       >
-        <div className="h-[280px] w-[280px] rounded-full bg-accent/8 blur-[120px] sm:h-[420px] sm:w-[420px]" />
+        <div className="h-[280px] w-[280px] rounded-full bg-accent/8 blur-2xl sm:h-[420px] sm:w-[420px] sm:blur-[120px]" />
       </div>
 
       <div className="relative grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
@@ -178,7 +178,7 @@ export default function RecruiterHero() {
           aria-label="Professional profile and technical focus"
           className="relative mx-auto w-full max-w-md lg:max-w-none"
         >
-          <div className="relative overflow-hidden rounded-[2rem] border border-border/80 bg-surface/60 p-5 shadow-2xl backdrop-blur-xl sm:rounded-[2.25rem] sm:p-6">
+          <div className="relative overflow-hidden rounded-[2rem] border border-border/80 bg-surface/60 p-5 shadow-2xl backdrop-blur-md sm:rounded-[2.25rem] sm:p-6 sm:backdrop-blur-xl">
             <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-accent/10 blur-2xl" />
 
             <div className="flex items-center gap-4 sm:gap-5 border-b border-border/60 pb-5">
@@ -186,7 +186,8 @@ export default function RecruiterHero() {
                 <img
                   src="/portrait-small.webp"
                   alt="Yousif Amr"
-                  className="h-full w-full object-cover object-top contrast-105 transition-transform duration-500 group-hover:scale-105"
+                  decoding="async"
+                  className="aspect-square h-full w-full object-cover object-top contrast-105 transition-transform duration-500 group-hover:scale-105"
                   fetchPriority="high"
                 />
                 <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-border/40" />

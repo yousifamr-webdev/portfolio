@@ -53,7 +53,7 @@ export default function IntroOverlay() {
     >
       {/* Ambient background glow */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-        <div className="h-[500px] w-[500px] rounded-full bg-accent/5 blur-[120px]" />
+        <div className="h-[500px] w-[500px] rounded-full bg-accent/5 blur-2xl sm:blur-[120px]" />
       </div>
 
       {/* Skip button */}
@@ -67,7 +67,6 @@ export default function IntroOverlay() {
 
       {/* Main Container */}
       <motion.div
-        layout
         transition={springTransition}
         className="relative z-10 flex w-full max-w-6xl flex-col items-center justify-center gap-8 md:flex-row md:gap-14 lg:gap-20"
       >
@@ -95,12 +94,13 @@ export default function IntroOverlay() {
                   : { duration: 0.85, ease: [0.16, 1, 0.3, 1] },
               opacity: { duration: isReopening ? 0.2 : 0.65, ease: "easeOut" },
             }}
-            className="flex shrink-0 items-center justify-center text-accent"
+            className="relative flex shrink-0 transform-gpu items-center justify-center text-accent will-change-transform"
           >
+            <div className="pointer-events-none absolute h-32 w-32 rounded-full bg-accent/20 blur-2xl" />
             <PersonalLogo
               tight
               aria-label="Yousif Amr Monogram"
-              className="h-28 w-28 sm:h-36 sm:w-36 md:h-48 md:w-48 lg:h-60 lg:w-60 text-accent drop-shadow-[0_0_45px_rgba(217,184,255,0.38)]"
+              className="h-28 w-28 text-accent sm:h-36 sm:w-36 md:h-48 md:w-48 lg:h-60 lg:w-60"
             />
           </motion.div>
 
@@ -156,10 +156,10 @@ export default function IntroOverlay() {
             <motion.div
               initial={
                 isReopening
-                  ? { opacity: 0 }
-                  : { opacity: 0, x: 36, filter: "blur(8px)" }
+                  ? { opacity: 0, x: 0 }
+                  : { opacity: 0, x: 36 }
               }
-              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+              animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
               transition={{
                 ...springTransition,
