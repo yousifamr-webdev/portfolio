@@ -59,7 +59,7 @@ export default function ExperienceTimeline() {
               {item.summary}
             </p>
 
-            {/* Scannable High-Hierarchy Achievements */}
+            {/* Scannable High-Hierarchy Achievements
             <ul className="mt-5 space-y-3 sm:mt-6 sm:space-y-3.5">
               {item.achievements.map((achievement, idx) => (
                 <li
@@ -73,7 +73,7 @@ export default function ExperienceTimeline() {
                   <span>{achievement}</span>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </motion.article>
         ))}
       </div>

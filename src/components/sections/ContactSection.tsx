@@ -117,7 +117,7 @@ export default function ContactSection() {
           <div className="flex flex-col justify-between">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent backdrop-blur-sm sm:px-3.5 sm:py-1.5 sm:text-xs sm:tracking-[0.24em]">
-                <Sparkles size={13} />
+               
                 <span>Start a conversation</span>
               </div>
 

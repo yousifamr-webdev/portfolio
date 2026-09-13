@@ -133,7 +133,7 @@ export function ProjectGalleryModal({
                 paginate(-1);
               }}
               aria-label="Previous image"
-              className="absolute left-2 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-surface-elevated/80 text-text-base shadow-lg backdrop-blur-md transition-all hover:border-accent hover:scale-105 sm:left-4 sm:h-12 sm:w-12 cursor-pointer"
+              className="absolute z-20 flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-canvas text-accent shadow-lg backdrop-blur-md transition-all hover:border-accent hover:scale-105 hover:bg-canvas/50 left-4 sm:h-12 sm:w-12 cursor-pointer"
             >
               <ChevronLeft size={20} />
             </button>
@@ -166,7 +166,7 @@ export function ProjectGalleryModal({
                 paginate(1);
               }}
               aria-label="Next image"
-              className="absolute right-2 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-surface-elevated/80 text-text-base shadow-lg backdrop-blur-md transition-all hover:border-accent hover:scale-105 sm:right-4 sm:h-12 sm:w-12 cursor-pointer"
+              className="absolute z-20 flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-canvas text-accent shadow-lg backdrop-blur-md transition-all hover:border-accent hover:scale-105 hover:bg-canvas/50 right-4 sm:h-12 sm:w-12 cursor-pointer"
             >
               <ChevronRight size={20} />
             </button>

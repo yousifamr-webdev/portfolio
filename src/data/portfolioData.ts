@@ -132,13 +132,13 @@ export const portfolioData: PortfolioData = {
       ],
       liveUrl: "https://e-commerce-green-ten-54.vercel.app",
       githubUrl: "https://github.com/yousifamr-webdev/E-Commerce-NestJS-",
-      technicalScore: 9,
-      visualScore: 4,
+      technicalScore: 10,
+      visualScore: 0,
     },
     {
       id: "social-app",
       title: "Social App",
-      category: "Full-Stack",
+      category: "Backend",
       impact:
         "A full-stack social network with 29 REST endpoints plus a GraphQL layer for post reactions, real-time chat over Socket.io, Firebase push notifications, and S3-backed media uploads, paired with a React 19 frontend built on TanStack Query.",
       stack: [
@@ -154,10 +154,9 @@ export const portfolioData: PortfolioData = {
       ],
       image: "",
       imageLabel: "Social App feed and post details preview",
-      liveUrl: "https://social-app-sable-xi.vercel.app",
       githubUrl: "https://github.com/yousifamr-webdev/Social_App_BE",
       technicalScore: 9,
-      visualScore: 4,
+      visualScore: 0,
     },
     {
       id: "sara7a-app",
@@ -177,8 +176,8 @@ export const portfolioData: PortfolioData = {
       image: "",
       imageLabel: "Sara7a App auth and messaging flow preview",
       githubUrl: "https://github.com/yousifamr-webdev/Sara7a-App",
-      technicalScore: 9,
-      visualScore: 4,
+      technicalScore: 7.5,
+      visualScore: 0,
     },
   ],
   experience: [
@@ -188,7 +187,7 @@ export const portfolioData: PortfolioData = {
       company: "Route IT-Training Center",
       period: "March 2025 — July 2026",
       summary:
-        "Owned end-to-end full-stack development, delivering modular backend APIs, responsive user interfaces, and robust authentication layers.",
+        "Owned end-to-end full-stack development, delivering modular backend APIs, responsive user interfaces, and strong authentication layers.",
       achievements: [
         "Developed modular RESTful APIs with Node.js, Express.js, and NestJS, integrating both relational SQL and NoSQL MongoDB databases.",
         "Architected relational schemas with Mongoose and Sequelize, enforcing schema validation and automated population.",
@@ -202,9 +201,9 @@ export const portfolioData: PortfolioData = {
       company: "University of Alexandria",
       period: "Graduated July 2026",
       summary:
-        "Applied civil engineering analytical rigor, structural problem-solving, and mathematics to master software engineering systems and algorithms.",
-      achievements: [
         "Earned a Bachelor of Science Degree in Civil Engineering while mastering computer science fundamentals and web technologies.",
+      achievements: [
+        "Applied civil engineering analytical mindset, structural problem-solving, and mathematics to master software engineering systems and algorithms..",
         "Built persistent browser utilities and responsive React applications using Vite and modern ES6+ paradigms.",
         "Completed intensive full-stack certification focusing on scalable web architectures and containerized microservices.",
       ],

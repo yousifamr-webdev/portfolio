@@ -46,7 +46,7 @@ export default function TechStackBento() {
         </h2>
 
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-text-muted sm:mt-4 sm:text-base">
-          Battle-tested technologies selected for type safety, maintainable
+          Modern technologies selected for type safety, maintainable
           architecture, and fast execution across the full lifecycle.
         </p>
       </div>

@@ -68,7 +68,7 @@ export default function Footer() {
           </a>
 
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-text-muted">
-            Building functional production ready web systems, clean database
+            Building production ready web systems, clean database
             schemas, and modern interactive user interfaces.
           </p>
         </div>
