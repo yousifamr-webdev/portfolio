@@ -92,14 +92,13 @@ export default function ClientHero() {
           </div>
 
           {/* Value Proposition Headline */}
-          <h1 className="mt-5 text-3xl font-bold leading-[1.1] tracking-tight text-text-base sm:text-5xl md:text-6xl lg:text-6xl">
-            Scalable Web Apps &amp; High-Performance Digital Products.
+          <h1 className="mt-5 text-3xl font-bold leading-[1.1] tracking-tight text-text-base sm:text-5xl md:text-[3.4rem] lg:text-[3.4rem]">
+            Your Website Should Work As Hard As You Do.
           </h1>
 
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-text-muted sm:mt-6 sm:text-base sm:leading-8">
-            Full-stack engineer delivering production-grade web systems,
-            clean functional APIs, and responsive digital interfaces tailored to
-            business momentum.
+            Finding customers, answering questions, taking orders, 24/7. <br />
+            The point? A website that earns its keep.
           </p>
 
           {/* Action Buttons */}

@@ -95,15 +95,15 @@ export const portfolioData: PortfolioData = {
     description:
       "Full-stack software engineer building modular NestJS/Node architectures, real-time WebSocket communication, and responsive production interfaces.",
     trustHighlights: [
-      "End-to-End API & UI Delivery",
-      "JWT Auth & Role-Based Security",
-      "Clean Relational & NoSQL Schemas",
+      "Everything handled, from idea to launch",
+      "Secure logins and customer data protection",
+      "Fast and reliable even as you grow",
     ],
     featuredProject: {
-      label: "Featured Enterprise Build",
-      name: "FreshCart E-Commerce",
+      label: "Featured Build (Concept Project)",
+      name: "FreshCart (Concept Project)",
       description:
-        "A full-stack commerce engine powered by 68 RESTful endpoints, Next.js, NestJS, and secure coupon/checkout pipelines.",
+        "Online Marketplace: Customers browse, order and pay online.",
     },
   },
   projects: [

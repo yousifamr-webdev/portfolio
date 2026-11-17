@@ -102,7 +102,7 @@ export default function RecruiterHero() {
   return (
     <main
       aria-labelledby="recruiter-hero-heading"
-      className="relative mx-auto max-w-7xl overflow-hidden px-4 pb-16 pt-4 sm:px-6 sm:pb-20 sm:pt-6 md:px-10 md:pb-24 md:pt-8"
+      className="relative lg:flex lg:items-center lg:h-[100vh] mx-auto max-w-7xl overflow-hidden px-4 pb-16 pt-4 sm:px-6 sm:pb-20 sm:pt-6 md:px-10 md:pb-40 md:pt-8"
     >
       <div
         aria-hidden="true"
@@ -207,9 +207,7 @@ export default function RecruiterHero() {
                   Backend Architecture &amp; Type-Safe Systems
                 </p>
 
-                <p className="mt-1 text-[11px] text-text-muted/80">
-                  M-E-R-N Stack
-                </p>
+          
               </div>
             </div>
 
@@ -237,7 +235,7 @@ export default function RecruiterHero() {
       </div>
 
       {/* Flagship Engineering Benchmarks */}
-      <section
+      {/* <section
         aria-labelledby="benchmarks-heading"
         className="mt-14 sm:mt-16 border-t border-border/60 pt-10 sm:pt-12"
       >
@@ -323,7 +321,7 @@ export default function RecruiterHero() {
             );
           })}
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }

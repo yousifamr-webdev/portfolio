@@ -29,7 +29,7 @@ const recruiterLinks: NavigationLink[] = [
 ];
 
 const showcaseLinks: NavigationLink[] = [
-  { label: "Work", href: "#top" },
+  { label: "About", href: "#top" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
