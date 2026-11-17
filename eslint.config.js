@@ -28,4 +28,30 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
+  {
+    files: ['src/context/PersonaContext.tsx'],
+    rules: {
+      'no-unused-vars': [
+        'error',
+        { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^persona$' },
+      ],
+      'react-refresh/only-export-components': [
+        'error',
+        { allowExportNames: ['usePersona'] },
+      ],
+    },
+  },
+  {
+    files: ['src/context/ThemeContext.tsx'],
+    rules: {
+      'no-unused-vars': [
+        'error',
+        { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^theme$' },
+      ],
+      'react-refresh/only-export-components': [
+        'error',
+        { allowExportNames: ['useTheme'] },
+      ],
+    },
+  },
 ])

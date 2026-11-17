@@ -29,10 +29,9 @@ export default function ContactSection() {
   const [selectedIntent, setSelectedIntent] =
     useState<IntentTag>("Full-Time Role");
   const [status, setStatus] = useState<FormStatus>("idle");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [, setErrorMessage] = useState("");
 
   const phoneNumber = portfolioData.identity.phone;
-  const telLink = `tel:${phoneNumber.replace(/\s+/g, "")}`;
   const cleanWhatsAppNumber = phoneNumber.replace(/\D/g, ""); // "201094005690"
   const whatsappUrl = `https://wa.me/${cleanWhatsAppNumber}?text=${encodeURIComponent(
     "Hi Yousif, I'd like to discuss a project / role.",

@@ -7,20 +7,19 @@ import Footer from './components/footer/Footer'
 import PortfolioHome from './pages/PortfolioHome'
 
 function App(): ReactElement {
-  const { isIntroComplete } = usePersona()
+  const { isIntroComplete, persona } = usePersona()
 
   return (
     <LayoutGroup>
+      {persona !== null && (
+        <div key="portfolio" inert={!isIntroComplete}>
+          <Navbar />
+          <PortfolioHome />
+          <Footer />
+        </div>
+      )}
       <AnimatePresence>
-        {isIntroComplete ? (
-          <div key="portfolio">
-            <Navbar />
-            <PortfolioHome />
-            <Footer />
-          </div>
-        ) : (
-          <IntroOverlay key="intro" />
-        )}
+        {!isIntroComplete && <IntroOverlay key="intro" />}
       </AnimatePresence>
     </LayoutGroup>
   )

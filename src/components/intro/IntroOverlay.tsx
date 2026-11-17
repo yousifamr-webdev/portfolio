@@ -20,6 +20,15 @@ export default function IntroOverlay() {
   const [isRevealed, setIsRevealed] = useState(isReopening);
 
   useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+
+  useEffect(() => {
     // Lock the flag immediately into session storage on first mount
     sessionStorage.setItem(THEATRICAL_INTRO_KEY, "true");
 
@@ -30,10 +39,12 @@ export default function IntroOverlay() {
   }, [isReopening]);
 
   const handleSelect = (nextPersona: "client" | "recruiter" | "curious") => {
+    window.scrollTo({ top: 0, behavior: "instant" });
     selectPersona(nextPersona);
   };
 
   const handleSkip = () => {
+    window.scrollTo({ top: 0, behavior: "instant" });
     selectPersona("recruiter");
   };
 

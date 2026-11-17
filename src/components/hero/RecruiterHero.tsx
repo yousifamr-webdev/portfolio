@@ -20,6 +20,7 @@ const springTransition = {
   damping: 24,
 };
 
+// eslint-disable-next-line no-unused-vars -- retained for the intentionally disabled benchmarks section
 const flagshipBenchmarks = [
   {
     project: "E-Commerce Engine",
