@@ -9,7 +9,6 @@ import {
   MapPin,
   Phone,
   Send,
-  Sparkles,
 } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { portfolioData } from "../../data/portfolioData";
@@ -32,7 +31,7 @@ export default function ContactSection() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const phoneNumber = portfolioData.identity.phone ?? "+20 109 400 5690";
+  const phoneNumber = portfolioData.identity.phone;
   const telLink = `tel:${phoneNumber.replace(/\s+/g, "")}`;
   const cleanWhatsAppNumber = phoneNumber.replace(/\D/g, ""); // "201094005690"
   const whatsappUrl = `https://wa.me/${cleanWhatsAppNumber}?text=${encodeURIComponent(
@@ -59,8 +58,7 @@ export default function ContactSection() {
     // Append metadata
     formData.append("topic", selectedIntent);
 
-    // REPLACE with your free Web3Forms access key (from web3forms.com)
-    // or set your Formspree endpoint URL
+    // Submit using the configured Web3Forms access key.
     formData.append("access_key", "67889ba2-a1ea-4ead-9e70-6beb3384bec2");
 
     try {

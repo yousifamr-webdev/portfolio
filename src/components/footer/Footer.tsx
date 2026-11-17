@@ -1,8 +1,9 @@
 import { ArrowUp, ArrowUpRight, Check, Code2, Copy, Mail } from "lucide-react";
 import { useState, type MouseEvent } from "react";
 import { usePersona } from "../../context/PersonaContext";
+import { getNavigationLinks } from "../../data/navigation";
 import { portfolioData } from "../../data/portfolioData";
-import { getNavigationLinks } from "../navigation/Navbar";
+import { scrollToElement } from "../../utils/scroll";
 import { PersonalLogo } from "../ui/Logo";
 import { FacebookIcon, GitHubIcon, InstagramIcon, LinkedInIcon } from "../ui/SocialIcons";
 import { WatermarkMonogram } from "../ui/WatermarkMonogram";
@@ -13,7 +14,7 @@ export default function Footer() {
   const { persona } = usePersona();
   const [isCopied, setIsCopied] = useState(false);
   const links = getNavigationLinks(persona === "recruiter");
-  const email = portfolioData.identity.email.replace("mailto:", "");
+  const email = portfolioData.identity.email;
 
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -23,13 +24,8 @@ export default function Footer() {
       return;
     }
 
-    const target = document.querySelector(href);
-    if (target) {
-      window.scrollTo({
-        top: target.getBoundingClientRect().top + window.scrollY - 76,
-        behavior: "smooth",
-      });
-    }
+    const target = document.querySelector<HTMLElement>(href);
+    if (target) scrollToElement(target);
   };
 
   const copyEmail = () => {

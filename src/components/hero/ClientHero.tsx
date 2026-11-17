@@ -4,10 +4,10 @@ import {
   ArrowUpRight,
   CheckCircle2,
   Layers3,
-  Sparkles,
 } from "lucide-react";
 import type { MouseEvent } from "react";
 import { portfolioData } from "../../data/portfolioData";
+import { scrollToElement } from "../../utils/scroll";
 
 const springTransition = {
   type: "spring" as const,
@@ -16,7 +16,7 @@ const springTransition = {
 };
 
 export default function ClientHero() {
-  const { showcase, identity } = portfolioData;
+  const { showcase } = portfolioData;
 
   const featuredProjectId =
     (showcase.featuredProject as { id?: string }).id ??
@@ -34,15 +34,7 @@ export default function ClientHero() {
   ) => {
     e.preventDefault();
     const target = document.getElementById(targetId);
-    if (target) {
-      const navbarHeight = 76;
-      const targetTop =
-        target.getBoundingClientRect().top + window.scrollY - navbarHeight;
-      window.scrollTo({
-        top: targetTop,
-        behavior: "smooth",
-      });
-    }
+    if (target) scrollToElement(target);
   };
 
   const handleNavigateToFeaturedProject = (e: MouseEvent) => {
@@ -58,16 +50,7 @@ export default function ClientHero() {
       );
     } else {
       const fallbackSection = document.getElementById("projects");
-      if (fallbackSection) {
-        const navbarHeight = 76;
-        window.scrollTo({
-          top:
-            fallbackSection.getBoundingClientRect().top +
-            window.scrollY -
-            navbarHeight,
-          behavior: "smooth",
-        });
-      }
+      if (fallbackSection) scrollToElement(fallbackSection);
     }
   };
 

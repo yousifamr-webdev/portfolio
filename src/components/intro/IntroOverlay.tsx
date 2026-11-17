@@ -2,13 +2,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { BriefcaseBusiness, Compass, Terminal } from "lucide-react";
 import { useEffect, useState } from "react";
 import { usePersona } from "../../context/PersonaContext";
+import { springTransition } from "../../utils/motion";
 import { PersonalLogo } from "../ui/Logo";
-
-const springTransition = {
-  type: "spring" as const,
-  stiffness: 160,
-  damping: 24,
-};
 
 const THEATRICAL_INTRO_KEY = "has_seen_theatrical_intro";
 
@@ -35,12 +30,10 @@ export default function IntroOverlay() {
   }, [isReopening]);
 
   const handleSelect = (nextPersona: "client" | "recruiter" | "curious") => {
-    sessionStorage.setItem(THEATRICAL_INTRO_KEY, "true");
     selectPersona(nextPersona);
   };
 
   const handleSkip = () => {
-    sessionStorage.setItem(THEATRICAL_INTRO_KEY, "true");
     selectPersona("recruiter");
   };
 

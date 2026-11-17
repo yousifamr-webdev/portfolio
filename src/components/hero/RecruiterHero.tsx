@@ -5,7 +5,6 @@ import {
   Clock,
   Code2,
   Database,
-  GitBranch,
   Layers,
   MapPin,
   ShieldCheck,
@@ -13,6 +12,7 @@ import {
 } from "lucide-react";
 import type { MouseEvent } from "react";
 import { portfolioData } from "../../data/portfolioData";
+import { scrollToElement } from "../../utils/scroll";
 
 const springTransition = {
   type: "spring" as const,
@@ -72,15 +72,7 @@ export default function RecruiterHero() {
   ) => {
     e.preventDefault();
     const target = document.getElementById(targetId);
-    if (target) {
-      const navbarHeight = 76;
-      const targetTop =
-        target.getBoundingClientRect().top + window.scrollY - navbarHeight;
-      window.scrollTo({
-        top: targetTop,
-        behavior: "smooth",
-      });
-    }
+    if (target) scrollToElement(target);
   };
 
   const leftAnimation = shouldReduceMotion

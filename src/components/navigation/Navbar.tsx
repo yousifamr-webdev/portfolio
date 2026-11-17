@@ -12,37 +12,16 @@ import {
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { usePersona } from "../../context/PersonaContext";
 import { useTheme } from "../../context/ThemeContext";
+import { getNavigationLinks } from "../../data/navigation";
+import { springTransition } from "../../utils/motion";
+import { scrollToElement } from "../../utils/scroll";
 import { PersonalLogo } from "../ui/Logo";
 import { HamburgerButton } from "../ui/HamburgerButton";
 
-interface NavigationLink {
-  label: string;
-  href: string;
-}
-
-const recruiterLinks: NavigationLink[] = [
-  { label: "Overview", href: "#top" },
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" },
-];
-
-const showcaseLinks: NavigationLink[] = [
-  { label: "About", href: "#top" },
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" },
-];
-
-export const getNavigationLinks = (isRecruiter: boolean) =>
-  isRecruiter ? recruiterLinks : showcaseLinks;
-
-const springTransition = {
-  type: "spring" as const,
-  stiffness: 160,
-  damping: 24,
+const personaConfig = {
+  recruiter: { label: "Recruiter", icon: Terminal },
+  client: { label: "Client", icon: BriefcaseBusiness },
+  curious: { label: "Curious", icon: Compass },
 };
 
 export default function Navbar() {
@@ -120,32 +99,19 @@ export default function Navbar() {
         return;
       }
 
-      const target = document.querySelector(href);
+      const target = document.querySelector<HTMLElement>(href);
       if (target) {
-        const navbarHeight = 72;
-        const targetTop =
-          target.getBoundingClientRect().top + window.scrollY - navbarHeight;
-
-        window.scrollTo({
-          top: targetTop,
-          behavior: "smooth",
-        });
+        scrollToElement(target);
         setActiveHref(href);
       }
     }, 100);
   };
 
-  const personaConfig = {
-    recruiter: { label: "Recruiter", icon: Terminal },
-    client: { label: "Client", icon: BriefcaseBusiness },
-    curious: { label: "Curious", icon: Compass },
-  };
-
   const CurrentPersonaIcon = persona
-    ? personaConfig[persona]?.icon || Terminal
+    ? personaConfig[persona].icon
     : Terminal;
   const currentPersonaLabel = persona
-    ? personaConfig[persona]?.label || "Explorer"
+    ? personaConfig[persona].label
     : "Explorer";
 
   return (

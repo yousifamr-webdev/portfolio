@@ -4,7 +4,6 @@ import {
   Database,
   Layers,
   Server,
-  Sparkles,
   Terminal,
 } from "lucide-react";
 import { portfolioData } from "../../data/portfolioData";

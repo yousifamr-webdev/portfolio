@@ -18,7 +18,7 @@ interface ThemeContextValue {
 const STORAGE_KEY = 'portfolio-theme'
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined)
 
-export function getInitialTheme(): Theme {
+function getInitialTheme(): Theme {
   const storedTheme = localStorage.getItem(STORAGE_KEY)
   return storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : 'dark'
 }

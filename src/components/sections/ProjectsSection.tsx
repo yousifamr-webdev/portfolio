@@ -7,6 +7,7 @@ import {
   type Project,
   type ProjectCategory,
 } from "../../data/portfolioData";
+import { scrollToElement } from "../../utils/scroll";
 import { GitHubIcon } from "../ui/SocialIcons";
 import { ProjectGalleryModal } from "../ui/ProjectGalleryModal";
 
@@ -50,14 +51,7 @@ export default function ProjectsSection() {
         const el = document.getElementById(`project-${targetId}`);
         if (!el) return;
 
-        const navbarHeight = 84;
-        const targetTop =
-          el.getBoundingClientRect().top + window.scrollY - navbarHeight;
-
-        window.scrollTo({
-          top: targetTop,
-          behavior: "smooth",
-        });
+        scrollToElement(el, 8);
 
         const observer = new IntersectionObserver(
           (entries) => {
@@ -133,9 +127,7 @@ export default function ProjectsSection() {
         </div>
       </div>
       {/* Projects Grid */}
-      <motion.div
-        className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-12"
-      >
+      <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-12">
         {projects.map((project, index) => {
           const isFlagship = index === 0 && filter === "All";
           const isWiggling = wigglingProjectId === project.id;
@@ -210,9 +202,7 @@ export default function ProjectsSection() {
                     </div>
                   </div>
                 </div>
-              ) : (
-                ""
-              )}
+              ) : null}
 
               {/* Details Container: On Flagship, spans 5 columns with enhanced hierarchy */}
               <div
@@ -288,7 +278,7 @@ export default function ProjectsSection() {
             </motion.article>
           );
         })}
-      </motion.div>
+      </div>
       {/* Lightbox Carousel Modal */}
       {activeGalleryProject && (
         <ProjectGalleryModal

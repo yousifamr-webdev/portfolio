@@ -23,7 +23,7 @@ const PersonaContext = createContext<PersonaContextValue | undefined>(
 );
 const STORAGE_KEY = "user_persona";
 
-export function getStoredPersona(): Exclude<Persona, null> | null {
+function getStoredPersona(): Exclude<Persona, null> | null {
   const storedPersona = sessionStorage.getItem(STORAGE_KEY);
   return storedPersona === "client" ||
     storedPersona === "recruiter" ||
