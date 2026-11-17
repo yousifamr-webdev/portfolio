@@ -179,6 +179,37 @@ export const portfolioData: PortfolioData = {
       technicalScore: 7.5,
       visualScore: 0,
     },
+  {
+  id: "forthmark-laravel",
+  title: "Forthmark",
+  category: "Full-Stack",
+  impact:
+    "A Laravel 13 idea-tracking app where each user manages private ideas with a three-state status, a toggleable step checklist, reference links, Markdown descriptions, and an S3-compatible image upload (14 routes, 3 Eloquent models, 5 migrations). Server-rendered Blade with Alpine.js modals and Tailwind CSS 4, with policy-based ownership checks and Pest browser tests.",
+  stack: [
+    "Laravel",
+    "PHP",
+    "Blade",
+    "Alpine.js",
+    "Tailwind CSS",
+    "Vite",
+    "Pest",
+    "AWS S3",
+  ],
+  image: "/projects/forthmark/logo.avif",
+  imageLabel: "Forthmark idea dashboard and idea detail preview",
+  gallery: [
+    "/projects/forthmark/landing-page.avif",
+    "/projects/forthmark/show-projects.avif",
+    "/projects/forthmark/create-idea.avif",
+    "/projects/forthmark/show-idea.avif",
+    "/projects/forthmark/idea-in-progress.avif",
+    "/projects/forthmark/form.avif",
+  ],
+  liveUrl: "https://forthmark.wasmer.app",
+  githubUrl: "https://github.com/yousifamr-webdev/forthmark",
+  technicalScore: 7,
+  visualScore: 0,
+},
   ],
   experience: [
     {
