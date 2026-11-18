@@ -1,7 +1,5 @@
-import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDownLeft, ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
-import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import {
   getCaseStudy,
@@ -9,27 +7,6 @@ import {
 } from "../data/caseStudies";
 import { portfolioData } from "../data/portfolioData";
 import { NAVBAR_OFFSET } from "../utils/scroll";
-
-function CaseStudyReveal({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  const shouldReduceMotion = useReducedMotion();
-
-  return (
-    <motion.section
-      initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-      whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      className={className}
-    >
-      {children}
-    </motion.section>
-  );
-}
 
 function CaseStudyBodySection({
   section,
@@ -39,114 +16,113 @@ function CaseStudyBodySection({
   index: number;
 }) {
   return (
-    <CaseStudyReveal
-      className="scroll-mt-24 rounded-2xl border border-border/80 bg-surface/60 p-5 backdrop-blur-md sm:rounded-3xl sm:p-8"
+    <section
+      id={section.id}
+      className="scroll-mt-24 rounded-2xl border border-border/80 bg-surface/60 p-5 sm:backdrop-blur-md sm:rounded-3xl sm:p-8"
     >
-      <section id={section.id}>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-          {String(index + 1).padStart(2, "0")} · {section.eyebrow}
-        </p>
-        <h2 className="mt-3 text-2xl font-bold tracking-tight text-text-base sm:text-3xl">
-          {section.title}
-        </h2>
-        <div className="mt-5 grid gap-4 text-sm leading-relaxed text-text-muted sm:text-base">
-          {section.body.map((paragraph, paragraphIndex) => (
-            <p key={`${section.id}-paragraph-${paragraphIndex}`}>{paragraph}</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+        {String(index + 1).padStart(2, "0")} · {section.eyebrow}
+      </p>
+      <h2 className="mt-3 text-2xl font-bold tracking-tight text-text-base sm:text-3xl">
+        {section.title}
+      </h2>
+      <div className="mt-5 grid gap-4 text-sm leading-relaxed text-text-muted sm:text-base">
+        {section.body.map((paragraph, paragraphIndex) => (
+          <p key={`${section.id}-paragraph-${paragraphIndex}`}>{paragraph}</p>
+        ))}
+      </div>
+
+      {section.bullets && section.bullets.length > 0 && (
+        <ul className="mt-6 grid gap-3 text-sm text-text-muted">
+          {section.bullets.map((bullet) => (
+            <li
+              key={bullet}
+              className="rounded-xl border border-border/70 bg-surface-elevated/60 px-4 py-3"
+            >
+              {bullet}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {section.stats && section.stats.length > 0 && (
+        <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {section.stats.map((stat) => (
+            <div
+              key={`${stat.value}-${stat.label}`}
+              className="rounded-xl border border-border/70 bg-surface-elevated/60 p-4"
+            >
+              <p className="text-2xl font-bold text-accent">{stat.value}</p>
+              <p className="mt-1 text-xs text-text-muted">{stat.label}</p>
+            </div>
           ))}
         </div>
+      )}
 
-        {section.bullets && section.bullets.length > 0 && (
-          <ul className="mt-6 grid gap-3 text-sm text-text-muted">
-            {section.bullets.map((bullet) => (
-              <li
-                key={bullet}
-                className="rounded-xl border border-border/70 bg-surface-elevated/60 px-4 py-3"
-              >
-                {bullet}
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {section.stats && section.stats.length > 0 && (
-          <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {section.stats.map((stat) => (
-              <div
-                key={`${stat.value}-${stat.label}`}
-                className="rounded-xl border border-border/70 bg-surface-elevated/60 p-4"
-              >
-                <p className="text-2xl font-bold text-accent">{stat.value}</p>
-                <p className="mt-1 text-xs text-text-muted">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {section.decisions && section.decisions.length > 0 && (
-          <div className="mt-7 grid gap-4">
-            {section.decisions.map((decision, decisionIndex) => (
-              <div
-                key={`${section.id}-decision-${decisionIndex}`}
-                className="rounded-xl border border-border/70 bg-surface-elevated/50 p-4 sm:p-5"
-              >
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
+      {section.decisions && section.decisions.length > 0 && (
+        <div className="mt-7 grid gap-4">
+          {section.decisions.map((decision, decisionIndex) => (
+            <div
+              key={`${section.id}-decision-${decisionIndex}`}
+              className="rounded-xl border border-border/70 bg-surface-elevated/50 p-4 sm:p-5"
+            >
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                    Decision
+                  </p>
+                  <p className="mt-1.5 text-sm text-text-base">
+                    {decision.decision}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                    Why
+                  </p>
+                  <p className="mt-1.5 text-sm text-text-muted">
+                    {decision.why}
+                  </p>
+                </div>
+                {decision.tradeoff && (
+                  <div className="sm:col-span-2">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
-                      Decision
-                    </p>
-                    <p className="mt-1.5 text-sm text-text-base">
-                      {decision.decision}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
-                      Why
+                      Trade-off
                     </p>
                     <p className="mt-1.5 text-sm text-text-muted">
-                      {decision.why}
+                      {decision.tradeoff}
                     </p>
                   </div>
-                  {decision.tradeoff && (
-                    <div className="sm:col-span-2">
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
-                        Trade-off
-                      </p>
-                      <p className="mt-1.5 text-sm text-text-muted">
-                        {decision.tradeoff}
-                      </p>
-                    </div>
-                  )}
-                </div>
+                )}
               </div>
-            ))}
-          </div>
-        )}
+            </div>
+          ))}
+        </div>
+      )}
 
-        {section.image && (
-          <figure className="mt-7 overflow-hidden rounded-2xl border border-border/70 bg-canvas">
-            <img
-              src={section.image.src}
-              alt={section.image.alt}
-              loading="lazy"
-              decoding="async"
-              className="h-auto w-full object-cover"
-            />
-            {section.image.caption && (
-              <figcaption className="border-t border-border/70 px-4 py-3 text-xs text-text-muted">
-                {section.image.caption}
-              </figcaption>
-            )}
-          </figure>
-        )}
-      </section>
-    </CaseStudyReveal>
+      {section.image && (
+        <figure className="mt-7 overflow-hidden rounded-2xl border border-border/70 bg-canvas">
+          <img
+            src={section.image.src}
+            alt={section.image.alt}
+            loading="lazy"
+            decoding="async"
+            className="h-auto w-full object-cover"
+          />
+          {section.image.caption && (
+            <figcaption className="border-t border-border/70 px-4 py-3 text-xs text-text-muted">
+              {section.image.caption}
+            </figcaption>
+          )}
+        </figure>
+      )}
+    </section>
   );
 }
 
 function CaseStudyNotFound() {
   return (
     <main className="relative z-10 mx-auto flex min-h-[65vh] max-w-3xl flex-col items-center justify-center px-6 py-20 text-center">
-      <span className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent backdrop-blur-sm">
+      <span className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent sm:backdrop-blur-sm">
         Case Study
       </span>
       <h1 className="mt-5 text-3xl font-bold tracking-tight text-text-base sm:text-5xl">
@@ -184,7 +160,6 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
     document.title = caseStudyTitle
       ? `${caseStudyTitle} | Yousif Amr`
       : "Case Study Not Found | Yousif Amr";
-    window.scrollTo({ top: 0, behavior: "instant" });
   }, [caseStudyTitle, slug]);
 
   useEffect(() => {
@@ -231,8 +206,8 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
             Back to projects
           </Link>
 
-          <CaseStudyReveal className="mt-8 rounded-2xl border border-border/80 bg-surface/60 p-5 backdrop-blur-md sm:rounded-3xl sm:p-8 lg:p-12">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent backdrop-blur-sm">
+          <div className="mt-8 rounded-2xl border border-border/80 bg-surface/60 p-5 sm:backdrop-blur-md sm:rounded-3xl sm:p-8 lg:p-12">
+            <span className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent sm:backdrop-blur-sm">
               Case Study
             </span>
             <h1 className="mt-5 max-w-4xl text-3xl font-bold tracking-tight text-text-base sm:text-5xl md:text-6xl">
@@ -303,13 +278,13 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
                 )}
               </div>
             )}
-          </CaseStudyReveal>
+          </div>
 
           <div className="mt-8 grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-10">
             <aside className="hidden lg:block">
               <nav
                 aria-label="Case study sections"
-                className="sticky top-[calc(76px+2rem)] rounded-2xl border border-border/80 bg-surface/60 p-4 backdrop-blur-md"
+                className="sticky top-[calc(76px+2rem)] rounded-2xl border border-border/80 bg-surface/60 p-4 sm:backdrop-blur-md"
               >
                 <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted">
                   On this page
@@ -355,7 +330,7 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
                 />
               ))}
 
-              <CaseStudyReveal className="rounded-2xl border border-border/80 bg-surface/60 p-6 backdrop-blur-md sm:rounded-3xl sm:p-9">
+              <div className="rounded-2xl border border-border/80 bg-surface/60 p-6 sm:backdrop-blur-md sm:rounded-3xl sm:p-9">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
                   Next step
                 </p>
@@ -384,7 +359,7 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
                     <ArrowUpRight size={15} />
                   </Link>
                 </div>
-              </CaseStudyReveal>
+              </div>
             </div>
           </div>
         </main>

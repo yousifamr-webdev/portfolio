@@ -11,7 +11,7 @@ export default function ExperienceTimeline() {
     >
       {/* Header */}
       <div className="flex flex-col items-start">
-        <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-accent backdrop-blur-sm">
+        <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-accent sm:backdrop-blur-sm">
           <span>Track Record</span>
         </div>
 

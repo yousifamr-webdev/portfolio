@@ -108,12 +108,12 @@ export default function ContactSection() {
         <div className="h-[300px] w-[300px] rounded-full bg-accent/5 blur-2xl sm:h-[420px] sm:w-[650px] sm:blur-[140px]" />
       </div>
 
-      <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-surface/70 p-5 backdrop-blur-md sm:rounded-3xl sm:p-8 sm:backdrop-blur-xl md:p-12 lg:rounded-[2.5rem] lg:p-16">
+      <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-surface/70 p-5 sm:rounded-3xl sm:p-8 sm:backdrop-blur-xl md:p-12 lg:rounded-[2.5rem] lg:p-16">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
           {/* Left Column: Direct Channels & Verified Logistics */}
           <div className="flex flex-col justify-between">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent backdrop-blur-sm sm:px-3.5 sm:py-1.5 sm:text-xs sm:tracking-[0.24em]">
+              <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent sm:backdrop-blur-sm sm:px-3.5 sm:py-1.5 sm:text-xs sm:tracking-[0.24em]">
                
                 <span>Start a conversation</span>
               </div>
@@ -163,7 +163,7 @@ export default function ContactSection() {
               <button
                 type="button"
                 onClick={copyEmail}
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-xs font-semibold text-accent-contrast shadow-[0_0_24px_rgba(217,184,255,0.25)] transition-all hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:w-auto sm:px-5 sm:py-3 sm:text-sm"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-xs font-semibold text-accent-contrast shadow-[0_0_24px_rgba(217,184,255,0.25)] transition-opacity hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:w-auto sm:px-5 sm:py-3 sm:text-sm"
               >
                 {isCopied ? <Check size={16} /> : <Copy size={16} />}
                 <span>{isCopied ? "Email Copied!" : "Copy Email Address"}</span>
@@ -208,7 +208,7 @@ export default function ContactSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative flex min-h-[520px] flex-col justify-center rounded-2xl border border-border/90 bg-surface-elevated/40 p-4 backdrop-blur-md sm:min-h-[550px] sm:rounded-3xl sm:p-6 md:p-8"
+            className="relative flex min-h-[520px] flex-col justify-center rounded-2xl border border-border/90 bg-surface-elevated/40 p-4 sm:backdrop-blur-md sm:min-h-[550px] sm:rounded-3xl sm:p-6 md:p-8"
           >
             <AnimatePresence mode="wait">
               {status === "success" ? (
@@ -260,7 +260,7 @@ export default function ContactSection() {
                             key={tag}
                             type="button"
                             onClick={() => setSelectedIntent(tag)}
-                            className={`rounded-lg border px-2.5 py-1 text-[11px] font-medium transition-all sm:px-3.5 sm:py-1.5 sm:text-xs ${
+                            className={`rounded-lg border px-2.5 py-1 text-[11px] font-medium transition-colors sm:px-3.5 sm:py-1.5 sm:text-xs ${
                               isSelected
                                 ? "border-accent bg-accent text-accent-contrast shadow-sm"
                                 : "border-border/80 bg-surface text-text-muted hover:border-border hover:text-text-base"
@@ -281,7 +281,7 @@ export default function ContactSection() {
                         name="name"
                         required
                         placeholder="Jane Doe"
-                        className="w-full rounded-xl border border-border/80 bg-canvas/80 px-3.5 py-2.5 font-sans text-xs text-text-base placeholder:font-normal placeholder:tracking-normal placeholder:text-text-muted/40 outline-none transition-all focus:border-accent focus:bg-canvas focus:ring-1 focus:ring-accent/40 sm:px-4 sm:py-3 sm:text-sm"
+                        className="w-full rounded-xl border border-border/80 bg-canvas/80 px-3.5 py-2.5 font-sans text-xs text-text-base placeholder:font-normal placeholder:tracking-normal placeholder:text-text-muted/40 outline-none transition-colors focus:border-accent focus:bg-canvas focus:ring-1 focus:ring-accent/40 sm:px-4 sm:py-3 sm:text-sm"
                       />
                     </label>
 
@@ -292,7 +292,7 @@ export default function ContactSection() {
                         name="email"
                         required
                         placeholder="jane@company.com"
-                        className="w-full rounded-xl border border-border/80 bg-canvas/80 px-3.5 py-2.5 font-sans text-xs text-text-base placeholder:font-normal placeholder:tracking-normal placeholder:text-text-muted/40 outline-none transition-all focus:border-accent focus:bg-canvas focus:ring-1 focus:ring-accent/40 sm:px-4 sm:py-3 sm:text-sm"
+                        className="w-full rounded-xl border border-border/80 bg-canvas/80 px-3.5 py-2.5 font-sans text-xs text-text-base placeholder:font-normal placeholder:tracking-normal placeholder:text-text-muted/40 outline-none transition-colors focus:border-accent focus:bg-canvas focus:ring-1 focus:ring-accent/40 sm:px-4 sm:py-3 sm:text-sm"
                       />
                     </label>
                   </div>
@@ -305,7 +305,7 @@ export default function ContactSection() {
                       required
                       rows={4}
                       placeholder="Tell me about what you're building, scope, timelines, or specifications..."
-                      className="w-full resize-none rounded-xl border border-border/80 bg-canvas/80 p-3 font-sans text-xs text-text-base placeholder:font-normal placeholder:tracking-normal placeholder:text-text-muted/40 outline-none transition-all focus:border-accent focus:bg-canvas focus:ring-1 focus:ring-accent/40 sm:p-4 sm:text-sm"
+                      className="w-full resize-none rounded-xl border border-border/80 bg-canvas/80 p-3 font-sans text-xs text-text-base placeholder:font-normal placeholder:tracking-normal placeholder:text-text-muted/40 outline-none transition-colors focus:border-accent focus:bg-canvas focus:ring-1 focus:ring-accent/40 sm:p-4 sm:text-sm"
                     />
                   </label>
 
@@ -313,7 +313,7 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={status === "submitting"}
-                    className="group inline-flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-xs font-semibold text-accent-contrast shadow-[0_0_24px_rgba(217,184,255,0.3)] transition-all hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-70 sm:py-3.5 sm:text-sm cursor-pointer"
+                    className="group inline-flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-xs font-semibold text-accent-contrast shadow-[0_0_24px_rgba(217,184,255,0.3)] transition-opacity hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-70 sm:py-3.5 sm:text-sm cursor-pointer"
                   >
                     {status === "submitting" ? (
                       <>

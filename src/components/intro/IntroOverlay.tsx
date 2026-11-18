@@ -183,7 +183,7 @@ export default function IntroOverlay() {
                   whileHover={{ scale: 1.03, borderColor: "var(--accent)" }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => handleSelect("client")}
-                  className="group flex w-full items-center justify-center gap-1.5 sm:gap-2.5 rounded-full border border-border/80 bg-surface/70 py-3 sm:py-3.5 px-2 sm:px-4 text-xs sm:text-sm md:text-base font-semibold text-text-base backdrop-blur-md shadow-sm transition-all hover:border-accent hover:bg-surface-elevated hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent whitespace-nowrap cursor-pointer"
+                  className="group flex w-full items-center justify-center gap-1.5 sm:gap-2.5 rounded-full border border-border/80 bg-surface/70 py-3 sm:py-3.5 px-2 sm:px-4 text-xs sm:text-sm md:text-base font-semibold text-text-base sm:backdrop-blur-md shadow-sm transition-colors hover:border-accent hover:bg-surface-elevated hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent whitespace-nowrap cursor-pointer"
                 >
                   <BriefcaseBusiness className="h-4 w-4 sm:h-[18px] sm:w-[18px] shrink-0 text-text-muted transition-colors group-hover:text-accent" />
                   <span>Potential client</span>
@@ -195,7 +195,7 @@ export default function IntroOverlay() {
                   whileHover={{ scale: 1.03, borderColor: "var(--accent)" }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => handleSelect("recruiter")}
-                  className="group flex w-full items-center justify-center gap-1.5 sm:gap-2.5 rounded-full border border-border/80 bg-surface/70 py-3 sm:py-3.5 px-2 sm:px-4 text-xs sm:text-sm md:text-base font-semibold text-text-base backdrop-blur-md shadow-sm transition-all hover:border-accent hover:bg-surface-elevated hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent whitespace-nowrap cursor-pointer"
+                  className="group flex w-full items-center justify-center gap-1.5 sm:gap-2.5 rounded-full border border-border/80 bg-surface/70 py-3 sm:py-3.5 px-2 sm:px-4 text-xs sm:text-sm md:text-base font-semibold text-text-base sm:backdrop-blur-md shadow-sm transition-colors hover:border-accent hover:bg-surface-elevated hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent whitespace-nowrap cursor-pointer"
                 >
                   <Terminal className="h-4 w-4 sm:h-[18px] sm:w-[18px] shrink-0 text-text-muted transition-colors group-hover:text-accent" />
                   <span>Recruiter</span>
@@ -208,7 +208,7 @@ export default function IntroOverlay() {
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.96 }}
                     onClick={() => handleSelect("curious")}
-                    className="flex w-[calc(50%-5px)] sm:w-[calc(50%-7px)] items-center justify-center gap-1.5 sm:gap-2.5 rounded-full border border-accent bg-accent py-3 sm:py-3.5 px-2 sm:px-4 text-xs sm:text-sm md:text-base font-bold text-accent-contrast shadow-[0_0_30px_rgba(217,184,255,0.35)] transition-all hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent whitespace-nowrap cursor-pointer"
+                    className="flex w-[calc(50%-5px)] sm:w-[calc(50%-7px)] items-center justify-center gap-1.5 sm:gap-2.5 rounded-full border border-accent bg-accent py-3 sm:py-3.5 px-2 sm:px-4 text-xs sm:text-sm md:text-base font-bold text-accent-contrast shadow-[0_0_30px_rgba(217,184,255,0.35)] transition-opacity hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent whitespace-nowrap cursor-pointer"
                   >
                     <Compass className="h-4 w-4 sm:h-[18px] sm:w-[18px] shrink-0" />
                     <span>Just curious</span>

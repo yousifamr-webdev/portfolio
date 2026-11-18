@@ -24,22 +24,59 @@ export default function ProjectsSection() {
   const [activeGalleryProject, setActiveGalleryProject] =
     useState<Project | null>(null);
 
-  const filteredProjects = portfolioData.projects.filter(
+  const projects = portfolioData.projects.filter(
     (project) => filter === "All" || project.category === filter,
   );
-  let projects = filteredProjects;
-  if (filter === "All") {
-    const featuredProjectIndex = filteredProjects.findIndex(
-      (project) =>
-        project.id === portfolioData.showcase.featuredProject.projectId,
-    );
-    if (featuredProjectIndex > 0) {
-      projects = [
-        filteredProjects[featuredProjectIndex],
-        ...filteredProjects.slice(0, featuredProjectIndex),
-        ...filteredProjects.slice(featuredProjectIndex + 1),
-      ];
+  const horizontalProjectIds = new Set<string>();
+  const featuredProjectId = portfolioData.showcase.featuredProject.projectId;
+  if (filter === "All" && projects.some((project) => project.id === featuredProjectId)) {
+    horizontalProjectIds.add(featuredProjectId);
+  }
+  const verticalProjects = projects.filter(
+    (project) => !horizontalProjectIds.has(project.id),
+  );
+  if (verticalProjects.length % 2 === 1) {
+    horizontalProjectIds.add(verticalProjects[verticalProjects.length - 1].id);
+  }
+
+  const projectLayouts: {
+    project: Project;
+    isHorizontal: boolean;
+    cardClass: string;
+    mediaClass: string;
+    detailsClass: string;
+  }[] = [];
+  let verticalIndex = 0;
+  for (const project of projects) {
+    const isHorizontal = horizontalProjectIds.has(project.id);
+    if (isHorizontal) {
+      projectLayouts.push({
+        project,
+        isHorizontal,
+        cardClass:
+          "md:col-span-2 lg:col-span-12 lg:grid lg:grid-cols-12 lg:gap-8 lg:items-center",
+        mediaClass: "aspect-[16/10]",
+        detailsClass: project.image
+          ? "mt-4 lg:mt-0 lg:col-span-5 lg:pl-2"
+          : "lg:col-span-12",
+      });
+      continue;
     }
+
+    const row = Math.floor(verticalIndex / 2);
+    const isLeftCard = verticalIndex % 2 === 0;
+    const takesSevenColumns =
+      row % 2 === 0 ? isLeftCard : !isLeftCard;
+    projectLayouts.push({
+      project,
+      isHorizontal,
+      cardClass: takesSevenColumns
+        ? "md:col-span-1 lg:col-span-7"
+        : "md:col-span-1 lg:col-span-5",
+      mediaClass: "h-44 sm:h-52",
+      detailsClass: project.image ? "mt-4" : "",
+    });
+    verticalIndex += 1;
   }
 
   useEffect(() => {
@@ -91,7 +128,7 @@ export default function ProjectsSection() {
       {/* Header & Filter Controls */}
       <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div className="flex flex-col items-start">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent backdrop-blur-sm sm:px-3.5 sm:py-1.5 sm:text-xs sm:tracking-[0.24em]">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent sm:backdrop-blur-sm sm:px-3.5 sm:py-1.5 sm:text-xs sm:tracking-[0.24em]">
             <span>Selected Work</span>
           </div>
 
@@ -102,7 +139,7 @@ export default function ProjectsSection() {
 
         {/* Sliding Filter Bar */}
         <div
-          className="flex w-fit items-center gap-1 rounded-full border border-border/70 bg-surface/60 p-1 backdrop-blur-md"
+          className="flex w-fit items-center gap-1 rounded-full border border-border/70 bg-surface/60 p-1 sm:backdrop-blur-md"
           role="group"
           aria-label="Filter projects"
         >
@@ -133,22 +170,24 @@ export default function ProjectsSection() {
         </div>
       </div>
       {/* Projects Grid */}
-      <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-12">
-        {projects.map((project, index) => {
-          const isFlagship =
-            filter === "All" &&
-            project.id === portfolioData.showcase.featuredProject.projectId;
+      <div className="mt-10 grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-12">
+        {projectLayouts.map(
+          (
+            { project, isHorizontal, cardClass, mediaClass, detailsClass },
+            index,
+          ) => {
+          const isFeatured =
+            filter === "All" && project.id === featuredProjectId;
           const isWiggling = wigglingProjectId === project.id;
+          const hasCompactStack = !isHorizontal && Boolean(project.image);
+          const visibleStack = hasCompactStack
+            ? project.stack.slice(0, 5)
+            : project.stack;
+          const hiddenStackCount = project.stack.length - visibleStack.length;
           const galleryImages =
             project.gallery && project.gallery.length > 0
               ? project.gallery
               : [project.image];
-
-          // Editorial column weighting: Flagship spans full 12 cols with side-by-side arrangement on large screens;
-          // subsequent projects form balanced 6-column pairs.
-          const gridSpanClass = isFlagship
-            ? "lg:col-span-12 lg:grid lg:grid-cols-12 lg:gap-8 lg:items-center"
-            : "lg:col-span-6";
 
           return (
             <motion.article
@@ -171,15 +210,14 @@ export default function ProjectsSection() {
                   : { duration: 0.45, delay: index * 0.06 }
               }
               whileHover={{ y: -4 }}
-              className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-surface/60 p-4 backdrop-blur-md transition-all duration-300 scroll-mt-28 sm:rounded-3xl sm:p-6 md:p-7 ${gridSpanClass} ${
+              className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-surface/60 p-4 sm:backdrop-blur-md transition-colors duration-300 scroll-mt-28 sm:rounded-3xl sm:p-6 md:p-7 ${cardClass} ${
                 isWiggling
                   ? "border-accent bg-surface-elevated shadow-[0_0_35px_rgba(217,184,255,0.35)] ring-2 ring-accent/40"
                   : "border-border/80 hover:border-accent/60 hover:bg-surface-elevated/70"
               }`}
             >
-              {/* Media Container: On Flagship, spans 7 columns */}
               {project.image ? (
-                <div className={isFlagship ? "lg:col-span-7" : ""}>
+                <div className={isHorizontal ? "lg:col-span-7" : ""}>
                   <div
                     role="button"
                     tabIndex={0}
@@ -190,18 +228,18 @@ export default function ProjectsSection() {
                         setActiveGalleryProject(project);
                       }
                     }}
-                    className="group/img relative aspect-[16/10] w-full cursor-pointer overflow-hidden rounded-xl border border-border/70 bg-canvas/50 sm:rounded-2xl"
+                    className={`group/img relative w-full cursor-pointer overflow-hidden rounded-xl border border-border/70 bg-canvas/50 sm:rounded-2xl ${mediaClass}`}
                   >
                     <img
                       src={project.image}
                       alt={project.title}
                       loading="lazy"
                       decoding="async"
-                      className="aspect-[16/10] h-full w-full object-cover transition-transform duration-500 ease-out group-hover/img:scale-105"
+                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover/img:scale-105"
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 transition-opacity group-hover/img:opacity-80" />
 
-                    <div className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-lg border border-accent/15 shadow-lg backdrop-blur-lg transition-all duration-100 hover:border-accent hover:bg-surface-elevated bg-surface-elevated px-2.5 py-1 text-[11px] font-medium text-accent">
+                    <div className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-lg border border-accent/15 shadow-lg sm:backdrop-blur-lg transition-colors duration-100 hover:border-accent hover:bg-surface-elevated bg-surface-elevated px-2.5 py-1 text-[11px] font-medium text-accent">
                       <Images size={13} className="text-accent" />
                       <span>
                         {galleryImages.length}{" "}
@@ -212,9 +250,8 @@ export default function ProjectsSection() {
                 </div>
               ) : null}
 
-              {/* Details Container: On Flagship, spans 5 columns with enhanced hierarchy */}
               <div
-                className={`flex flex-col justify-between ${isFlagship ? "mt-5 lg:mt-0 lg:col-span-5 lg:pl-2" : "mt-4"}`}
+                className={`flex flex-col ${detailsClass}`}
               >
                 <div>
                   <div className="flex items-start justify-between gap-3 sm:mt-1">
@@ -223,13 +260,17 @@ export default function ProjectsSection() {
                         <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent sm:text-xs">
                           {project.category}
                         </span>
-                        {isFlagship && (
+                        {isFeatured && (
                           <span className="rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider text-accent">
                             {portfolioData.showcase.featuredProject.label}
                           </span>
                         )}
                       </div>
-                      <h3 className="mt-1.5 text-lg font-bold tracking-tight text-text-base transition-colors group-hover:text-accent sm:text-xl md:text-2xl">
+                      <h3
+                        className={`mt-1.5 text-lg font-bold tracking-tight text-text-base transition-colors group-hover:text-accent sm:text-xl md:text-2xl ${
+                          hasCompactStack ? "line-clamp-2" : ""
+                        }`}
+                      >
                         {project.title}
                       </h3>
                     </div>
@@ -238,28 +279,37 @@ export default function ProjectsSection() {
                     </span>
                   </div>
 
-                  <p className="mt-3 text-xs leading-relaxed text-text-muted sm:text-sm">
+                  <p
+                    className={`mt-3 text-xs leading-relaxed text-text-muted sm:text-sm ${
+                      hasCompactStack ? "line-clamp-4" : ""
+                    }`}
+                  >
                     {project.impact}
                   </p>
                 </div>
 
                 <div className="mt-6 pt-2">
                   <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                    {project.stack.map((tech) => (
+                    {visibleStack.map((tech) => (
                       <span
                         key={tech}
-                        className="inline-flex items-center rounded-lg border border-border/70 bg-canvas/60 px-2.5 py-1 text-[11px] font-medium text-text-base backdrop-blur-sm sm:rounded-xl sm:px-3 sm:py-1 sm:text-xs"
+                        className="inline-flex items-center rounded-lg border border-border/70 bg-canvas/60 px-2.5 py-1 text-[11px] font-medium text-text-base sm:backdrop-blur-sm sm:rounded-xl sm:px-3 sm:py-1 sm:text-xs"
                       >
                         {tech}
                       </span>
                     ))}
+                    {hiddenStackCount > 0 && (
+                      <span className="inline-flex items-center rounded-lg border border-border/70 bg-canvas/60 px-2.5 py-1 text-[11px] font-medium text-text-muted sm:rounded-xl sm:px-3 sm:py-1 sm:text-xs">
+                        +{hiddenStackCount}
+                      </span>
+                    )}
                   </div>
 
-                  <div className="mt-6 flex items-center gap-3 border-t border-border/50 pt-4">
+                  <div className="mt-5 flex flex-wrap items-center gap-3">
                     {project.caseStudySlug && (
                       <Link
                         to={`/case-study/${project.caseStudySlug}`}
-                        className="group/btn inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-3.5 py-2 text-xs font-semibold text-accent-contrast transition-all hover:opacity-90 sm:px-4 sm:py-2.5 sm:text-sm"
+                        className="group/btn inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-3.5 py-2 text-xs font-semibold text-accent-contrast transition-opacity hover:opacity-90 sm:px-4 sm:py-2.5 sm:text-sm"
                       >
                         <BookOpen className="h-4 w-4 shrink-0" />
                         <span>Case Study</span>
@@ -270,7 +320,7 @@ export default function ProjectsSection() {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="group/btn inline-flex items-center gap-1.5 rounded-xl border border-border/80 bg-surface-elevated/70 px-3.5 py-2 text-xs font-semibold text-text-base transition-all hover:border-accent hover:text-accent sm:px-4 sm:py-2.5 sm:text-sm"
+                        className="group/btn inline-flex items-center gap-1.5 rounded-xl border border-border/80 bg-surface-elevated/70 px-3.5 py-2 text-xs font-semibold text-text-base transition-colors hover:border-accent hover:text-accent sm:px-4 sm:py-2.5 sm:text-sm"
                       >
                         <span>Live Demo</span>
                         <ArrowUpRight
@@ -284,7 +334,7 @@ export default function ProjectsSection() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="group/btn inline-flex items-center justify-center gap-2 rounded-xl border border-border/80 bg-surface-elevated/70 px-3.5 py-2 text-xs font-semibold text-text-base transition-all hover:border-accent hover:text-accent sm:px-4 sm:py-2.5 sm:text-sm"
+                      className="group/btn inline-flex items-center justify-center gap-2 rounded-xl border border-border/80 bg-surface-elevated/70 px-3.5 py-2 text-xs font-semibold text-text-base transition-colors hover:border-accent hover:text-accent sm:px-4 sm:py-2.5 sm:text-sm"
                     >
                       <GitHubIcon className="h-4 w-4 shrink-0" />
                       <span>Source</span>

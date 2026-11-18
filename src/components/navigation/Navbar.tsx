@@ -145,9 +145,9 @@ export default function Navbar() {
     <nav className="sticky top-0 z-40 w-full">
       {/* Top Header Bar Layer */}
       <div
-        className={`w-full transition-all duration-300 ${
+        className={`w-full transition-colors duration-300 ${
           isScrolled || isMenuOpen
-            ? "border-b border-border/80 bg-canvas/80 shadow-[0_4px_24px_rgba(0,0,0,0.2)] backdrop-blur-md sm:backdrop-blur-xl"
+            ? "border-b border-border/80 bg-canvas/95 sm:bg-canvas/80 shadow-[0_4px_24px_rgba(0,0,0,0.2)] sm:backdrop-blur-xl"
             : ""
         }`}
       >
@@ -168,7 +168,7 @@ export default function Navbar() {
           </Link>
 
           {/* Center Desktop Navigation */}
-          <div className="hidden items-center rounded-full border border-border/60 bg-surface/50 p-1 backdrop-blur-md lg:flex">
+          <div className="hidden items-center rounded-full border border-border/60 bg-surface/50 p-1 sm:backdrop-blur-md lg:flex">
             {links.map((link) => {
               const isActive = activeHref === link.href;
               return (
@@ -206,7 +206,7 @@ export default function Navbar() {
               type="button"
               onClick={handleSwitchPersona}
               aria-label="Switch persona view"
-              className="group hidden items-center gap-2.5 rounded-full border border-border/70 bg-surface/60 py-1.5 pl-3 pr-3 text-xs backdrop-blur-md transition-all hover:border-accent hover:bg-surface-elevated sm:flex"
+              className="group hidden items-center gap-2.5 rounded-full border border-border/70 bg-surface/60 py-1.5 pl-3 pr-3 text-xs sm:backdrop-blur-md transition-colors hover:border-accent hover:bg-surface-elevated sm:flex"
             >
               <span className="text-text-muted">
                 Mode:{" "}
@@ -225,7 +225,7 @@ export default function Navbar() {
             {/* Theme Toggle */}
             <button
               aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-surface/60 text-accent backdrop-blur-md transition-all hover:border-accent hover:bg-surface-elevated"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-surface/60 text-accent sm:backdrop-blur-md transition-colors hover:border-accent hover:bg-surface-elevated"
               type="button"
               onClick={toggleTheme}
             >
@@ -259,7 +259,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="absolute left-0 top-full w-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-b border-border/80 bg-canvas/80 px-6 py-5 shadow-lg backdrop-blur-md sm:backdrop-blur-xl lg:hidden"
+            className="absolute left-0 top-full w-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-b border-border/80 bg-canvas/95 sm:bg-canvas/80 px-6 py-5 shadow-lg sm:backdrop-blur-xl lg:hidden"
           >
             <div className="flex flex-col gap-2 touch-manipulation">
               {links.map((link, idx) => {

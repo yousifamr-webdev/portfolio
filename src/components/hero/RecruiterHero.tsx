@@ -107,7 +107,7 @@ export default function RecruiterHero() {
       <div className="relative grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
         {/* Left Column: Role & Hiring Conversion Actions */}
         <motion.div {...leftAnimation} className="flex flex-col items-start">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent sm:backdrop-blur-sm">
             <span>Technical Profile</span>
           </div>
 
@@ -128,7 +128,7 @@ export default function RecruiterHero() {
             <a
               href="/resume.pdf"
               download="Yousif_Amr_Resume.pdf"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3.5 text-sm font-semibold text-accent-contrast shadow-[0_0_24px_rgba(217,184,255,0.22)] transition-all duration-200 hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3.5 text-sm font-semibold text-accent-contrast shadow-[0_0_24px_rgba(217,184,255,0.22)] transition-opacity duration-200 hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas cursor-pointer"
             >
               <ArrowDownToLine size={16} aria-hidden="true" />
               <span>Download Resume</span>
@@ -137,7 +137,7 @@ export default function RecruiterHero() {
             <a
               href="#projects"
               onClick={(e) => handleScrollTo(e, "projects")}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border/80 bg-surface/70 px-5 py-3.5 text-sm font-semibold text-text-base backdrop-blur-sm transition-colors duration-200 hover:border-accent hover:bg-surface-elevated hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border/80 bg-surface/70 px-5 py-3.5 text-sm font-semibold text-text-base sm:backdrop-blur-sm transition-colors duration-200 hover:border-accent hover:bg-surface-elevated hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas cursor-pointer"
             >
               <span>View Projects</span>
               <ArrowUpRight size={15} aria-hidden="true" />
@@ -146,7 +146,7 @@ export default function RecruiterHero() {
             <a
               href="#contact"
               onClick={(e) => handleScrollTo(e, "contact")}
-              className="inline-flex items-center justify-center rounded-xl border border-border/80 bg-surface/70 px-6 py-3.5 text-sm font-semibold text-text-base backdrop-blur-sm transition-colors hover:border-accent hover:bg-surface-elevated hover:text-accent cursor-pointer"
+              className="inline-flex items-center justify-center rounded-xl border border-border/80 bg-surface/70 px-6 py-3.5 text-sm font-semibold text-text-base sm:backdrop-blur-sm transition-colors hover:border-accent hover:bg-surface-elevated hover:text-accent cursor-pointer"
             >
               Let&apos;s Talk
             </a>
@@ -171,7 +171,7 @@ export default function RecruiterHero() {
           aria-label="Professional profile and technical focus"
           className="relative mx-auto w-full max-w-md lg:max-w-none"
         >
-          <div className="relative overflow-hidden rounded-[2rem] border border-border/80 bg-surface/60 p-5 shadow-2xl backdrop-blur-md sm:rounded-[2.25rem] sm:p-6 sm:backdrop-blur-xl">
+          <div className="relative overflow-hidden rounded-[2rem] border border-border/80 bg-surface/60 p-5 shadow-2xl sm:rounded-[2.25rem] sm:p-6 sm:backdrop-blur-xl">
             <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-accent/10 blur-2xl" />
 
             <div className="flex items-center gap-4 sm:gap-5 border-b border-border/60 pb-5">
@@ -263,7 +263,7 @@ export default function RecruiterHero() {
             return (
               <motion.article
                 key={item.title}
-                className="group relative flex flex-col justify-between rounded-2xl border border-border/80 bg-surface/50 p-5 backdrop-blur-sm transition-all duration-200 hover:border-accent/60 hover:bg-surface-elevated/70"
+                className="group relative flex flex-col justify-between rounded-2xl border border-border/80 bg-surface/50 p-5 sm:backdrop-blur-sm transition-colors duration-200 hover:border-accent/60 hover:bg-surface-elevated/70"
                 initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
                 animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
                 transition={

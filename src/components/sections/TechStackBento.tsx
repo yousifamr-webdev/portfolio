@@ -36,7 +36,7 @@ export default function TechStackBento() {
 
       {/* Header */}
       <div className="relative z-10 flex flex-col items-start">
-        <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent backdrop-blur-sm sm:px-3.5 sm:py-1.5 sm:text-xs sm:tracking-[0.24em]">
+        <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface-elevated/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent sm:backdrop-blur-sm sm:px-3.5 sm:py-1.5 sm:text-xs sm:tracking-[0.24em]">
           <span>Toolkit &amp; Architecture</span>
         </div>
 
@@ -64,10 +64,10 @@ export default function TechStackBento() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: index * 0.08 }}
               whileHover={{ y: -4 }}
-              className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border/80 bg-surface/60 p-5 backdrop-blur-md transition-colors hover:border-accent/60 hover:bg-surface-elevated/70 sm:rounded-[2rem] sm:p-7 md:p-8 ${spanClass}`}
+              className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border/80 bg-surface/60 p-5 sm:backdrop-blur-md transition-colors hover:border-accent/60 hover:bg-surface-elevated/70 sm:rounded-[2rem] sm:p-7 md:p-8 ${spanClass}`}
             >
               {/* Corner glow on hover */}
-              <div className="pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full bg-accent/0 blur-2xl transition-all duration-300 group-hover:bg-accent/10" />
+              <div className="pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full bg-accent/0 blur-2xl transition-colors duration-300 group-hover:bg-accent/10" />
 
               <div>
                 {/* Header row: Icon & category index */}
@@ -94,7 +94,7 @@ export default function TechStackBento() {
                 {category.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="inline-flex items-center rounded-lg border border-border/70 bg-canvas/60 px-2.5 py-1 text-[11px] font-medium text-text-base backdrop-blur-sm transition-all duration-200 hover:border-accent hover:bg-surface hover:text-accent sm:rounded-xl sm:px-3.5 sm:py-1.5 sm:text-xs"
+                    className="inline-flex items-center rounded-lg border border-border/70 bg-canvas/60 px-2.5 py-1 text-[11px] font-medium text-text-base sm:backdrop-blur-sm transition-colors duration-200 hover:border-accent hover:bg-surface hover:text-accent sm:rounded-xl sm:px-3.5 sm:py-1.5 sm:text-xs"
                   >
                     {skill}
                   </span>

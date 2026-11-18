@@ -92,7 +92,7 @@ export function ProjectGalleryModal({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
-        className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-canvas/90 p-4 backdrop-blur-md sm:p-6 sm:backdrop-blur-xl md:p-8 cursor-default"
+        className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-canvas/95 p-4 sm:bg-canvas/90 sm:p-6 sm:backdrop-blur-xl md:p-8 cursor-default"
       >
         {/* Top Header Bar */}
         <div
@@ -133,7 +133,7 @@ export function ProjectGalleryModal({
                 paginate(-1);
               }}
               aria-label="Previous image"
-              className="absolute z-20 flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-canvas text-accent shadow-lg backdrop-blur-md transition-all hover:border-accent hover:scale-105 hover:bg-canvas/50 left-4 sm:h-12 sm:w-12 cursor-pointer"
+              className="absolute z-20 flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-canvas text-accent shadow-lg sm:backdrop-blur-md transition-[transform,border-color,background-color] hover:border-accent hover:scale-105 hover:bg-canvas/50 left-4 sm:h-12 sm:w-12 cursor-pointer"
             >
               <ChevronLeft size={20} />
             </button>
@@ -166,7 +166,7 @@ export function ProjectGalleryModal({
                 paginate(1);
               }}
               aria-label="Next image"
-              className="absolute z-20 flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-canvas text-accent shadow-lg backdrop-blur-md transition-all hover:border-accent hover:scale-105 hover:bg-canvas/50 right-4 sm:h-12 sm:w-12 cursor-pointer"
+              className="absolute z-20 flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-canvas text-accent shadow-lg sm:backdrop-blur-md transition-[transform,border-color,background-color] hover:border-accent hover:scale-105 hover:bg-canvas/50 right-4 sm:h-12 sm:w-12 cursor-pointer"
             >
               <ChevronRight size={20} />
             </button>
@@ -177,7 +177,7 @@ export function ProjectGalleryModal({
         {images.length > 1 && (
           <div
             onClick={(e) => e.stopPropagation()}
-            className="flex max-w-full gap-2 overflow-x-auto rounded-2xl border border-border/70 bg-surface/50 p-2 backdrop-blur-md cursor-default"
+            className="flex max-w-full gap-2 overflow-x-auto rounded-2xl border border-border/70 bg-surface/95 p-2 sm:bg-surface/50 sm:backdrop-blur-md cursor-default"
           >
             {images.map((img, index) => {
               const isActive = index === currentIndex;
@@ -188,7 +188,7 @@ export function ProjectGalleryModal({
                   onClick={() =>
                     setPage([index, index > currentIndex ? 1 : -1])
                   }
-                  className={`relative aspect-[16/10] h-12 shrink-0 overflow-hidden rounded-lg border transition-all sm:h-14 cursor-pointer ${
+                  className={`relative aspect-[16/10] h-12 shrink-0 overflow-hidden rounded-lg border transition-[transform,opacity,border-color,ring-color] sm:h-14 cursor-pointer ${
                     isActive
                       ? "border-accent ring-2 ring-accent/50 scale-105"
                       : "border-border/60 opacity-60 hover:opacity-100"

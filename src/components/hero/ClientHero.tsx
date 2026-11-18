@@ -73,7 +73,7 @@ export default function ClientHero() {
           className="flex flex-col items-start"
         >
           {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-surface-elevated/60 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-accent backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-surface-elevated/60 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-accent sm:backdrop-blur-sm">
             <span>Digital Product Partner</span>
           </div>
 
@@ -92,7 +92,7 @@ export default function ClientHero() {
             <a
               href="#projects"
               onClick={(e) => handleScrollTo(e, "projects")}
-              className="group inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3.5 text-sm font-semibold text-accent-contrast shadow-[0_0_24px_rgba(217,184,255,0.3)] transition-all hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+              className="group inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3.5 text-sm font-semibold text-accent-contrast shadow-[0_0_24px_rgba(217,184,255,0.3)] transition-opacity hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
             >
               <span>View My Work</span>
               <ArrowDown
@@ -103,7 +103,7 @@ export default function ClientHero() {
             <a
               href="#contact"
               onClick={(e) => handleScrollTo(e, "contact")}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border/80 bg-surface/70 px-6 py-3.5 text-sm font-semibold text-text-base backdrop-blur-sm transition-colors hover:border-accent hover:bg-surface-elevated hover:text-accent cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border/80 bg-surface/70 px-6 py-3.5 text-sm font-semibold text-text-base sm:backdrop-blur-sm transition-colors hover:border-accent hover:bg-surface-elevated hover:text-accent cursor-pointer"
             >
               Let&apos;s Talk
             </a>
@@ -114,7 +114,7 @@ export default function ClientHero() {
             {showcase.trustHighlights.map((highlight) => (
               <span
                 key={highlight}
-                className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-surface/40 px-3.5 py-1.5 text-xs font-medium text-text-muted backdrop-blur-sm"
+                className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-surface/40 px-3.5 py-1.5 text-xs font-medium text-text-muted sm:backdrop-blur-sm"
               >
                 <CheckCircle2 size={13} className="text-accent" />
                 <span>{highlight}</span>
@@ -130,20 +130,25 @@ export default function ClientHero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ ...springTransition, delay: 0.12 }}
         >
-          <div className="relative overflow-hidden rounded-[2.25rem] border border-border/80 bg-surface/60 p-4 shadow-2xl backdrop-blur-md sm:p-5 sm:backdrop-blur-xl">
+          <div className="relative overflow-hidden rounded-[2.25rem] border border-border/80 bg-surface/60 p-4 shadow-2xl sm:backdrop-blur-xl sm:p-5">
             <div className="relative aspect-[4/4.2] w-full overflow-hidden rounded-2xl border border-border/60 bg-canvas sm:aspect-[4/4.5]">
               <img
                 src="/portrait.webp"
+                srcSet="/portrait-small.webp 442w, /portrait.webp 2130w"
+                sizes="(min-width: 1024px) 40vw, (min-width: 480px) 408px, calc(100vw - 4rem)"
                 alt="Yousif Amr"
+                width={2130}
+                height={1691}
                 decoding="async"
-                className="aspect-[4/4.2] h-full w-full object-cover object-top contrast-105 transition-all duration-700 hover:grayscale-0"
+                fetchPriority="high"
+                className="aspect-[4/4.2] h-full w-full object-cover object-top contrast-105 transition-[filter] duration-700 hover:grayscale-0"
               />
               <div className="pointer-events-none absolute inset-0 dark:bg-gradient-to-t dark:from-canvas dark:via-canvas/20 dark:to-transparent dark:to-50%" />
 
               {/* Floating Featured Case Study Badge */}
               <div
                 onClick={handleNavigateToFeaturedProject}
-                className="group/badge absolute inset-x-3 bottom-3 cursor-pointer rounded-xl border border-border/80  p-3.5 shadow-lg backdrop-blur-lg transition-all duration-200 hover:border-accent hover:bg-surface-elevated bg-surface-elevated sm:inset-x-4 sm:bottom-4 sm:p-4"
+                className="group/badge absolute inset-x-3 bottom-3 cursor-pointer rounded-xl border border-border/80  p-3.5 shadow-lg sm:backdrop-blur-lg transition-colors duration-200 hover:border-accent hover:bg-surface-elevated bg-surface-elevated sm:inset-x-4 sm:bottom-4 sm:p-4"
               >
                 <div className="flex items-center justify-between text-[11px] text-text-muted">
                   <span className="flex items-center gap-1.5 font-medium text-accent">

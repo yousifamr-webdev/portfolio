@@ -55,7 +55,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-border bg-surface/60 backdrop-blur-md overflow-hidden">
+    <footer className="relative border-t border-border bg-surface/60 sm:backdrop-blur-md overflow-hidden">
       <WatermarkMonogram
         variant="ghost"
         className="pointer-events-none z-0 sm:w-[250%] lg:w-[50%] min-w-[1000px] top-[5%] -right-[120%] sm:-top-[40%] sm:-right-[120%] lg:-top-[75%] lg:-right-[10%]"
@@ -117,7 +117,7 @@ export default function Footer() {
               href="https://github.com/yousifamr-webdev/portfolio"
               target="_blank"
               rel="noreferrer"
-              className="group inline-flex items-center justify-between rounded-xl border border-border/80 bg-surface/80 p-3 text-xs font-medium text-text-base transition-all hover:border-accent hover:bg-surface-elevated"
+              className="group inline-flex items-center justify-between rounded-xl border border-border/80 bg-surface/80 p-3 text-xs font-medium text-text-base transition-colors hover:border-accent hover:bg-surface-elevated"
             >
               <div className="flex items-center gap-2.5">
                 <Code2 size={16} className="text-accent" />
@@ -166,7 +166,7 @@ export default function Footer() {
           <div className="mt-4 flex flex-wrap gap-2">
             <a
               aria-label="GitHub Profile"
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface/70 text-text-muted transition-all hover:border-accent hover:bg-surface-elevated hover:text-accent"
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface/70 text-text-muted transition-colors hover:border-accent hover:bg-surface-elevated hover:text-accent"
               href={portfolioData.identity.github}
               target="_blank"
               rel="noreferrer"
@@ -175,7 +175,7 @@ export default function Footer() {
             </a>
             <a
               aria-label="LinkedIn Profile"
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface/70 text-text-muted transition-all hover:border-accent hover:bg-surface-elevated hover:text-accent"
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface/70 text-text-muted transition-colors hover:border-accent hover:bg-surface-elevated hover:text-accent"
               href={portfolioData.identity.linkedin}
               target="_blank"
               rel="noreferrer"
@@ -184,7 +184,7 @@ export default function Footer() {
             </a>
             <a
               aria-label="Facebook Profile"
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface/70 text-text-muted transition-all hover:border-accent hover:bg-surface-elevated hover:text-accent"
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface/70 text-text-muted transition-colors hover:border-accent hover:bg-surface-elevated hover:text-accent"
               href={portfolioData.identity.facebook}
               target="_blank"
               rel="noreferrer"
@@ -193,7 +193,7 @@ export default function Footer() {
             </a>
             <a
               aria-label="Instagram Profile"
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface/70 text-text-muted transition-all hover:border-accent hover:bg-surface-elevated hover:text-accent"
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface/70 text-text-muted transition-colors hover:border-accent hover:bg-surface-elevated hover:text-accent"
               href={portfolioData.identity.instagram}
               target="_blank"
               rel="noreferrer"
@@ -202,7 +202,7 @@ export default function Footer() {
             </a>
             <a
               aria-label="Send Direct Email"
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface/70 text-text-muted transition-all hover:border-accent hover:bg-surface-elevated hover:text-accent"
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface/70 text-text-muted transition-colors hover:border-accent hover:bg-surface-elevated hover:text-accent"
               href={`mailto:${email}`}
             >
               <Mail size={18} />

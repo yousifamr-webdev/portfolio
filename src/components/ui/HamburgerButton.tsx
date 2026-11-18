@@ -23,7 +23,7 @@ export const HamburgerButton: FC<HamburgerButtonProps> = ({
       aria-expanded={isOpen}
       aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
       onClick={onToggle}
-      className={`animated-hamburger-btn group relative flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-surface/60 text-text-base backdrop-blur-md transition-all hover:border-accent focus:outline-none lg:hidden ${
+      className={`animated-hamburger-btn group relative flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-surface/60 text-text-base sm:backdrop-blur-md transition-colors hover:border-accent focus:outline-none lg:hidden ${
         isOpen ? "active text-accent" : ""
       } ${className}`}
       {...props}
