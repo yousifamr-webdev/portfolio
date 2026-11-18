@@ -10,6 +10,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { usePersona } from "../../context/PersonaContext";
 import { useTheme } from "../../context/ThemeContext";
 import { getNavigationLinks } from "../../data/navigation";
@@ -27,6 +28,8 @@ const personaConfig = {
 export default function Navbar() {
   const { persona, reopenIntro } = usePersona();
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [activeHref, setActiveHref] = useState("#top");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -65,6 +68,8 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    if (location.pathname !== "/") return;
+
     const sections = links
       .map(({ href }) =>
         href !== "#top" ? document.querySelector(href) : null,
@@ -84,13 +89,18 @@ export default function Navbar() {
 
     sections.forEach((section) => section && observer.observe(section));
     return () => observer.disconnect();
-  }, [links]);
+  }, [links, location.pathname]);
 
   const closeMenu = () => setIsMenuOpen(false);
 
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     closeMenu();
+
+    if (location.pathname !== "/") {
+      navigate("/", { state: { scrollTo: href } });
+      return;
+    }
 
     setTimeout(() => {
       if (href === "#top") {
@@ -105,6 +115,22 @@ export default function Navbar() {
         setActiveHref(href);
       }
     }, 100);
+  };
+
+  const handleSwitchPersona = () => {
+    reopenIntro();
+    navigate("/");
+  };
+
+  const handleLogoClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (location.pathname === "/") {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    event.preventDefault();
+    navigate("/", { state: { scrollTo: "#top" } });
   };
 
   const CurrentPersonaIcon = persona
@@ -127,10 +153,10 @@ export default function Navbar() {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3.5 md:px-10">
           {/* Brand Monogram Only */}
-          <a
+          <Link
             className="group flex items-center gap-3.5 text-text-base transition-opacity hover:opacity-90"
-            href="#top"
-            onClick={(e) => handleNavClick(e, "#top")}
+            to="/"
+            onClick={handleLogoClick}
           >
             <motion.div
               layoutId="brand-monogram"
@@ -139,7 +165,7 @@ export default function Navbar() {
             >
               <PersonalLogo tight className="h-9 w-9 text-accent" />
             </motion.div>
-          </a>
+          </Link>
 
           {/* Center Desktop Navigation */}
           <div className="hidden items-center rounded-full border border-border/60 bg-surface/50 p-1 backdrop-blur-md lg:flex">
@@ -178,7 +204,7 @@ export default function Navbar() {
             {/* Persona Switcher */}
             <button
               type="button"
-              onClick={reopenIntro}
+              onClick={handleSwitchPersona}
               aria-label="Switch persona view"
               className="group hidden items-center gap-2.5 rounded-full border border-border/70 bg-surface/60 py-1.5 pl-3 pr-3 text-xs backdrop-blur-md transition-all hover:border-accent hover:bg-surface-elevated sm:flex"
             >
@@ -267,7 +293,7 @@ export default function Navbar() {
                 type="button"
                 onClick={() => {
                   closeMenu();
-                  reopenIntro();
+                  handleSwitchPersona();
                 }}
                 className="mt-2 flex items-center justify-between rounded-xl border border-border/80 bg-surface/80 px-4 py-3 text-left text-sm font-medium text-text-base transition-colors hover:border-accent cursor-pointer"
               >

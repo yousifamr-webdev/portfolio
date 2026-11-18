@@ -18,14 +18,17 @@ const springTransition = {
 export default function ClientHero() {
   const { showcase } = portfolioData;
 
-  const featuredProjectId =
-    (showcase.featuredProject as { id?: string }).id ??
-    portfolioData.projects.find(
-      (p) =>
-        p.title.toLowerCase() === showcase.featuredProject.name.toLowerCase(),
-    )?.id ??
-    portfolioData.projects[0]?.id ??
-    "featured";
+  const configuredFeaturedProject = portfolioData.projects.find(
+    (project) => project.id === showcase.featuredProject.projectId,
+  );
+  if (!configuredFeaturedProject && import.meta.env.DEV) {
+    console.warn(
+      `Featured project "${showcase.featuredProject.projectId}" was not found. Falling back to the first project.`,
+    );
+  }
+  const featuredProject =
+    configuredFeaturedProject ?? portfolioData.projects[0];
+  const featuredProjectId = featuredProject?.id ?? "";
 
   // Mobile-safe smooth scroll with navbar clearance
   const handleScrollTo = (
@@ -152,7 +155,7 @@ export default function ClientHero() {
                 <div className="mt-2 flex items-center justify-between gap-3">
                   <div>
                     <h2 className="text-sm font-bold text-text-base sm:text-base">
-                      {showcase.featuredProject.name}
+                      {featuredProject?.title ?? showcase.featuredProject.label}
                     </h2>
                     <p className="line-clamp-1 text-xs text-text-muted">
                       {showcase.featuredProject.description}

@@ -1,5 +1,6 @@
 import { ArrowUp, ArrowUpRight, Check, Code2, Copy, Mail } from "lucide-react";
 import { useState, type MouseEvent } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { usePersona } from "../../context/PersonaContext";
 import { getNavigationLinks } from "../../data/navigation";
 import { portfolioData } from "../../data/portfolioData";
@@ -12,12 +13,30 @@ import { WatermarkMonogram } from "../ui/WatermarkMonogram";
 
 export default function Footer() {
   const { persona } = usePersona();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [isCopied, setIsCopied] = useState(false);
   const links = getNavigationLinks(persona === "recruiter");
   const email = portfolioData.identity.email;
 
+  const handleLogoClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (location.pathname === "/") {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    event.preventDefault();
+    navigate("/", { state: { scrollTo: "#top" } });
+  };
+
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+
+    if (location.pathname !== "/") {
+      navigate("/", { state: { scrollTo: href } });
+      return;
+    }
 
     if (href === "#top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -45,10 +64,10 @@ export default function Footer() {
       <div className="relative z-10 mx-auto grid max-w-7xl gap-12 px-6 py-16 md:px-10 lg:grid-cols-[1.4fr_0.8fr_1fr_1fr]">
         {/* Brand Column */}
         <div className="flex flex-col">
-          <a
+          <Link
             className="group flex items-center gap-3.5 text-text-base transition-opacity hover:opacity-90"
-            href="#top"
-            onClick={(e) => handleNavClick(e, "#top")}
+            to="/"
+            onClick={handleLogoClick}
           >
             <span className="shrink-0 text-accent">
               <PersonalLogo tight className="h-9 w-9 text-accent" />
@@ -61,7 +80,7 @@ export default function Footer() {
                 Web Development
               </p>
             </div>
-          </a>
+          </Link>
 
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-text-muted">
             Building production ready web systems, clean database

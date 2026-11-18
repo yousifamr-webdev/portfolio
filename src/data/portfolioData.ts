@@ -11,8 +11,7 @@ export interface Project {
   gallery?: string[];
   liveUrl?: string;
   githubUrl: string;
-  technicalScore: number;
-  visualScore: number;
+  caseStudySlug?: string;
 }
 
 export interface Experience {
@@ -50,8 +49,8 @@ export interface PortfolioData {
     description: string;
     trustHighlights: string[];
     featuredProject: {
+      projectId: string;
       label: string;
-      name: string;
       description: string;
     };
   };
@@ -100,8 +99,8 @@ export const portfolioData: PortfolioData = {
       "Fast and reliable even as you grow",
     ],
     featuredProject: {
-      label: "Featured Build (Concept Project)",
-      name: "FreshCart (Concept Project)",
+      projectId: "ecommerce-nestjs",
+      label: "Featured Project",
       description:
         "Online Marketplace: Customers browse, order and pay online.",
     },
@@ -132,8 +131,6 @@ export const portfolioData: PortfolioData = {
       ],
       liveUrl: "https://e-commerce-green-ten-54.vercel.app",
       githubUrl: "https://github.com/yousifamr-webdev/E-Commerce-NestJS-",
-      technicalScore: 10,
-      visualScore: 0,
     },
     {
       id: "social-app",
@@ -155,8 +152,6 @@ export const portfolioData: PortfolioData = {
       image: "",
       imageLabel: "Social App feed and post details preview",
       githubUrl: "https://github.com/yousifamr-webdev/Social_App_BE",
-      technicalScore: 9,
-      visualScore: 0,
     },
     {
       id: "sara7a-app",
@@ -176,8 +171,6 @@ export const portfolioData: PortfolioData = {
       image: "",
       imageLabel: "Sara7a App auth and messaging flow preview",
       githubUrl: "https://github.com/yousifamr-webdev/Sara7a-App",
-      technicalScore: 7.5,
-      visualScore: 0,
     },
     {
       id: "forthmark-laravel",
@@ -207,8 +200,18 @@ export const portfolioData: PortfolioData = {
       ],
       liveUrl: "https://forthmark.wasmer.app",
       githubUrl: "https://github.com/yousifamr-webdev/forthmark",
-      technicalScore: 7,
-      visualScore: 0,
+    },
+    {
+      id: "portfolio",
+      title: "Personal Portfolio",
+      category: "Frontend",
+      caseStudySlug: "portfolio",
+      impact:
+        "A persona-driven portfolio that reshapes its hero, copy, and navigation for clients, recruiters, and curious visitors, built on a typed data layer, a CSS-variable design-token system with light and dark themes, and Framer Motion shared-element transitions.",
+      stack: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion"],
+      image: "/projects/personal-portfolio/logo_purple.avif",
+      imageLabel: "Portfolio persona selector and project showcase preview",
+      githubUrl: "https://github.com/yousifamr-webdev/portfolio",
     },
   ],
   experience: [

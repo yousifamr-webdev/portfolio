@@ -1,4 +1,6 @@
 // src/pages/PortfolioHome.tsx
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { usePersona } from "../context/PersonaContext";
 import ClientHero from "../components/hero/ClientHero";
 import RecruiterHero from "../components/hero/RecruiterHero";
@@ -8,9 +10,32 @@ import TechStackBento from "../components/sections/TechStackBento";
 import ContactSection from "../components/sections/ContactSection";
 import { WatermarkMonogram } from "../components/ui/WatermarkMonogram";
 import { DepthSeparator } from "../components/ui/DepthSeparator";
+import { scrollToElement } from "../utils/scroll";
 
 export default function PortfolioHome() {
   const { view } = usePersona();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Yousif Amr | Web Developer";
+  }, []);
+
+  useEffect(() => {
+    const scrollTarget = (location.state as { scrollTo?: unknown } | null)
+      ?.scrollTo;
+    if (typeof scrollTarget !== "string" || !/^#[\w-]+$/.test(scrollTarget)) {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      const target = document.getElementById(scrollTarget.slice(1));
+      if (target) scrollToElement(target);
+      navigate("/", { replace: true, state: null });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [location.key, location.state, navigate]);
 
   return (
     <div className="relative flex flex-col w-full bg-canvas text-text-base overflow-x-hidden">

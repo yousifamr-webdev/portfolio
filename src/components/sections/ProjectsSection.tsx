@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Images } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
-import { usePersona } from "../../context/PersonaContext";
+import { ArrowUpRight, BookOpen, Images } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   portfolioData,
   type Project,
@@ -12,10 +12,9 @@ import { GitHubIcon } from "../ui/SocialIcons";
 import { ProjectGalleryModal } from "../ui/ProjectGalleryModal";
 
 type ProjectFilter = "All" | ProjectCategory;
-const filters: ProjectFilter[] = ["All", "Full-Stack","Backend"];
+const filters: ProjectFilter[] = ["All", "Full-Stack", "Backend", "Frontend"];
 
 export default function ProjectsSection() {
-  const { persona } = usePersona();
   const [filter, setFilter] = useState<ProjectFilter>("All");
   const [wigglingProjectId, setWigglingProjectId] = useState<string | null>(
     null,
@@ -25,16 +24,23 @@ export default function ProjectsSection() {
   const [activeGalleryProject, setActiveGalleryProject] =
     useState<Project | null>(null);
 
-  const projects = useMemo(() => {
-    const visible = portfolioData.projects.filter(
-      (project) => filter === "All" || project.category === filter,
+  const filteredProjects = portfolioData.projects.filter(
+    (project) => filter === "All" || project.category === filter,
+  );
+  let projects = filteredProjects;
+  if (filter === "All") {
+    const featuredProjectIndex = filteredProjects.findIndex(
+      (project) =>
+        project.id === portfolioData.showcase.featuredProject.projectId,
     );
-    return [...visible].sort((a, b) =>
-      persona === "recruiter"
-        ? b.technicalScore - a.technicalScore
-        : b.visualScore - a.visualScore,
-    );
-  }, [filter, persona]);
+    if (featuredProjectIndex > 0) {
+      projects = [
+        filteredProjects[featuredProjectIndex],
+        ...filteredProjects.slice(0, featuredProjectIndex),
+        ...filteredProjects.slice(featuredProjectIndex + 1),
+      ];
+    }
+  }
 
   useEffect(() => {
     const handleFocusProject = (e: Event) => {
@@ -129,7 +135,9 @@ export default function ProjectsSection() {
       {/* Projects Grid */}
       <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-12">
         {projects.map((project, index) => {
-          const isFlagship = index === 0 && filter === "All";
+          const isFlagship =
+            filter === "All" &&
+            project.id === portfolioData.showcase.featuredProject.projectId;
           const isWiggling = wigglingProjectId === project.id;
           const galleryImages =
             project.gallery && project.gallery.length > 0
@@ -217,7 +225,7 @@ export default function ProjectsSection() {
                         </span>
                         {isFlagship && (
                           <span className="rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider text-accent">
-                            Flagship Architecture
+                            {portfolioData.showcase.featuredProject.label}
                           </span>
                         )}
                       </div>
@@ -248,6 +256,15 @@ export default function ProjectsSection() {
                   </div>
 
                   <div className="mt-6 flex items-center gap-3 border-t border-border/50 pt-4">
+                    {project.caseStudySlug && (
+                      <Link
+                        to={`/case-study/${project.caseStudySlug}`}
+                        className="group/btn inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-3.5 py-2 text-xs font-semibold text-accent-contrast transition-all hover:opacity-90 sm:px-4 sm:py-2.5 sm:text-sm"
+                      >
+                        <BookOpen className="h-4 w-4 shrink-0" />
+                        <span>Case Study</span>
+                      </Link>
+                    )}
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
