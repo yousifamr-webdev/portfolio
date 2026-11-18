@@ -15,7 +15,7 @@ import { usePersona } from "../../context/PersonaContext";
 import { useTheme } from "../../context/ThemeContext";
 import { getNavigationLinks } from "../../data/navigation";
 import { springTransition } from "../../utils/motion";
-import { NAVBAR_OFFSET, scrollToElement } from "../../utils/scroll";
+import { scrollToElement } from "../../utils/scroll";
 import { PersonalLogo } from "../ui/Logo";
 import { HamburgerButton } from "../ui/HamburgerButton";
 
@@ -144,195 +144,195 @@ export default function Navbar() {
 
   return (
     <>
-    <nav
-      className={`${isCaseStudy ? "fixed inset-x-0 top-0" : "sticky top-0"} z-40 w-full`}
-    >
-      <div
-        aria-hidden="true"
-        className={`pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(100%+1.5rem)] bg-[linear-gradient(to_bottom,var(--bg-canvas)_0%,var(--bg-canvas)_60%,transparent_100%)] transition-opacity duration-200 sm:hidden ${
-          isMenuOpen ? "opacity-0" : "opacity-100"
-        }`}
-      />
-      {/* Top Header Bar Layer */}
-      <div
-        className={`w-full transition-colors duration-300 ${
-          isScrolled || isMenuOpen
-            ? "sm:border-b sm:border-border/80 sm:bg-canvas/80 sm:shadow-[0_4px_24px_rgba(0,0,0,0.2)] sm:backdrop-blur-xl"
-            : ""
-        } ${isMenuOpen ? "max-sm:bg-canvas" : ""}`}
+      <nav
+        className={`${isCaseStudy ? "relative" : "sticky top-0"} z-40 w-full`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3.5 md:px-10">
-          {/* Brand Monogram Only */}
-          <Link
-            className="group flex items-center gap-3.5 text-text-base transition-opacity hover:opacity-90"
-            to="/"
-            onClick={handleLogoClick}
-          >
-            <motion.div
-              layoutId="brand-monogram"
-              layoutDependency={isIntroComplete}
-              transition={isCaseStudy ? { duration: 0 } : springTransition}
-              className="shrink-0 text-accent"
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(100%+1.5rem)] bg-[linear-gradient(to_bottom,var(--bg-canvas)_0%,var(--bg-canvas)_60%,transparent_100%)] transition-opacity duration-200 sm:hidden ${
+            isMenuOpen ? "opacity-0" : "opacity-100"
+          }`}
+        />
+        {/* Top Header Bar Layer */}
+        <div
+          className={`w-full transition-colors duration-300 ${
+            (!isCaseStudy && isScrolled) || isMenuOpen
+              ? "sm:border-b sm:border-border/80 sm:bg-canvas/80 sm:shadow-[0_4px_24px_rgba(0,0,0,0.2)] sm:backdrop-blur-xl"
+              : ""
+          } ${isMenuOpen ? "max-sm:bg-canvas" : ""}`}
+        >
+          <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3.5 md:px-10">
+            {/* Brand Monogram Only */}
+            <Link
+              className="group flex items-center gap-3.5 text-text-base transition-opacity hover:opacity-90"
+              to="/"
+              onClick={handleLogoClick}
             >
-              <PersonalLogo tight className="h-9 w-9 text-accent" />
-            </motion.div>
-          </Link>
-
-          {/* Center Desktop Navigation */}
-          <div className="hidden items-center rounded-full border border-border/60 bg-surface/50 p-1 sm:backdrop-blur-md lg:flex">
-            {links.map((link) => {
-              const isActive = activeNavHref === link.href;
-              return (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className={`relative px-4 py-1.5 text-sm font-medium transition-colors duration-200 ${
-                    isActive
-                      ? "text-text-base"
-                      : "text-text-muted hover:text-text-base"
-                  }`}
-                >
-                  {isActive && (
-                    <motion.div
-                      key={isCaseStudy ? "case-study" : "home"}
-                      layoutId={
-                        isCaseStudy
-                          ? "active-nav-pill-case-study"
-                          : "active-nav-pill"
-                      }
-                      layoutDependency={activeNavHref}
-                      transition={
-                        isCaseStudy
-                          ? { duration: 0 }
-                          : { type: "spring", stiffness: 350, damping: 30 }
-                      }
-                      className="absolute inset-0 rounded-full border border-border bg-surface-elevated shadow-sm"
-                    />
-                  )}
-                  <span className="relative z-10">{link.label}</span>
-                </a>
-              );
-            })}
-          </div>
-
-          {/* Right Action Controls */}
-          <div className="flex items-center gap-2.5">
-            {/* Persona Switcher */}
-            <button
-              type="button"
-              onClick={handleSwitchPersona}
-              aria-label="Switch persona view"
-              className="group hidden items-center gap-2.5 rounded-full border border-border/70 bg-surface/60 py-1.5 pl-3 pr-3 text-xs sm:backdrop-blur-md transition-colors hover:border-accent hover:bg-surface-elevated sm:flex"
-            >
-              <span className="text-text-muted">
-                Mode:{" "}
-                <strong className="font-semibold text-text-base">
-                  {currentPersonaLabel}
-                </strong>
-              </span>
-              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-surface text-text-muted transition-colors group-hover:text-accent">
-                <RefreshCw
-                  size={11}
-                  className="transition-transform duration-300 group-hover:rotate-180"
-                />
-              </div>
-            </button>
-
-            {/* Theme Toggle */}
-            <button
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-surface/60 text-accent sm:backdrop-blur-md transition-colors hover:border-accent hover:bg-surface-elevated"
-              type="button"
-              onClick={toggleTheme}
-            >
-              <motion.span
-                animate={{
-                  rotate: theme === "dark" ? 0 : 180,
-                  scale: [0.9, 1],
-                }}
-                transition={{ duration: 0.3 }}
-                className="block"
+              <motion.div
+                layoutId="brand-monogram"
+                layoutDependency={isIntroComplete}
+                transition={isCaseStudy ? { duration: 0 } : springTransition}
+                className="shrink-0 text-accent"
               >
-                {theme === "dark" ? <Moon size={17} /> : <Sun size={17} />}
-              </motion.span>
-            </button>
+                <PersonalLogo tight className="h-9 w-9 text-accent" />
+              </motion.div>
+            </Link>
 
-            {/* Mobile Animated Hamburger Button */}
-            <HamburgerButton
-              isOpen={isMenuOpen}
-              onToggle={() => setIsMenuOpen((prev) => !prev)}
-              size={14}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Drawer (Direct sibling to header bar; blur now correctly samples the page underneath) */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="absolute left-0 top-full w-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-b border-border/80 bg-canvas px-6 py-5 shadow-lg sm:bg-canvas/80 sm:backdrop-blur-xl lg:hidden"
-          >
-            <div className="flex flex-col gap-2 touch-manipulation">
-              {links.map((link, idx) => {
+            {/* Center Desktop Navigation */}
+            <div className="hidden items-center rounded-full border border-border/60 bg-surface/50 p-1 sm:backdrop-blur-md lg:flex">
+              {links.map((link) => {
                 const isActive = activeNavHref === link.href;
                 return (
-                  <motion.a
+                  <a
                     key={link.href}
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.03 }}
-                    className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-colors cursor-pointer ${
+                    className={`relative px-4 py-1.5 text-sm font-medium transition-colors duration-200 ${
                       isActive
-                        ? "border border-border bg-surface text-accent font-semibold"
-                        : "text-text-muted hover:bg-surface/50 hover:text-text-base"
+                        ? "text-text-base"
+                        : "text-text-muted hover:text-text-base"
                     }`}
                   >
-                    <span>{link.label}</span>
                     {isActive && (
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <motion.div
+                        key={isCaseStudy ? "case-study" : "home"}
+                        layoutId={
+                          isCaseStudy
+                            ? "active-nav-pill-case-study"
+                            : "active-nav-pill"
+                        }
+                        layoutDependency={activeNavHref}
+                        transition={
+                          isCaseStudy
+                            ? { duration: 0 }
+                            : { type: "spring", stiffness: 350, damping: 30 }
+                        }
+                        className="absolute inset-0 rounded-full border border-border bg-surface-elevated shadow-sm"
+                      />
                     )}
-                  </motion.a>
+                    <span className="relative z-10">{link.label}</span>
+                  </a>
                 );
               })}
-
-              <motion.button
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: links.length * 0.03 }}
-                type="button"
-                onClick={() => {
-                  closeMenu();
-                  handleSwitchPersona();
-                }}
-                className="mt-2 flex items-center justify-between rounded-xl border border-border/80 bg-surface/80 px-4 py-3 text-left text-sm font-medium text-text-base transition-colors hover:border-accent cursor-pointer"
-              >
-                <div className="flex items-center gap-2.5">
-                  <CurrentPersonaIcon size={16} className="text-accent" />
-                  <span>
-                    Viewing as:{" "}
-                    <strong className="font-semibold text-accent">
-                      {currentPersonaLabel}
-                    </strong>
-                  </span>
-                </div>
-                <span className="text-xs uppercase tracking-wider text-text-muted">
-                  Change
-                </span>
-              </motion.button>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
-    {isCaseStudy && <div aria-hidden="true" style={{ height: NAVBAR_OFFSET }} />}
+
+            {/* Right Action Controls */}
+            <div className="flex items-center gap-2.5">
+              {/* Persona Switcher */}
+              <button
+                type="button"
+                onClick={handleSwitchPersona}
+                aria-label="Switch persona view"
+                className="group hidden items-center gap-2.5 rounded-full border border-border/70 bg-surface/60 py-1.5 pl-3 pr-3 text-xs sm:backdrop-blur-md transition-colors hover:border-accent hover:bg-surface-elevated sm:flex"
+              >
+                <span className="text-text-muted">
+                  Mode:{" "}
+                  <strong className="font-semibold text-text-base">
+                    {currentPersonaLabel}
+                  </strong>
+                </span>
+                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-surface text-text-muted transition-colors group-hover:text-accent">
+                  <RefreshCw
+                    size={11}
+                    className="transition-transform duration-300 group-hover:rotate-180"
+                  />
+                </div>
+              </button>
+
+              {/* Theme Toggle */}
+              <button
+                aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-surface/60 text-accent sm:backdrop-blur-md transition-colors hover:border-accent hover:bg-surface-elevated"
+                type="button"
+                onClick={toggleTheme}
+              >
+                <motion.span
+                  animate={{
+                    rotate: theme === "dark" ? 0 : 180,
+                    scale: [0.9, 1],
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="block"
+                >
+                  {theme === "dark" ? <Moon size={17} /> : <Sun size={17} />}
+                </motion.span>
+              </button>
+
+              {/* Mobile Animated Hamburger Button */}
+              <HamburgerButton
+                isOpen={isMenuOpen}
+                onToggle={() => setIsMenuOpen((prev) => !prev)}
+                size={14}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Drawer (Direct sibling to header bar; blur now correctly samples the page underneath) */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="absolute left-0 top-full w-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-b border-border/80 bg-canvas px-6 py-5 shadow-lg sm:bg-canvas/80 sm:backdrop-blur-xl lg:hidden"
+            >
+              <div className="flex flex-col gap-2 touch-manipulation">
+                {links.map((link, idx) => {
+                  const isActive = activeNavHref === link.href;
+                  return (
+                    <motion.a
+                      key={link.href}
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.03 }}
+                      className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-colors cursor-pointer ${
+                        isActive
+                          ? "border border-border bg-surface text-accent font-semibold"
+                          : "text-text-muted hover:bg-surface/50 hover:text-text-base"
+                      }`}
+                    >
+                      <span>{link.label}</span>
+                      {isActive && (
+                        <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      )}
+                    </motion.a>
+                  );
+                })}
+
+                <motion.button
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: links.length * 0.03 }}
+                  type="button"
+                  onClick={() => {
+                    closeMenu();
+                    handleSwitchPersona();
+                  }}
+                  className="mt-2 flex items-center justify-between rounded-xl border border-border/80 bg-surface/80 px-4 py-3 text-left text-sm font-medium text-text-base transition-colors hover:border-accent cursor-pointer"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <CurrentPersonaIcon size={16} className="text-accent" />
+                    <span>
+                      Viewing as:{" "}
+                      <strong className="font-semibold text-accent">
+                        {currentPersonaLabel}
+                      </strong>
+                    </span>
+                  </div>
+                  <span className="text-xs uppercase tracking-wider text-text-muted">
+                    Change
+                  </span>
+                </motion.button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+  
     </>
   );
 }
