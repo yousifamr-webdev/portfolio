@@ -190,7 +190,7 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
   }, [slug]);
 
   return (
-    <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-canvas text-text-base">
+    <div className="relative flex min-h-screen flex-col overflow-x-clip bg-canvas text-text-base">
       <div
         aria-hidden="true"
         className="pointer-events-none fixed inset-0 z-0 bg-architectural-grid [contain:paint] max-sm:[mask-image:none] md:[mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_60%,transparent_100%)] [transform:translate3d(0,0,0)]"

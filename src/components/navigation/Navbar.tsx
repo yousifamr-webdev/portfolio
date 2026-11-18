@@ -15,7 +15,7 @@ import { usePersona } from "../../context/PersonaContext";
 import { useTheme } from "../../context/ThemeContext";
 import { getNavigationLinks } from "../../data/navigation";
 import { springTransition } from "../../utils/motion";
-import { scrollToElement } from "../../utils/scroll";
+import { NAVBAR_OFFSET, scrollToElement } from "../../utils/scroll";
 import { PersonalLogo } from "../ui/Logo";
 import { HamburgerButton } from "../ui/HamburgerButton";
 
@@ -26,11 +26,13 @@ const personaConfig = {
 };
 
 export default function Navbar() {
-  const { persona, reopenIntro } = usePersona();
+  const { isIntroComplete, persona, reopenIntro } = usePersona();
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
+  const isCaseStudy = location.pathname.startsWith("/case-study/");
   const [activeHref, setActiveHref] = useState("#top");
+  const activeNavHref = isCaseStudy ? "#projects" : activeHref;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollFrame = useRef<number | null>(null);
@@ -141,15 +143,23 @@ export default function Navbar() {
     : "Explorer";
 
   return (
-    // Root nav handles sticky positioning without backdrop-blur so child layers don't get clipped
-    <nav className="sticky top-0 z-40 w-full">
+    <>
+    <nav
+      className={`${isCaseStudy ? "fixed inset-x-0 top-0" : "sticky top-0"} z-40 w-full`}
+    >
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(100%+1.5rem)] bg-[linear-gradient(to_bottom,var(--bg-canvas)_0%,var(--bg-canvas)_60%,transparent_100%)] transition-opacity duration-200 sm:hidden ${
+          isMenuOpen ? "opacity-0" : "opacity-100"
+        }`}
+      />
       {/* Top Header Bar Layer */}
       <div
         className={`w-full transition-colors duration-300 ${
           isScrolled || isMenuOpen
-            ? "border-b border-border/80 bg-canvas/95 sm:bg-canvas/80 shadow-[0_4px_24px_rgba(0,0,0,0.2)] sm:backdrop-blur-xl"
+            ? "sm:border-b sm:border-border/80 sm:bg-canvas/80 sm:shadow-[0_4px_24px_rgba(0,0,0,0.2)] sm:backdrop-blur-xl"
             : ""
-        }`}
+        } ${isMenuOpen ? "max-sm:bg-canvas" : ""}`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3.5 md:px-10">
           {/* Brand Monogram Only */}
@@ -160,7 +170,8 @@ export default function Navbar() {
           >
             <motion.div
               layoutId="brand-monogram"
-              transition={springTransition}
+              layoutDependency={isIntroComplete}
+              transition={isCaseStudy ? { duration: 0 } : springTransition}
               className="shrink-0 text-accent"
             >
               <PersonalLogo tight className="h-9 w-9 text-accent" />
@@ -170,7 +181,7 @@ export default function Navbar() {
           {/* Center Desktop Navigation */}
           <div className="hidden items-center rounded-full border border-border/60 bg-surface/50 p-1 sm:backdrop-blur-md lg:flex">
             {links.map((link) => {
-              const isActive = activeHref === link.href;
+              const isActive = activeNavHref === link.href;
               return (
                 <a
                   key={link.href}
@@ -184,12 +195,18 @@ export default function Navbar() {
                 >
                   {isActive && (
                     <motion.div
-                      layoutId="active-nav-pill"
-                      transition={{
-                        type: "spring",
-                        stiffness: 350,
-                        damping: 30,
-                      }}
+                      key={isCaseStudy ? "case-study" : "home"}
+                      layoutId={
+                        isCaseStudy
+                          ? "active-nav-pill-case-study"
+                          : "active-nav-pill"
+                      }
+                      layoutDependency={activeNavHref}
+                      transition={
+                        isCaseStudy
+                          ? { duration: 0 }
+                          : { type: "spring", stiffness: 350, damping: 30 }
+                      }
                       className="absolute inset-0 rounded-full border border-border bg-surface-elevated shadow-sm"
                     />
                   )}
@@ -259,11 +276,11 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="absolute left-0 top-full w-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-b border-border/80 bg-canvas/95 sm:bg-canvas/80 px-6 py-5 shadow-lg sm:backdrop-blur-xl lg:hidden"
+            className="absolute left-0 top-full w-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-b border-border/80 bg-canvas px-6 py-5 shadow-lg sm:bg-canvas/80 sm:backdrop-blur-xl lg:hidden"
           >
             <div className="flex flex-col gap-2 touch-manipulation">
               {links.map((link, idx) => {
-                const isActive = activeHref === link.href;
+                const isActive = activeNavHref === link.href;
                 return (
                   <motion.a
                     key={link.href}
@@ -315,5 +332,7 @@ export default function Navbar() {
         )}
       </AnimatePresence>
     </nav>
+    {isCaseStudy && <div aria-hidden="true" style={{ height: NAVBAR_OFFSET }} />}
+    </>
   );
 }
