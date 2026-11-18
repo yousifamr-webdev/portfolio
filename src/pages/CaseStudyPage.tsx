@@ -284,7 +284,7 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
             <aside className="hidden lg:block">
               <nav
                 aria-label="Case study sections"
-                className="sticky top-8 rounded-2xl border border-border/80 bg-surface/60 p-4 sm:backdrop-blur-md"
+                className="sticky top-[calc(76px+2rem)] rounded-2xl border border-border/80 bg-surface/60 p-4 sm:backdrop-blur-md"
               >
                 <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted">
                   On this page

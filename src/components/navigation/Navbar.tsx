@@ -143,24 +143,23 @@ export default function Navbar() {
     : "Explorer";
 
   return (
-    <>
-      <nav
-        className={`${isCaseStudy ? "relative" : "sticky top-0"} z-40 w-full`}
-      >
-        <div
-          aria-hidden="true"
-          className={`pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(100%+2.5rem)] bg-[linear-gradient(to_bottom,var(--bg-canvas)_0%,var(--bg-canvas)_48%,color-mix(in_srgb,var(--bg-canvas)_82%,transparent)_65%,color-mix(in_srgb,var(--bg-canvas)_45%,transparent)_82%,color-mix(in_srgb,var(--bg-canvas)_15%,transparent)_93%,color-mix(in_srgb,var(--bg-canvas)_0%,transparent)_100%)] transition-opacity duration-200 sm:hidden ${
-            isMenuOpen ? "opacity-0" : "opacity-100"
-          }`}
-        />
-        {/* Top Header Bar Layer */}
-        <div
-          className={`w-full transition-colors duration-300 ${
-            (!isCaseStudy && isScrolled) || isMenuOpen
-              ? "sm:border-b sm:border-border/80 sm:bg-canvas/80 sm:shadow-[0_4px_24px_rgba(0,0,0,0.2)] sm:backdrop-blur-xl"
-              : ""
-          } ${isMenuOpen ? "max-sm:bg-canvas" : ""}`}
-        >
+    <nav className="sticky top-0 z-40 w-full">
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 -z-10 border-b bg-canvas/80 backdrop-blur-md sm:backdrop-blur-xl transition-opacity duration-300 ease-out ${
+          isScrolled || isMenuOpen
+            ? "opacity-100 border-border/80 shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
+            : "opacity-0 border-transparent"
+        }`}
+      />
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 -z-10 border-b border-border/80 bg-canvas transition-opacity duration-200 ease-out lg:hidden ${
+          isMenuOpen ? "opacity-100" : "opacity-0"
+        }`}
+      />
+      {/* Top Header Bar Layer */}
+      <div className="w-full">
           <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3.5 md:px-10">
             {/* Brand Monogram Only */}
             <Link
@@ -268,16 +267,16 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Drawer (Direct sibling to header bar; blur now correctly samples the page underneath) */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2, ease: "easeInOut" }}
-              className="absolute left-0 top-full w-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-b border-border/80 bg-canvas px-6 py-5 shadow-lg sm:bg-canvas/80 sm:backdrop-blur-xl lg:hidden"
-            >
+      {/* Mobile Drawer */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="absolute left-0 top-full w-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-b border-border/80 bg-canvas px-6 py-5 shadow-lg lg:hidden"
+          >
               <div className="flex flex-col gap-2 touch-manipulation">
                 {links.map((link, idx) => {
                   const isActive = activeNavHref === link.href;
@@ -328,11 +327,9 @@ export default function Navbar() {
                   </span>
                 </motion.button>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
-  
-    </>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 }
