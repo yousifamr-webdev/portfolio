@@ -138,7 +138,7 @@ export const portfolioData: PortfolioData = {
       title: "Social App",
       category: "Backend",
       impact:
-        "A full-stack social network with 29 REST endpoints plus a GraphQL layer for post reactions, real-time chat over Socket.io, Firebase push notifications, and S3-backed media uploads, paired with a React 19 frontend built on TanStack Query.",
+        "A Backend system designed for a social network platform with 29 REST endpoints plus a GraphQL layer for post reactions, real-time chat over Socket.io, Firebase push notifications, and S3-backed media uploads.",
       stack: [
         "React",
         "Vite",
