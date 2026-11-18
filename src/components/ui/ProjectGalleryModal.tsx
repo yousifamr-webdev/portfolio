@@ -92,12 +92,12 @@ export function ProjectGalleryModal({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
-        className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-canvas/95 p-4 sm:bg-canvas/90 sm:p-6 sm:backdrop-blur-xl md:p-8 cursor-default"
+        className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-canvas/95 py-4 px-0 sm:bg-canvas/90 sm:p-6 sm:backdrop-blur-xl md:p-8 cursor-default"
       >
         {/* Top Header Bar */}
         <div
           onClick={(e) => e.stopPropagation()}
-          className="flex w-full max-w-6xl items-center justify-between cursor-default"
+          className="flex w-full max-w-6xl items-center justify-between px-4 sm:px-0 cursor-default"
         >
           <div className="flex items-center gap-3">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-border/80 bg-surface text-accent">
@@ -133,13 +133,13 @@ export function ProjectGalleryModal({
                 paginate(-1);
               }}
               aria-label="Previous image"
-              className="absolute z-20 flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-canvas text-accent shadow-lg sm:backdrop-blur-md transition-[transform,border-color,background-color] hover:border-accent hover:scale-105 hover:bg-canvas/50 left-4 sm:h-12 sm:w-12 cursor-pointer"
+              className="absolute z-20 hidden h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-canvas text-accent shadow-lg sm:flex sm:backdrop-blur-md transition-[transform,border-color,background-color] hover:border-accent hover:scale-105 hover:bg-canvas/50 left-4 sm:h-12 sm:w-12 cursor-pointer"
             >
               <ChevronLeft size={20} />
             </button>
           )}
 
-          <div className="relative flex h-full max-h-[70vh] w-full items-center justify-center pointer-events-none">
+          <div className="relative flex h-full max-h-[78dvh] w-full items-center justify-center pointer-events-none sm:max-h-[70vh]">
             <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.img
                 key={currentIndex}
@@ -152,8 +152,16 @@ export function ProjectGalleryModal({
                 initial="enter"
                 animate="center"
                 exit="exit"
+                draggable={false}
+                drag={images.length > 1 ? "x" : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(_, { offset, velocity }) => {
+                  if (offset.x < -50 || velocity.x < -300) paginate(1);
+                  else if (offset.x > 50 || velocity.x > 300) paginate(-1);
+                }}
                 onClick={(e) => e.stopPropagation()}
-                className="pointer-events-auto aspect-[16/10] max-h-full max-w-full rounded-2xl border border-border/80 object-contain shadow-2xl cursor-default"
+                className="pointer-events-auto w-full max-h-full select-none touch-pan-y object-contain shadow-2xl border-y border-border/80 sm:w-auto sm:max-w-full sm:rounded-2xl sm:border cursor-default"
               />
             </AnimatePresence>
           </div>
@@ -166,7 +174,7 @@ export function ProjectGalleryModal({
                 paginate(1);
               }}
               aria-label="Next image"
-              className="absolute z-20 flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-canvas text-accent shadow-lg sm:backdrop-blur-md transition-[transform,border-color,background-color] hover:border-accent hover:scale-105 hover:bg-canvas/50 right-4 sm:h-12 sm:w-12 cursor-pointer"
+              className="absolute z-20 hidden h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-canvas text-accent shadow-lg sm:flex sm:backdrop-blur-md transition-[transform,border-color,background-color] hover:border-accent hover:scale-105 hover:bg-canvas/50 right-4 sm:h-12 sm:w-12 cursor-pointer"
             >
               <ChevronRight size={20} />
             </button>
@@ -177,7 +185,7 @@ export function ProjectGalleryModal({
         {images.length > 1 && (
           <div
             onClick={(e) => e.stopPropagation()}
-            className="flex max-w-full gap-2 overflow-x-auto rounded-2xl border border-border/70 bg-surface/95 p-2 sm:bg-surface/50 sm:backdrop-blur-md cursor-default"
+            className="hidden max-w-full gap-2 overflow-x-auto rounded-2xl border border-border/70 bg-surface/95 p-2 sm:flex sm:bg-surface/50 sm:backdrop-blur-md cursor-default"
           >
             {images.map((img, index) => {
               const isActive = index === currentIndex;
@@ -204,6 +212,48 @@ export function ProjectGalleryModal({
                 </button>
               );
             })}
+          </div>
+        )}
+
+        {images.length > 1 && (
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="flex w-full items-center justify-between px-4 sm:hidden"
+          >
+            <button
+              type="button"
+              onClick={() => paginate(-1)}
+              aria-label="Previous image"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-surface text-accent cursor-pointer"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <div className="flex items-center gap-1.5" aria-label="Image pagination">
+              {images.map((img, index) => (
+                <button
+                  key={img}
+                  type="button"
+                  onClick={() =>
+                    setPage([index, index > currentIndex ? 1 : -1])
+                  }
+                  aria-label={`Go to image ${index + 1}`}
+                  aria-current={index === currentIndex ? "true" : undefined}
+                  className={`h-2 rounded-full transition-[width,background-color] cursor-pointer ${
+                    index === currentIndex
+                      ? "w-6 bg-accent"
+                      : "w-2 bg-border"
+                  }`}
+                />
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={() => paginate(1)}
+              aria-label="Next image"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-surface text-accent cursor-pointer"
+            >
+              <ChevronRight size={20} />
+            </button>
           </div>
         )}
       </motion.div>

@@ -149,7 +149,7 @@ export default function Navbar() {
       >
         <div
           aria-hidden="true"
-          className={`pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(100%+1.5rem)] bg-[linear-gradient(to_bottom,var(--bg-canvas)_0%,var(--bg-canvas)_60%,transparent_100%)] transition-opacity duration-200 sm:hidden ${
+          className={`pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(100%+2.5rem)] bg-[linear-gradient(to_bottom,var(--bg-canvas)_0%,var(--bg-canvas)_48%,color-mix(in_srgb,var(--bg-canvas)_82%,transparent)_65%,color-mix(in_srgb,var(--bg-canvas)_45%,transparent)_82%,color-mix(in_srgb,var(--bg-canvas)_15%,transparent)_93%,color-mix(in_srgb,var(--bg-canvas)_0%,transparent)_100%)] transition-opacity duration-200 sm:hidden ${
             isMenuOpen ? "opacity-0" : "opacity-100"
           }`}
         />
