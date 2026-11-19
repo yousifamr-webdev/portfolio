@@ -8,11 +8,13 @@ import ScrollToTop from "./components/ScrollToTop";
 import { usePersona } from "./context/PersonaContext";
 import CaseStudyPage from "./pages/CaseStudyPage";
 import PortfolioHome from "./pages/PortfolioHome";
+import { Analytics } from "@vercel/analytics/react";
 
 function App(): ReactElement {
   return (
     <LayoutGroup>
       <SiteShell />
+      <Analytics/>
     </LayoutGroup>
   );
 }
