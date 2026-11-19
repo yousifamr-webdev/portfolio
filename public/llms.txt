@@ -1,0 +1,35 @@
+# Yousif Amr
+
+## Identity & availability
+
+Yousif Amr is a Full-Stack Software Engineer based in Cairo, Egypt. His portfolio data describes full-stack and backend engineering work; it does not specify a current availability status.
+
+## Core stack
+
+NestJS, Node.js, Express.js, TypeScript, React, Next.js, Laravel, PHP, MongoDB, Mongoose, MySQL, Socket.io, Redis, Docker, and AWS S3.
+
+## Projects
+
+- **E-Commerce Platform** — 68 REST endpoints and 11 Mongoose schemas; [Live site](https://e-commerce-green-ten-54.vercel.app) · [GitHub](https://github.com/yousifamr-webdev/E-Commerce-NestJS-)
+- **Social App** — 29 REST endpoints, GraphQL post reactions, Socket.io chat, Firebase push notifications, and S3 media uploads; [GitHub](https://github.com/yousifamr-webdev/Social_App_BE)
+- **Sara7a App** — 24 RESTful endpoints, Google OAuth, two-step OTP verification, and Redis-backed session/rate control; [GitHub](https://github.com/yousifamr-webdev/Sara7a-App)
+- **Forthmark** — 14 routes, 3 Eloquent models, and 5 migrations; [Live site](https://forthmark.wasmer.app) · [GitHub](https://github.com/yousifamr-webdev/forthmark)
+- **Personal Portfolio** — Persona-driven React and TypeScript portfolio; [GitHub](https://github.com/yousifamr-webdev/portfolio)
+
+## Case studies
+
+- **A Portfolio That Speaks to Two Audiences** — [Read the case study](https://yousifamr.vercel.app/case-study/portfolio/)
+
+## Experience and education
+
+- Full-Stack Software Engineering Trainee, Route IT-Training Center (March 2025–July 2026).
+- Civil Engineering, University of Alexandria (graduated July 2026).
+
+## Contact and social links
+
+- Email: [yousifamr811@gmail.com](mailto:yousifamr811@gmail.com)
+- Phone: +20 109 400 5690
+- GitHub: https://github.com/yousifamr-webdev
+- LinkedIn: https://www.linkedin.com/in/yousif-amr/
+- Facebook: https://web.facebook.com/yousif.amr.fb
+- Instagram: https://www.instagram.com/yousifamr_/

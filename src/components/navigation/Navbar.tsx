@@ -26,7 +26,12 @@ const personaConfig = {
 };
 
 export default function Navbar() {
-  const { isIntroComplete, persona, reopenIntro } = usePersona();
+  const {
+    isIntroComplete,
+    persona,
+    reopenIntro,
+    shouldAnimateIntroExit,
+  } = usePersona();
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
@@ -143,7 +148,8 @@ export default function Navbar() {
     : "Explorer";
 
   return (
-    <nav className="sticky top-0 z-40 w-full">
+    <header className="sticky top-0 z-40 w-full">
+      <nav aria-label="Primary navigation" className="w-full">
       <div
         aria-hidden="true"
         className={`pointer-events-none absolute inset-0 -z-10 border-b bg-canvas/80 backdrop-blur-md sm:backdrop-blur-xl transition-opacity duration-300 ease-out ${
@@ -163,6 +169,7 @@ export default function Navbar() {
           <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3.5 md:px-10">
             {/* Brand Monogram Only */}
             <Link
+              aria-label="Yousif Amr — Home"
               className="group flex items-center gap-3.5 text-text-base transition-opacity hover:opacity-90"
               to="/"
               onClick={handleLogoClick}
@@ -170,10 +177,14 @@ export default function Navbar() {
               <motion.div
                 layoutId="brand-monogram"
                 layoutDependency={isIntroComplete}
-                transition={isCaseStudy ? { duration: 0 } : springTransition}
+                transition={
+                  isCaseStudy || !shouldAnimateIntroExit
+                    ? { duration: 0 }
+                    : springTransition
+                }
                 className="shrink-0 text-accent"
               >
-                <PersonalLogo tight className="h-9 w-9 text-accent" />
+                <PersonalLogo tight className="h-9 w-9 text-accent" aria-hidden="true" />
               </motion.div>
             </Link>
 
@@ -330,6 +341,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+      </nav>
+    </header>
   );
 }

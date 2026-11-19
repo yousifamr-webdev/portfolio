@@ -7,6 +7,7 @@ import {
 } from "../data/caseStudies";
 import { portfolioData } from "../data/portfolioData";
 import { NAVBAR_OFFSET } from "../utils/scroll";
+import { getCaseStudySeo, updatePageSeo } from "../utils/seo";
 
 function CaseStudyBodySection({
   section,
@@ -146,7 +147,6 @@ function CaseStudyNotFound() {
 
 export default function CaseStudyPage({ slug }: { slug: string }) {
   const caseStudy = getCaseStudy(slug);
-  const caseStudyTitle = caseStudy?.title;
   const [activeSection, setActiveSection] = useState(
     caseStudy?.sections[0]?.id ?? "",
   );
@@ -156,11 +156,7 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
       )
     : undefined;
 
-  useEffect(() => {
-    document.title = caseStudyTitle
-      ? `${caseStudyTitle} | Yousif Amr`
-      : "Case Study Not Found | Yousif Amr";
-  }, [caseStudyTitle, slug]);
+  useEffect(() => updatePageSeo(getCaseStudySeo(slug)), [slug]);
 
   useEffect(() => {
     const routeCaseStudy = getCaseStudy(slug);

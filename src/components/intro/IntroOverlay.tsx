@@ -1,23 +1,25 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { BriefcaseBusiness, Compass, Terminal } from "lucide-react";
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { usePersona } from "../../context/PersonaContext";
 import { springTransition } from "../../utils/motion";
 import { PersonalLogo } from "../ui/Logo";
 
 const THEATRICAL_INTRO_KEY = "has_seen_theatrical_intro";
-
-function checkHasSeenIntro(): boolean {
-  if (typeof window === "undefined") return false;
-  return sessionStorage.getItem(THEATRICAL_INTRO_KEY) === "true";
-}
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export default function IntroOverlay() {
-  const { persona, selectPersona } = usePersona();
+  const { persona, selectPersona, shouldAnimateIntroExit } = usePersona();
 
-  // Instantly true if the intro ran once or if an active persona already exists
-  const [isReopening] = useState(() => checkHasSeenIntro() || Boolean(persona));
-  const [isRevealed, setIsRevealed] = useState(isReopening);
+  const [isReopening, setIsReopening] = useState(Boolean(persona));
+  const [isRevealed, setIsRevealed] = useState(Boolean(persona));
+  const didStartIntro = useRef(false);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -28,15 +30,20 @@ export default function IntroOverlay() {
     };
   }, []);
 
-  useEffect(() => {
-    // Lock the flag immediately into session storage on first mount
-    sessionStorage.setItem(THEATRICAL_INTRO_KEY, "true");
-
-    if (!isReopening) {
-      const timer = window.setTimeout(() => setIsRevealed(true), 1500);
-      return () => window.clearTimeout(timer);
+  useIsomorphicLayoutEffect(() => {
+    const hasSeenIntro =
+      sessionStorage.getItem(THEATRICAL_INTRO_KEY) === "true";
+    if ((hasSeenIntro && !didStartIntro.current) || persona) {
+      setIsReopening(true);
+      setIsRevealed(true);
+      return;
     }
-  }, [isReopening]);
+
+    sessionStorage.setItem(THEATRICAL_INTRO_KEY, "true");
+    didStartIntro.current = true;
+    const timer = window.setTimeout(() => setIsRevealed(true), 1500);
+    return () => window.clearTimeout(timer);
+  }, [persona]);
 
   const handleSelect = (nextPersona: "client" | "recruiter" | "curious") => {
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -52,7 +59,11 @@ export default function IntroOverlay() {
     <motion.section
       aria-label="Welcome screen"
       className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-canvas px-4 sm:px-6 md:px-12"
-      exit={{ opacity: 0, transition: { duration: 0.25, ease: "easeInOut" } }}
+      exit={
+        shouldAnimateIntroExit
+          ? { opacity: 0, transition: { duration: 0.25, ease: "easeInOut" } }
+          : { opacity: 0, transition: { duration: 0 } }
+      }
       initial={{ opacity: 1 }}
     >
       {/* Ambient background glow */}
@@ -130,9 +141,9 @@ export default function IntroOverlay() {
                 }}
                 className="mt-2 flex flex-col items-center text-center select-none"
               >
-                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium tracking-[0.42em] [word-spacing:-0.22em] text-text-base uppercase pl-[0.42em] whitespace-nowrap">
+                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium tracking-[0.42em] [word-spacing:-0.22em] text-text-base uppercase pl-[0.42em] whitespace-nowrap">
                   YOUSIF AMR
-                </h2>
+                </p>
                 <p className="mt-0.5 sm:mt-2 text-[0.6rem] md:text-sm font-semibold uppercase tracking-[0.38em] text-text-muted pl-[0.38em]">
                   Web Development
                 </p>
@@ -172,9 +183,9 @@ export default function IntroOverlay() {
               }}
               className="flex w-full max-w-xl flex-col items-center text-center"
             >
-              <h1 className="mt-2 text-2xl font-bold tracking-tight text-text-base sm:text-4xl md:text-5xl lg:text-6xl">
+              <p className="mt-2 text-2xl font-bold tracking-tight text-text-base sm:text-4xl md:text-5xl lg:text-6xl">
                 Who is visiting?
-              </h1>
+              </p>
 
               <div className="mt-7 sm:mt-8 grid grid-cols-2 gap-2.5 sm:gap-3.5 w-full max-w-[340px] sm:max-w-[460px] md:max-w-[500px]">
                 {/* Potential client */}
