@@ -11,15 +11,14 @@ import ContactSection from "../components/sections/ContactSection";
 import { WatermarkMonogram } from "../components/ui/WatermarkMonogram";
 import { DepthSeparator } from "../components/ui/DepthSeparator";
 import { scrollToElement } from "../utils/scroll";
+import { getHomeSeo, updatePageSeo } from "../utils/seo";
 
 export default function PortfolioHome() {
   const { view } = usePersona();
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    document.title = "Yousif Amr | Web Developer";
-  }, []);
+  useEffect(() => updatePageSeo(getHomeSeo()), []);
 
   useEffect(() => {
     const scrollTarget = (location.state as { scrollTo?: unknown } | null)
@@ -45,43 +44,45 @@ export default function PortfolioHome() {
         className="pointer-events-none fixed inset-0 z-0 bg-architectural-grid [contain:paint] max-sm:[mask-image:none] md:[mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_60%,transparent_100%)] [transform:translate3d(0,0,0)]"
       />
 
-      {/* 1. HERO: Top-right quadrant crop */}
-      <div className="relative z-10 w-full overflow-hidden">
-        <WatermarkMonogram
-          variant="ghost"
-          className="sm:w-[150%] lg:w-[100%] min-w-[500px]  top-[5%] -right-[50%] sm:top-[5%] sm:-right-[20%] lg:-top-[5%] lg:right-[20%]"
-        />
-        <div id="top">
-          {view === "VIEW_TECHNICAL" ? <RecruiterHero /> : <ClientHero />}
+      <main>
+        {/* 1. HERO: Top-right quadrant crop */}
+        <div className="relative z-10 w-full overflow-hidden">
+          <WatermarkMonogram
+            variant="ghost"
+            className="sm:w-[150%] lg:w-[100%] min-w-[500px]  top-[5%] -right-[50%] sm:top-[5%] sm:-right-[20%] lg:-top-[5%] lg:right-[20%]"
+          />
+          <div id="top">
+            {view === "VIEW_SHOWCASE" ? <ClientHero /> : <RecruiterHero />}
+          </div>
         </div>
-      </div>
 
-      <DepthSeparator variant="lift" />
+        <DepthSeparator variant="lift" />
 
-      {/* 2. PROJECTS */}
-      <div className="relative z-10 w-full">
-        <ProjectsSection />
-      </div>
-      <DepthSeparator variant="sink" />
+        {/* 2. PROJECTS */}
+        <div className="relative z-10 w-full">
+          <ProjectsSection />
+        </div>
+        <DepthSeparator variant="sink" />
 
-      {/* 3. EXPERIENCE: Left edge watermark */}
-      <div className="relative z-10 w-full overflow-hidden">
-        <WatermarkMonogram
-          variant="ghost"
-          className="sm:w-[150%] lg:w-[100%] min-w-[560px]  top-[35%] -left-[15%] sm:top-[5%] sm:-left-[20%] lg:-top-[5%] lg:left-[20%]"
-        />
-        <ExperienceTimeline />
-      </div>
-      <DepthSeparator variant="lift" />
-      {/* 4. TECH STACK */}
-      <div className="relative z-10 w-full">
-        <TechStackBento />
-      </div>
-      <DepthSeparator variant="sink" />
-      {/* 5. CONTACT */}
-      <div className="relative z-10 w-full">
-        <ContactSection />
-      </div>
+        {/* 3. EXPERIENCE: Left edge watermark */}
+        <div className="relative z-10 w-full overflow-hidden">
+          <WatermarkMonogram
+            variant="ghost"
+            className="sm:w-[150%] lg:w-[100%] min-w-[560px]  top-[35%] -left-[15%] sm:top-[5%] sm:-left-[20%] lg:-top-[5%] lg:left-[20%]"
+          />
+          <ExperienceTimeline />
+        </div>
+        <DepthSeparator variant="lift" />
+        {/* 4. TECH STACK */}
+        <div className="relative z-10 w-full">
+          <TechStackBento />
+        </div>
+        <DepthSeparator variant="sink" />
+        {/* 5. CONTACT */}
+        <div className="relative z-10 w-full">
+          <ContactSection />
+        </div>
+      </main>
     </div>
   );
 }

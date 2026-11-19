@@ -31,12 +31,9 @@ function SiteShell() {
         {showChrome && <Navbar />}
         <Routes>
           <Route path="/case-study/:slug" element={<CaseStudyContent />} />
-          <Route
-            path="*"
-            element={persona !== null ? <PortfolioHome /> : null}
-          />
+          <Route path="*" element={<PortfolioHome />} />
         </Routes>
-        {showChrome && <Footer />}
+        <Footer />
       </div>
       <AnimatePresence>
         {showIntro && <IntroOverlay key="intro" />}

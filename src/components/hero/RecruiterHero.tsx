@@ -93,7 +93,7 @@ export default function RecruiterHero() {
       };
 
   return (
-    <main
+    <section
       aria-labelledby="recruiter-hero-heading"
       className="relative lg:flex lg:items-center lg:h-[100vh] mx-auto max-w-7xl overflow-hidden px-4 pb-16 pt-4 sm:px-6 sm:pb-20 sm:pt-6 md:px-10 md:pb-40 md:pt-8"
     >
@@ -177,7 +177,7 @@ export default function RecruiterHero() {
               <div className="group relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl border border-border/80 bg-canvas shadow-md sm:h-28 sm:w-28">
                 <img
                   src="/portrait-small.webp"
-                  alt="Yousif Amr"
+                  alt="Yousif Amr, Full-Stack Software Engineer"
                   decoding="async"
                   className="aspect-square h-full w-full object-cover object-top contrast-105 transition-transform duration-500 group-hover:scale-105"
                   fetchPriority="high"
@@ -312,6 +312,6 @@ export default function RecruiterHero() {
           })}
         </div>
       </section> */}
-    </main>
+    </section>
   );
 }

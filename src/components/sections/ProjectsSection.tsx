@@ -220,6 +220,7 @@ export default function ProjectsSection() {
                 <div className={isHorizontal ? "lg:col-span-7" : ""}>
                   <div
                     role="button"
+                    aria-label={`Open ${project.title} image gallery`}
                     tabIndex={0}
                     onClick={() => setActiveGalleryProject(project)}
                     onKeyDown={(e) => {
@@ -232,7 +233,7 @@ export default function ProjectsSection() {
                   >
                     <img
                       src={project.image}
-                      alt={project.title}
+                      alt={project.imageLabel || project.title}
                       loading="lazy"
                       decoding="async"
                       className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover/img:scale-105"

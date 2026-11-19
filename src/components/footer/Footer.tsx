@@ -70,7 +70,7 @@ export default function Footer() {
             onClick={handleLogoClick}
           >
             <span className="shrink-0 text-accent">
-              <PersonalLogo tight className="h-9 w-9 text-accent" />
+              <PersonalLogo tight className="h-9 w-9 text-accent" aria-hidden="true" />
             </span>
             <div className="flex flex-col select-none">
               <span className="text-sm font-semibold text-center tracking-[0.32em] [word-spacing:-0.22em] text-text-base uppercase pl-[0.32em] whitespace-nowrap">
@@ -93,7 +93,7 @@ export default function Footer() {
           <h2 className="text-xs font-semibold uppercase tracking-[0.24em] text-text-muted">
             Explore
           </h2>
-          <nav className="mt-5 grid gap-3">
+          <nav aria-label="Footer navigation" className="mt-5 grid gap-3">
             {links.map((link) => (
               <a
                 key={link.href}

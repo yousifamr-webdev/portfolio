@@ -88,6 +88,9 @@ export function ProjectGalleryModal({
   return (
     <AnimatePresence>
       <motion.div
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${projectTitle} image gallery`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -193,6 +196,7 @@ export function ProjectGalleryModal({
                 <button
                   key={img}
                   type="button"
+                  aria-label={`View screenshot ${index + 1} of ${projectTitle}`}
                   onClick={() =>
                     setPage([index, index > currentIndex ? 1 : -1])
                   }
@@ -204,7 +208,7 @@ export function ProjectGalleryModal({
                 >
                   <img
                     src={img}
-                    alt="thumbnail"
+                    alt={`${projectTitle} thumbnail ${index + 1}`}
                     loading="lazy"
                     decoding="async"
                     className="aspect-[16/10] h-full w-full object-cover"
