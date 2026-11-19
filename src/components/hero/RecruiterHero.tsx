@@ -119,14 +119,13 @@ export default function RecruiterHero() {
           </h1>
 
           <p className="mt-5 max-w-xl text-sm leading-7 text-text-muted sm:mt-6 sm:text-base sm:leading-8">
-            Building comprehensive full-stack systems from type-safe database
-            schemas and high-throughput modular APIs to fluid responsive
-            frontends.
+            Full-stack apps, built end to end: clean data, solid APIs, and
+            interfaces that work on any screen.
           </p>
 
           <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
             <a
-              href="/resume.pdf"
+              href="/Yousif_Amr_Resume.pdf"
               download="Yousif_Amr_Resume.pdf"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3.5 text-sm font-semibold text-accent-contrast shadow-[0_0_24px_rgba(217,184,255,0.22)] transition-opacity duration-200 hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas cursor-pointer"
             >
@@ -199,8 +198,6 @@ export default function RecruiterHero() {
                 <p className="mt-0.5 text-xs font-semibold text-accent tracking-wide">
                   Backend Architecture &amp; Type-Safe Systems
                 </p>
-
-          
               </div>
             </div>
 

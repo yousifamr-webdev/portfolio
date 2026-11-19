@@ -35,7 +35,7 @@ const caseStudies: CaseStudy[] = [
     projectId: "portfolio",
     title: "A Portfolio That Speaks to Two Audiences",
     tagline:
-      "One portfolio, two very different readers. How I designed a site that serves clients and recruiters without making either of them dig.",
+      "One portfolio, two very different readers. How I designed a site that serves clients and recruiters without making either of them search for what matters.",
     meta: {
       role: "Design, development, and copywriting",
       timeline: "3 days",
