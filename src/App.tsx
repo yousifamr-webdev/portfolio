@@ -1,6 +1,7 @@
 import { AnimatePresence, LayoutGroup } from "framer-motion";
 import type { ReactElement } from "react";
 import { Route, Routes, useLocation, useParams } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import Footer from "./components/footer/Footer";
 import IntroOverlay from "./components/intro/IntroOverlay";
 import Navbar from "./components/navigation/Navbar";
@@ -38,6 +39,7 @@ function SiteShell() {
       <AnimatePresence>
         {showIntro && <IntroOverlay key="intro" />}
       </AnimatePresence>
+      <Analytics />
     </>
   );
 }
