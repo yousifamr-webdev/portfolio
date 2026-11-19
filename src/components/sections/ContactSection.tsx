@@ -249,16 +249,17 @@ export default function ContactSection() {
                 >
                   {/* Intent Filter Chips */}
                   <div>
-                    <label className="block text-[11px] font-semibold uppercase tracking-[0.16em] text-text-muted sm:text-xs sm:tracking-[0.2em]">
+                    <span id="inquiry-topic" className="block text-[11px] font-semibold uppercase tracking-[0.16em] text-text-muted sm:text-xs sm:tracking-[0.2em]">
                       I&apos;m inquiring about
-                    </label>
-                    <div className="mt-2.5 flex flex-wrap gap-1.5 sm:mt-3 sm:gap-2">
+                    </span>
+                    <div role="group" aria-labelledby="inquiry-topic" className="mt-2.5 flex flex-wrap gap-1.5 sm:mt-3 sm:gap-2">
                       {INTENT_TAGS.map((tag) => {
                         const isSelected = selectedIntent === tag;
                         return (
                           <button
                             key={tag}
                             type="button"
+                            aria-pressed={isSelected}
                             onClick={() => setSelectedIntent(tag)}
                             className={`rounded-lg border px-2.5 py-1 text-[11px] font-medium transition-colors sm:px-3.5 sm:py-1.5 sm:text-xs ${
                               isSelected

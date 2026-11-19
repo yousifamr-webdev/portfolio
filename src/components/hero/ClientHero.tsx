@@ -58,7 +58,7 @@ export default function ClientHero() {
   };
 
   return (
-    <main className="relative mx-auto max-w-7xl px-4 pb-20 pt-3 sm:px-6 sm:pb-24 sm:pt-6 md:px-10 md:pt-8 lg:pt-8">
+    <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-3 sm:px-6 sm:pb-24 sm:pt-6 md:px-10 md:pt-8 lg:pt-8">
       {/* Ambient background glow */}
       <div className="pointer-events-none absolute left-1/4 top-1/4 -translate-x-1/2 -translate-y-1/2">
         <div className="h-[320px] w-[320px] rounded-full bg-accent/10 blur-2xl sm:h-[480px] sm:w-[480px] sm:blur-[130px]" />
@@ -136,7 +136,7 @@ export default function ClientHero() {
                 src="/portrait.webp"
                 srcSet="/portrait-small.webp 442w, /portrait.webp 2130w"
                 sizes="(min-width: 1024px) 40vw, (min-width: 480px) 408px, calc(100vw - 4rem)"
-                alt="Yousif Amr"
+                alt="Yousif Amr, Full-Stack Software Engineer"
                 width={2130}
                 height={1691}
                 decoding="async"
@@ -146,7 +146,8 @@ export default function ClientHero() {
               <div className="pointer-events-none absolute inset-0 dark:bg-gradient-to-t dark:from-canvas dark:via-canvas/20 dark:to-transparent dark:to-50%" />
 
               {/* Floating Featured Case Study Badge */}
-              <div
+              <a
+                href={`#project-${featuredProjectId}`}
                 onClick={handleNavigateToFeaturedProject}
                 className="group/badge absolute inset-x-3 bottom-3 cursor-pointer rounded-xl border border-border/80  p-3.5 shadow-lg sm:backdrop-blur-lg transition-colors duration-200 hover:border-accent hover:bg-surface-elevated bg-surface-elevated sm:inset-x-4 sm:bottom-4 sm:p-4"
               >
@@ -167,20 +168,18 @@ export default function ClientHero() {
                     </p>
                   </div>
 
-                  <a
-                    href={`#project-${featuredProjectId}`}
-                    onClick={handleNavigateToFeaturedProject}
+                  <span
                     className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border bg-surface-elevated text-text-base transition-colors group-hover/badge:border-accent group-hover/badge:text-accent cursor-pointer"
-                    aria-label="View featured project"
+                    aria-hidden="true"
                   >
                     <ArrowUpRight size={15} />
-                  </a>
+                  </span>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
         </motion.div>
       </section>
-    </main>
+    </div>
   );
 }
